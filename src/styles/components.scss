@@ -1,0 +1,67 @@
+.rr-card {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
+  .rr-card-header {
+    display: flex;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #dae0ec;
+    .rr-card-header-content {
+      padding: 4px 10px 0 10px;
+      flex: 1;
+      p {
+        line-height: 20px;
+        font-size: 14px;
+      }
+      .p-wname {
+        color: #9e9e9e;
+      }
+    }
+  }
+  .rr-card-content {
+    padding: 15px 20px 0 20px;
+    .p-title {
+      line-height: 22px;
+      margin-bottom: 12px;
+    }
+    .p-content {
+      font-size: 13px;
+      color: #7db0ed;
+      margin-bottom: 18px;
+    }
+    .p-info {
+      font-size: 13px;
+      color: #9e9e9e;
+      margin-left: -8px;
+      span {
+        margin: 0 4px 0 8px;
+      }
+    }
+  }
+  .rr-card-grade {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    background-color: lightblue;
+    line-height: 44px;
+    text-align: center;
+    color: #ffffff;
+  }
+  .rr-card-status {
+    height: fit-content;
+    padding: 5px 10px;
+    margin-top: 8px;
+    border: 1px solid #0084ff;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #0084ff;
+  }
+}
+
+.rr-role-switch {
+  width: 100%;
+  text-align: center;
+}
