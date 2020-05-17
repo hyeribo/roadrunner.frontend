@@ -1,48 +1,51 @@
 const webpack = require("webpack");
 const path = require("path");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = env => ({
+module.exports = (env) => ({
   mode: env.mode,
   entry: {
-    vendor: ['react', 'react-dom'],
-    bundle: [path.resolve(__dirname, "src", "index.js")]
+    vendor: ["react", "react-dom"],
+    bundle: [path.resolve(__dirname, "src", "index.js")],
   },
   output: {
     path: path.resolve(__dirname, "public"),
-    publicPath: '/',
-    filename: '[name].[hash].js'
+    publicPath: "/",
+    filename: "[name].[hash].js",
   },
   devServer: {
     inline: true,
     contentBase: path.resolve(__dirname, "public"),
-    hot:true,
+    hot: true,
     // open: true,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   resolve: {
     extensions: [".js", ".jsx"],
     alias: {
-      'react-dom': '@hot-loader/react-dom',
-      "@root": path.resolve('src'),
-      "@assets": path.resolve('src/assets'),
-      "@components": path.resolve('src/components'),
-      "@containers": path.resolve('src/containers'),
-      "@pages": path.resolve('src/pages'),
-      "@routes": path.resolve('src/routes'),
-      "@styles": path.resolve('src/styles')
-    }
+      "react-dom": "@hot-loader/react-dom",
+      "@root": path.resolve("src"),
+      "@assets": path.resolve("src/assets"),
+      "@atoms": path.resolve("src/components/atoms"),
+      "@molecules": path.resolve("src/components/molecules"),
+      "@organisms": path.resolve("src/components/organisms"),
+      "@templates": path.resolve("src/components/templates"),
+      "@pages": path.resolve("src/components/pages"),
+      "@containers": path.resolve("src/containers"),
+      "@routes": path.resolve("src/routes"),
+      "@styles": path.resolve("src/styles"),
+    },
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env.mode)
+      "process.env.NODE_ENV": JSON.stringify(env.mode),
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      favicon: './public/favicon.ico'
-    })
+      template: "./src/index.html",
+      favicon: "./public/favicon.ico",
+    }),
   ],
-  devtool: env.mode === 'development' ? "source-map" : '',
+  devtool: env.mode === "development" ? "source-map" : "",
   // optimization: {
   //   splitChunks: {
   //     cacheGroups: {
@@ -60,30 +63,26 @@ module.exports = env => ({
       {
         test: /\.(js|jsx)$/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            plugins: [
-              ["import", {"libraryName": "antd", "style": "css"}],
-            ]
-          }
+            plugins: [["import", { libraryName: "antd", style: "css" }]],
+          },
         },
-        exclude: [
-          /(node_modules|unitTest)/,
-        ]
+        exclude: [/(node_modules|unitTest)/],
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          'style-loader',
+          "style-loader",
           // Translates CSS into CommonJS
-          'css-loader',
+          "css-loader",
           // Compiles Sass to CSS
-          'sass-loader',
+          "sass-loader",
         ],
       },
       {
@@ -92,12 +91,12 @@ module.exports = env => ({
           {
             loader: "url-loader",
             options: {
-              name: 'img/[hash].[ext]',
-              limit: 10000
-            }
-          }
-        ]
-      }
-    ]
-  }
+              name: "img/[hash].[ext]",
+              limit: 10000,
+            },
+          },
+        ],
+      },
+    ],
+  },
 });
