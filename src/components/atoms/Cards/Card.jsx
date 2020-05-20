@@ -9,9 +9,11 @@ import {
   EyeOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Card = (props) => {
-  const { data, footer, ...rest } = props;
+  const { data, url, footer, ...rest } = props;
 
   return (
     <div className="rr-card" {...props}>
@@ -21,23 +23,37 @@ const Card = (props) => {
           <p>{data.address}</p>
           <p className="p-wname">{data.wname}</p>
         </div>
-        <div className="rr-card-status">{data.status}</div>
+        {data.status && <div className="rr-card-status">{data.status}</div>}
       </div>
       <div className="rr-card-content">
-        <p className="p-title limit-line-3">{data.title}</p>
-        <p className="p-content limit-line-1">{data.content}</p>
-        <p className="p-info">
-          <CalendarOutlined />
-          {moment(data.wdate).format("YYYY-MM-DD")}
-          <ClockCircleOutlined />
-          {moment(data.wdate).format("HH:mm")}
-          <EyeOutlined />
-          {data.hits}
-        </p>
+        <Link to={url}>
+          <p className="p-title limit-line-3">{data.title}</p>
+          <p className="p-content limit-line-1">{data.content}</p>
+          <p className="p-info">
+            <CalendarOutlined />
+            {moment(data.wdate).format("YYYY-MM-DD")}
+            <ClockCircleOutlined />
+            {moment(data.wdate).format("HH:mm")}
+            <EyeOutlined />
+            {data.hits}
+          </p>
+        </Link>
       </div>
       {footer}
     </div>
   );
+};
+
+Card.propTypes = {
+  data: PropTypes.shape({
+    address: PropTypes.string,
+    wname: PropTypes.string,
+    status: PropTypes.string,
+    title: PropTypes.string,
+    content: PropTypes.string,
+    wdate: PropTypes.string,
+  }),
+  footer: PropTypes.node,
 };
 
 export default Card;
