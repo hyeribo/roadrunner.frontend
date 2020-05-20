@@ -7,22 +7,33 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const BottomTab = () => {
+const tabs = [
+  { icon: <HomeOutlined />, tabName: "home", link: "/main" },
+  { icon: <ProfileOutlined />, tabName: "myrequest", link: "/my/requests" },
+  { icon: <PlusOutlined />, tabName: "plus", link: "/write" },
+  { icon: <MessageOutlined />, tabName: "chatting", link: "/chattings" },
+  { icon: <UserOutlined />, tabName: "my", link: "/my" },
+];
+
+const BottomTab = ({ tabName }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="rr-bottom-tab">
       <div className="global-content-wrapper">
         <div className="tab-content">
-          <div className="tab-item">
+          <div className={`tab-item ${tabName === "home" && "active"}`}>
             <Link to="/main">
               <HomeOutlined />
-              <p className="tab-item-text">홈</p>
+              <p className="tab-item-text">{t("tab_home")}</p>
             </Link>
           </div>
-          <div className="tab-item">
+          <div className={`tab-item ${tabName === "myrequest" && "active"}`}>
             <Link to="/my/requests">
               <ProfileOutlined />
-              <p className="tab-item-text">나의요청</p>
+              <p className="tab-item-text">{t("tab_myrequest")}</p>
             </Link>
           </div>
           <div className="tab-item plus">
@@ -32,16 +43,16 @@ const BottomTab = () => {
               </div>
             </Link>
           </div>
-          <div className="tab-item">
+          <div className={`tab-item ${tabName === "chattings" && "active"}`}>
             <Link to="/chattings">
               <MessageOutlined />
-              <p className="tab-item-text">채팅</p>
+              <p className="tab-item-text">{t("tab_chatting")}</p>
             </Link>
           </div>
-          <div className="tab-item">
+          <div className={`tab-item ${tabName === "my" && "active"}`}>
             <Link to="/my">
               <UserOutlined />
-              <p className="tab-item-text">마이페이지</p>
+              <p className="tab-item-text">{t("tab_my")}</p>
             </Link>
           </div>
         </div>

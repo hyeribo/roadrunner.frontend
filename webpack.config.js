@@ -26,6 +26,7 @@ module.exports = (env) => ({
       "react-dom": "@hot-loader/react-dom",
       "@root": path.resolve("src"),
       "@assets": path.resolve("src/assets"),
+      "@config": path.resolve("src/config"),
       "@atoms": path.resolve("src/components/atoms"),
       "@molecules": path.resolve("src/components/molecules"),
       "@organisms": path.resolve("src/components/organisms"),

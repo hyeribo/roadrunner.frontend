@@ -6,7 +6,7 @@ import RequestCardList from "@molecules/CardList/RequestCardList";
 
 const Home = () => {
   return (
-    <MainLayout>
+    <MainLayout tabName="home">
       <RoleSwitch style={{ marginBottom: "15px" }} />
       <RequestCardList />
     </MainLayout>

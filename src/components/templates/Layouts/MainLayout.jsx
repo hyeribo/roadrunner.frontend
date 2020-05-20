@@ -12,7 +12,7 @@ const MainLayout = (props) => {
           <div className="rr-main-layout-content">{props.children}</div>
         </div>
       </div>
-      <BottomTab />
+      <BottomTab tabName={props.tabName} />
     </div>
   );
 };

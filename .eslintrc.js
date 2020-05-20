@@ -27,6 +27,7 @@ module.exports = {
         map: [
           ["@root", "./src"],
           ["@assets", "./src/assets"],
+          ["@config", "./src/config"],
           ["@atoms", "./src/components/atoms"],
           ["@molecules", "./src/components/molecules"],
           ["@organisms", "./src/components/organisms"],
