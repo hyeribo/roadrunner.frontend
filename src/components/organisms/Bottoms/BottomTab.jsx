@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const tabs = [
-  { icon: <HomeOutlined />, tabName: "home", link: "/main" },
+  { icon: <HomeOutlined />, tabName: "home", link: "/home" },
   { icon: <ProfileOutlined />, tabName: "myrequest", link: "/my/requests" },
   { icon: <PlusOutlined />, tabName: "plus", link: "/write" },
   { icon: <MessageOutlined />, tabName: "chatting", link: "/chattings" },
@@ -25,7 +25,7 @@ const BottomTab = ({ tabName }) => {
       <div className="global-content-wrapper">
         <div className="tab-content">
           <div className={`tab-item ${tabName === "home" && "active"}`}>
-            <Link to="/main">
+            <Link to="/home">
               <HomeOutlined />
               <p className="tab-item-text">{t("tab_home")}</p>
             </Link>
