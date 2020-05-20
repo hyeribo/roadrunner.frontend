@@ -141,4 +141,22 @@
     color: #000000;
   }
 }
+.rr-common-bottom {
+  position: fixed;
+  width: 100%;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: #ffffff;
+
+  .bottom-content {
+    display: flex;
+    height: 84px;
+    line-height: 66px;
+    padding: 14px 24px;
+    box-shadow: 0 4px 20px 0 rgba(155, 132, 135, 0.14);
+  }
+}
 /* // Common Layout */
