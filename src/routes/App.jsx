@@ -15,6 +15,7 @@ import Home from "@pages/Home";
 import MyRequests from "@pages/My/MyRequests";
 import Chattings from "@pages/Chatting/Chattings";
 import MyPage from "@pages/My/MyPage";
+import Sample from "@pages/Sample";
 
 // sub
 import Write from "@pages/Write";
@@ -43,7 +44,7 @@ const App = () => {
         <Route exact path="/home" component={Home} />
         <Route exact path="/my/requests" component={MyRequests} />
         <Route exact path="/chattings" component={Chattings} />
-        <Route exact path="/my" component={MyPage} />
+        <Route exact path="/Sample" component={Sample} />
 
         <Route exact path="/login" component={Login} />
         <Route exact path="/join" component={Join} />
