@@ -11,6 +11,7 @@ import Login from "@pages/Intro/Login";
 import Join from "@pages/Intro/Join";
 
 // main
+import Sample from "@pages/Sample";
 import Home from "@pages/Home";
 import MyRequests from "@pages/My/MyRequests";
 import Chattings from "@pages/Chatting/Chattings";
@@ -41,6 +42,7 @@ const App = () => {
       <Switch>
         <Redirect exact from="/" to="/home" />
         <Route exact path="/home" component={Home} />
+        <Route exact path="/sample" component={Sample} />
         <Route exact path="/my/requests" component={MyRequests} />
         <Route exact path="/chattings" component={Chattings} />
         <Route exact path="/my" component={MyPage} />
