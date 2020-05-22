@@ -33,7 +33,7 @@ module.exports = {
           ["@organisms", "./src/components/organisms"],
           ["@templates", "./src/components/templates"],
           ["@pages", "./src/components/pages"],
-          ["@containers", "./src/containers"],
+          ["@modules", "./src/modules"],
           ["@routes", "./src/routes"],
           ["@styles", "./src/styles"],
         ],

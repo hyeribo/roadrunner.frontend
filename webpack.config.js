@@ -32,7 +32,7 @@ module.exports = (env) => ({
       "@organisms": path.resolve("src/components/organisms"),
       "@templates": path.resolve("src/components/templates"),
       "@pages": path.resolve("src/components/pages"),
-      "@containers": path.resolve("src/containers"),
+      "@modules": path.resolve("src/modules"),
       "@routes": path.resolve("src/routes"),
       "@styles": path.resolve("src/styles"),
     },
