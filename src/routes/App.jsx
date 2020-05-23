@@ -18,6 +18,7 @@ import MyPage from "@pages/My/MyPage";
 
 // sub
 import Write from "@pages/Write";
+import Sample from "@pages/Sample";
 import RequestWrite from "@pages/Request/RequestWrite";
 import RequestModify from "@pages/Request/RequestModify";
 import RequestDetail from "@pages/Request/RequestDetail";
@@ -49,6 +50,7 @@ const App = () => {
         <Route exact path="/join" component={Join} />
 
         <Route exact path="/write" component={Write} />
+        <Route exact path="/sample" component={Sample} />
         <Route exact path="/request/write" component={RequestWrite} />
         <Route
           exact
