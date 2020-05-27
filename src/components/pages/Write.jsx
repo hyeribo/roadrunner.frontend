@@ -4,7 +4,7 @@ import CommonLayout from "@templates/Layouts/CommonLayout";
 
 const Write = () => {
   return (
-    <CommonLayout bottomButtons={[{ text: "test" }]}>
+    <CommonLayout>
       <div>Write</div>
     </CommonLayout>
   );
