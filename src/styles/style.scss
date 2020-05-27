@@ -5,6 +5,10 @@
   margin: 0 auto;
 }
 
+.global-content-container {
+  padding: 0 24px;
+}
+
 /* Main Layout */
 .rr-main-layout {
   .rr-main-layout-wrapper {
@@ -109,8 +113,7 @@
   }
   .rr-common-layout-content {
     min-height: calc(100vh - 80px);
-    // padding: 60px 15px 80px 15px;
-    padding: 75px 15px 95px 15px;
+    padding: 62px 0 95px 0;
     background-color: #f5f5f5;
   }
 }
@@ -123,19 +126,20 @@
   z-index: 100;
   .content {
     display: flex;
-    line-height: 60px;
-    height: 60px;
+    line-height: 62px;
+    height: 62px;
     padding: 0 20px;
     background-color: #ffffff;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
   }
   .title {
     flex: 1;
-    font-size: 23px;
+    font-size: 17px;
     font-weight: bold;
     color: #000000;
+    text-align: center;
   }
-  .icon-menu {
+  .header-icon {
     line-height: 70px;
     font-size: 22px;
     color: #000000;
@@ -160,3 +164,35 @@
   }
 }
 /* // Common Layout */
+
+/* Login page */
+#rr-login-page {
+  .img-wrapper {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 57px;
+    img {
+      width: 194px;
+    }
+  }
+  .find-wrapper {
+    width: 100%;
+    text-align: right;
+    div {
+      margin-left: 20px;
+    }
+  }
+  .form-item {
+    display: flex;
+    .form-icon {
+      width: 17px;
+      line-height: 55px;
+      margin-right: 14px;
+      color: #000000;
+    }
+    .rr-form-group {
+      flex: 1;
+    }
+  }
+}
+/* // Login page */
