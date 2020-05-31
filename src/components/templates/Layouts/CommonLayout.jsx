@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
 import { ArrowLeftOutlined, MenuOutlined } from "@ant-design/icons";
 
-import Button from "@atoms/Buttons/Button";
+import MainButton from "@atoms/Buttons/MainButton";
 
 const CommonLayoutHeader = (props) => {
   const { pageName, showBackButton, showMenuButton } = props;
@@ -33,7 +33,7 @@ const CommonLayoutBottom = (props) => {
     <div className="rr-common-bottom">
       <div className="global-content-wrapper">
         <div className="bottom-content">
-          <Button {...rest}>{text}</Button>
+          <MainButton {...rest}>{text}</MainButton>
         </div>
       </div>
     </div>
@@ -48,10 +48,11 @@ const CommonLayout = (props) => {
     buttonProps,
     backgroundColor,
     children,
+    ...rest
   } = props;
 
   return (
-    <div className="rr-common-layout">
+    <div className="rr-common-layout" {...rest}>
       <CommonLayoutHeader
         pageName={pageName}
         showBackButton={showBackButton}

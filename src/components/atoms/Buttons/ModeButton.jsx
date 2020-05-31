@@ -1,20 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = (props) => {
+const ModeButton = (props) => {
   const { color, children, ...rest } = props;
   return (
-    <button className={`rr-button ${color}`} {...rest}>
-      {props.children}
+    <button className={`rr-mode-button ${color}`} {...rest}>
+      {children}
     </button>
   );
 };
 
-Button.propTypes = {
+ModeButton.propTypes = {
   color: PropTypes.oneOf(["default", "primary", "disabled", "pending"]),
 };
-Button.defaultProps = {
+ModeButton.defaultProps = {
   color: "default",
 };
 
-export default Button;
+export default ModeButton;

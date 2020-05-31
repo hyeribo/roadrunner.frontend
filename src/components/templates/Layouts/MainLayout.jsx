@@ -5,10 +5,10 @@ import MainHeader from "@organisms/Headers/MainHeader";
 import BottomTab from "@organisms/Bottoms/BottomTab";
 
 const MainLayout = (props) => {
-  const { tabName, backgroundColor, children } = props;
+  const { tabName, backgroundColor, children, ...rest } = props;
 
   return (
-    <div className="rr-main-layout">
+    <div className="rr-main-layout" {...rest}>
       <MainHeader />
       <div className="rr-main-layout-wrapper">
         <div className="global-content-wrapper">
