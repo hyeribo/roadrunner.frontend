@@ -69,7 +69,7 @@ const CommonLayout = (props) => {
   );
 };
 
-CommonLayout.CommonLayout = {
+CommonLayout.propTypes = {
   pageName: PropTypes.string.isRequired,
   showBackButton: PropTypes.bool,
   showMenuButton: PropTypes.bool,

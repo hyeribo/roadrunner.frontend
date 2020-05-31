@@ -21,3 +21,20 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.float-r {
+  float: right;
+}
+
+.float-l {
+  float: left;
+}
+
+.p-info {
+  font-size: 13px;
+  color: #9e9e9e;
+  margin-left: -8px;
+  span {
+    margin: 0 4px 0 8px;
+  }
+}

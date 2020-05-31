@@ -12,6 +12,8 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import Badge from "@atoms/Badges/Badge";
+
 const Card = (props) => {
   const { data, url, footer, ...rest } = props;
 
@@ -23,7 +25,9 @@ const Card = (props) => {
           <p>{data.address}</p>
           <p className="p-wname">{data.wname}</p>
         </div>
-        {data.status && <div className="rr-card-status">{data.status}</div>}
+        {data.status && (
+          <Badge text={data.status} style={{ marginTop: "8px" }} />
+        )}
       </div>
       <div className="rr-card-content">
         <Link to={url}>
