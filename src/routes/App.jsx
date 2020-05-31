@@ -32,6 +32,7 @@ import Notice from "@pages/Public/Notice";
 import Faq from "@pages/Public/Faq";
 import Terms from "@pages/Public/Terms";
 import CustomerService from "@pages/Public/CustomerService";
+import Team from "@pages/Public/Team";
 import ChattingsModify from "@pages/Chatting/ChattingsModify";
 import ChattingRoom from "@pages/Chatting/ChattingRoom";
 
@@ -79,6 +80,7 @@ const App = () => {
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/terms" component={Terms} />
         <Route exact path="/cs" component={CustomerService} />
+        <Route exact path="/team" component={Team} />
         <Route exact path="/chattings/modify" component={ChattingsModify} />
         <Route
           exact
