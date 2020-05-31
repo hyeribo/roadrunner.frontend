@@ -219,3 +219,32 @@
   }
 }
 /* // MyPage */
+
+/* Intro/Write */
+#rr-write-intro {
+  padding: 34px;
+  .paragraph {
+    line-height: 1.45;
+    padding: 20% 0;
+    font-size: 19px;
+    font-weight: lighter;
+    text-align: center;
+  }
+  .select-area {
+    display: flex;
+    width: 100%;
+    .select-item {
+      flex: 1;
+      margin: 0 14px;
+    }
+    .select-text {
+      line-height: 28px;
+      font-size: 16px;
+      margin-top: 17px;
+      text-align: center;
+      font-weight: lighter;
+      color: #9e9e9e;
+    }
+  }
+}
+/* // Intro/Write */

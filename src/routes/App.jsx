@@ -17,7 +17,7 @@ import Chattings from "@pages/Chatting/Chattings";
 import MyPage from "@pages/My/MyPage";
 
 // sub
-import Write from "@pages/Write";
+import Write from "@pages/Intro/Write";
 import RequestWrite from "@pages/Request/RequestWrite";
 import RequestModify from "@pages/Request/RequestModify";
 import RequestDetail from "@pages/Request/RequestDetail";
