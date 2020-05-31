@@ -4,7 +4,7 @@ import { MailOutlined, LockOutlined } from "@ant-design/icons";
 
 import FormItem from "@molecules/FormItem/FormItem";
 import TextButton from "@atoms/Buttons/TextButton";
-import Button from "@atoms/Buttons/Button";
+import MainButton from "@atoms/Buttons/MainButton";
 
 const LoginForm = (props) => {
   const { onSubmit } = props;
@@ -54,9 +54,9 @@ const LoginForm = (props) => {
         <TextButton type="button">아이디 찾기</TextButton>
         <TextButton type="button">비밀번호 찾기</TextButton>
       </div>
-      <Button type="submit" color="primary" style={{ marginTop: "28px" }}>
+      <MainButton type="submit" color="primary" style={{ marginTop: "28px" }}>
         로그인
-      </Button>
+      </MainButton>
     </form>
   );
 };
