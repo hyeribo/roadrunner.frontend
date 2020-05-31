@@ -60,7 +60,13 @@ const CommonLayout = (props) => {
       />
       <div className="rr-common-layout-wrapper">
         <div className="global-content-wrapper">
-          <div className="rr-common-layout-content" style={{ backgroundColor }}>
+          <div
+            className="rr-common-layout-content"
+            style={{
+              backgroundColor,
+              paddingBottom: showBottom ? "95px" : "24px",
+            }}
+          >
             {children}
           </div>
         </div>
