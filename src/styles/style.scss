@@ -196,3 +196,26 @@
   }
 }
 /* // Login page */
+
+/* MyPage */
+#rr-my-page {
+  .list-item {
+    display: flex;
+    height: 59px;
+    line-height: 59px;
+    border-bottom: 1px solid #dfdfdf;
+    .icon {
+      width: 60px;
+      text-align: center;
+      .anticon {
+        font-size: 24px;
+        vertical-align: middle;
+      }
+    }
+    .text {
+      font-size: 16px;
+      color: #5c5c5c;
+    }
+  }
+}
+/* // MyPage */
