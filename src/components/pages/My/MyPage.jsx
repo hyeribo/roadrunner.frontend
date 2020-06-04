@@ -24,7 +24,7 @@ const ListItem = (props) => (
 const MyPage = () => {
   return (
     <MainLayout tabName="my" backgroundColor="#ffffff">
-      <div id="rr-my-page">
+      <div id="rr-my-page" className="p-15">
         <UserInfo type="runner" />
         <div>
           <ListItem

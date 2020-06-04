@@ -52,6 +52,15 @@
   .m-l-#{$space} {
     margin-left: #{$space}px !important;
   }
+  .m-h-#{$space} {
+    margin: 0 #{$space}px !important;
+  }
+  .m-v-#{$space} {
+    margin: #{$space}px 0 !important;
+  }
+  .m-#{$space} {
+    margin: #{$space}px !important;
+  }
 
   .p-t-#{$space} {
     padding-top: #{$space}px !important;
@@ -64,5 +73,14 @@
   }
   .p-l-#{$space} {
     padding-left: #{$space}px !important;
+  }
+  .p-h-#{$space} {
+    margin: 0 #{$space}px !important;
+  }
+  .p-v-#{$space} {
+    margin: #{$space}px 0 !important;
+  }
+  .p-#{$space} {
+    padding: #{$space}px !important;
   }
 }

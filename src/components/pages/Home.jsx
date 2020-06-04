@@ -54,10 +54,7 @@ const Home = (props) => {
   return (
     <MainLayout tabName="home" containPaddingTop={false}>
       <RoleSwitch onChange={(newRole) => setRole(newRole)} />
-      <div
-        className="global-content-container-sm p-t-15"
-        style={{ marginTop: "-55px" }}
-      >
+      <div className="p-l-15 p-r-15" style={{ marginTop: "-40px" }}>
         {role === "runner" ? (
           <RequestCardList requests={data} />
         ) : (
