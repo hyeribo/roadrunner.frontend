@@ -39,7 +39,7 @@
   }
 }
 
-@for $space from 1 through 50 {
+@for $space from 0 through 50 {
   .m-t-#{$space} {
     margin-top: #{$space}px !important;
   }

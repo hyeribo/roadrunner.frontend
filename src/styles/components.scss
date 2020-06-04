@@ -58,7 +58,6 @@
   text-align: center;
   .switch-wrapper {
     padding: 67px 0 50px 0;
-    border-radius: 0 0 14px 0;
     &.show {
       display: flex;
     }
@@ -67,12 +66,14 @@
     }
     &.runner {
       background-color: #0070ff;
+      border-radius: 0 0 14px 0;
       .active .text {
         left: 60%;
       }
     }
     &.shopper {
       background-color: #ffc500;
+      border-radius: 0 0 0 14px;
       .active .text {
         right: 60%;
       }
@@ -94,9 +95,26 @@
       width: 100%;
       height: 100%;
     }
-    // .text {
-    //   position: absolute;
-    // }
+  }
+}
+
+.rr-role-switch-simple {
+  width: 100%;
+  text-align: center;
+  .switch-wrapper {
+    &.show {
+      display: flex;
+    }
+    &.hide {
+      display: none;
+    }
+    .space {
+      flex: 1;
+    }
+    img {
+      width: auto;
+      height: 73px;
+    }
   }
 }
 
@@ -155,8 +173,8 @@
 .rr-radio-button {
   @extend .rr-button;
   width: 100%;
-  height: 38px;
-  line-height: 38px;
+  height: 40px;
+  line-height: 40px;
   border-radius: 7px;
   font-size: 15px;
   &.default {
