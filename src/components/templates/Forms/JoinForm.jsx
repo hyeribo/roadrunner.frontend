@@ -1,6 +1,5 @@
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
-import { MailOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
 
 import FormItem from "@molecules/FormItem/FormItem";
 import AvatarUpload from "@molecules/Upload/AvatarUpload";
@@ -26,6 +25,7 @@ const radioOptions = [
     span: 6,
   },
 ];
+
 export const ConnectForm = ({ children }) => {
   const methods = useFormContext();
 
@@ -35,14 +35,13 @@ export const ConnectForm = ({ children }) => {
 };
 
 export const JoinForm = (props) => {
-  const { display } = props;
   const validatePasswordConfirm = (value, password) => {
     return value === password;
   };
   return (
     <ConnectForm>
       {({ register, errors, control, getValues }) => (
-        <div style={{ display }}>
+        <div>
           <Controller
             name="profile_img"
             as={<AvatarUpload />}
@@ -142,7 +141,17 @@ export const JoinForm = (props) => {
             />
           </FormItem>
           <FormItem label="성별" name="gender" required error={errors.gender}>
-            <Radio options={radioOptions} style={{ marginTop: "10px" }} />
+            <Controller
+              name="gender"
+              as={
+                <Radio options={radioOptions} style={{ marginTop: "10px" }} />
+              }
+              control={control}
+              onChange={([gender]) => {
+                return gender;
+              }}
+              rules={{ required: true }}
+            />
           </FormItem>
         </div>
       )}
