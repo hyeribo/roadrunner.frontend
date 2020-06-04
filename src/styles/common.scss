@@ -38,3 +38,31 @@
     margin: 0 4px 0 8px;
   }
 }
+
+@for $space from 1 through 50 {
+  .m-t-#{$space} {
+    margin-top: #{$space}px !important;
+  }
+  .m-r-#{$space} {
+    margin-right: #{$space}px !important;
+  }
+  .m-b-#{$space} {
+    margin-bottom: #{$space}px !important;
+  }
+  .m-l-#{$space} {
+    margin-left: #{$space}px !important;
+  }
+
+  .p-t-#{$space} {
+    padding-top: #{$space}px !important;
+  }
+  .p-r-#{$space} {
+    padding-right: #{$space}px !important;
+  }
+  .p-b-#{$space} {
+    padding-bottom: #{$space}px !important;
+  }
+  .p-l-#{$space} {
+    padding-left: #{$space}px !important;
+  }
+}
