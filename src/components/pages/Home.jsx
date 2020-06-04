@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 
 import MainLayout from "@templates/Layouts/MainLayout";
-import RoleSwitch from "@molecules/RoleSwitch/RoleSwitch";
+import RoleSwitch from "@molecules/Switch/RoleSwitch";
 import RequestCardList from "@molecules/CardList/RequestCardList";
 import ProposalCardList from "@molecules/CardList/ProposalCardList";
 
 const initialRole = "runner";
 const Home = (props) => {
-  console.log("props", props);
   const [role, setRole] = useState(initialRole);
   const [data, setData] = useState([]);
 
@@ -53,17 +52,18 @@ const Home = (props) => {
   }, [role]);
 
   return (
-    <MainLayout tabName="home">
-      <RoleSwitch
-        style={{ marginBottom: "15px" }}
-        onChange={(e) => setRole(e.target.value)}
-        value={role}
-      />
-      {role === "runner" ? (
-        <RequestCardList requests={data} />
-      ) : (
-        <ProposalCardList proposals={data} />
-      )}
+    <MainLayout tabName="home" containPaddingTop={false}>
+      <RoleSwitch onChange={(newRole) => setRole(newRole)} />
+      <div
+        className="global-content-container-sm p-t-15"
+        style={{ marginTop: "-55px" }}
+      >
+        {role === "runner" ? (
+          <RequestCardList requests={data} />
+        ) : (
+          <ProposalCardList proposals={data} />
+        )}
+      </div>
     </MainLayout>
   );
 };

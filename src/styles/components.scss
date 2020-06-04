@@ -56,6 +56,48 @@
 .rr-role-switch {
   width: 100%;
   text-align: center;
+  .switch-wrapper {
+    padding: 67px 0 50px 0;
+    border-radius: 0 0 14px 0;
+    &.show {
+      display: flex;
+    }
+    &.hide {
+      display: none;
+    }
+    &.runner {
+      background-color: #0070ff;
+      .active .text {
+        left: 60%;
+      }
+    }
+    &.shopper {
+      background-color: #ffc500;
+      .active .text {
+        right: 60%;
+      }
+    }
+    .active {
+      flex: 2;
+      position: relative;
+      .text {
+        position: absolute;
+        height: 20px;
+        width: auto;
+        top: 10px;
+      }
+    }
+    .inactive {
+      flex: 1;
+    }
+    img:not(.text) {
+      width: 100%;
+      height: 100%;
+    }
+    // .text {
+    //   position: absolute;
+    // }
+  }
 }
 
 .rr-button {
