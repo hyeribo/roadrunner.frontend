@@ -5,9 +5,8 @@ import RoleSwitch from "@molecules/Switch/RoleSwitch";
 import RequestCardList from "@molecules/CardList/RequestCardList";
 import ProposalCardList from "@molecules/CardList/ProposalCardList";
 
-const initialRole = "runner";
 const Home = (props) => {
-  const [role, setRole] = useState(initialRole);
+  const [role, setRole] = useState("runner");
   const [data, setData] = useState([]);
 
   const fetch = async () => {
