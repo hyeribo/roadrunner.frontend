@@ -13,14 +13,13 @@ const CommonLayoutHeader = (props) => {
     <div className="rr-common-header">
       <div className="global-content-wrapper">
         <div className="content">
-          {showBackButton && (
-            <ArrowLeftOutlined
-              className="header-icon"
-              onClick={history.goBack}
-            />
-          )}
+          <div className="header-icon">
+            {showBackButton && <ArrowLeftOutlined onClick={history.goBack} />}
+          </div>
           <p className="title">{pageName}</p>
-          {showMenuButton && <MenuOutlined className="header-icon" />}
+          <div className="header-icon">
+            {showMenuButton && <MenuOutlined />}
+          </div>
         </div>
       </div>
     </div>
