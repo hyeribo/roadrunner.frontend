@@ -24,6 +24,8 @@ const ButtonItem = (props) => (
 
 const MySettings = ({ history }) => {
   const handleLogout = () => {
+    history.entries = [];
+    history.index = -1;
     history.push("/login");
   };
 
