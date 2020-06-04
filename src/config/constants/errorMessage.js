@@ -20,6 +20,9 @@ const errorMessage = {
   address: {
     required: "주소를 입력해주세요.",
   },
+  gender: {
+    required: "성별을 선택해주세요.",
+  },
 };
 
 export default errorMessage;

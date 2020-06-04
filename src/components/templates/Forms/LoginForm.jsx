@@ -27,7 +27,7 @@ const LoginForm = (props) => {
               required: true,
               pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
             })}
-            placeholder="이메일을 입력하세요."
+            placeholder="이메일을 입력해주세요."
           />
         </FormItem>
       </div>
@@ -46,7 +46,7 @@ const LoginForm = (props) => {
             ref={register({
               required: true,
             })}
-            placeholder="비밀번호를 입력하세요."
+            placeholder="비밀번호를 입력해주세요."
           />
         </FormItem>
       </div>

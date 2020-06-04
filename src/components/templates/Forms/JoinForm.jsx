@@ -4,7 +4,28 @@ import { MailOutlined, LockOutlined, PlusOutlined } from "@ant-design/icons";
 
 import FormItem from "@molecules/FormItem/FormItem";
 import AvatarUpload from "@molecules/Upload/AvatarUpload";
+import Radio from "@molecules/Radio/Radio";
 
+const radioOptions = [
+  {
+    key: "1",
+    label: "여자",
+    value: "1",
+    span: 6,
+  },
+  {
+    key: "2",
+    label: "남자",
+    value: "2",
+    span: 6,
+  },
+  {
+    key: "0",
+    label: "기타",
+    value: "0",
+    span: 6,
+  },
+];
 export const ConnectForm = ({ children }) => {
   const methods = useFormContext();
 
@@ -31,12 +52,29 @@ export const JoinForm = (props) => {
             }}
           />
           <FormItem
+            label="이메일"
+            labelFor="email"
+            name="email"
+            required
+            error={errors.email}
+            style={{ marginTop: "20px" }}
+          >
+            <input
+              id="email"
+              name="email"
+              ref={register({
+                required: true,
+                pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              })}
+              placeholder="이메일을 입력해주세요."
+            />
+          </FormItem>
+          <FormItem
             label="이름"
             labelFor="realusername"
             name="realusername"
             required
             error={errors.realusername}
-            style={{ marginTop: "20px" }}
           >
             <input
               id="realusername"
@@ -102,6 +140,9 @@ export const JoinForm = (props) => {
               })}
               placeholder="예) 강남구 역삼동 123-45"
             />
+          </FormItem>
+          <FormItem label="성별" name="gender" required error={errors.gender}>
+            <Radio options={radioOptions} style={{ marginTop: "10px" }} />
           </FormItem>
         </div>
       )}
