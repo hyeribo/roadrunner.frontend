@@ -173,6 +173,9 @@
   color: #8a96b6;
   background: none;
   border: none;
+  &.underline {
+    text-decoration: underline;
+  }
 }
 
 .rr-form-item {

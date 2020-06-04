@@ -218,6 +218,31 @@
     }
   }
 }
+
+#rr-my-settings {
+  .list-item {
+    display: flex;
+    height: 69px;
+    line-height: 69px;
+    padding: 0 14px;
+    border-bottom: 1px solid #dfdfdf;
+    .text {
+      flex: 1;
+      font-size: 16px;
+      color: #000000;
+    }
+    .right {
+      .anticon {
+        font-size: 16px;
+        vertical-align: middle;
+      }
+      .rr-text-button {
+        color: #5c5c5c;
+        padding: 0;
+      }
+    }
+  }
+}
 /* // MyPage */
 
 /* Intro/Write */
