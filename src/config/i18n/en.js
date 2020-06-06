@@ -4,6 +4,8 @@ const en = {
     tab_myrequest: "MY REQ",
     tab_chatting: "CHATTING",
     tab_my: "MY",
+
+    label_username: "Username",
   },
 };
 

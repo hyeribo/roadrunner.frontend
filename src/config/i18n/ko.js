@@ -4,6 +4,8 @@ const ko = {
     tab_myrequest: "나의 요청",
     tab_chatting: "채팅",
     tab_my: "마이페이지",
+
+    label_username: "이름",
   },
 };
 
