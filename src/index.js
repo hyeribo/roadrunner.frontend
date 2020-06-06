@@ -10,6 +10,7 @@ import App from "@routes/App";
 
 import en from "@config/i18n/en";
 import ko from "@config/i18n/ko";
+import "@styles/font.scss";
 import "@styles/reset.scss";
 import "@styles/common.scss";
 import "@styles/style.scss";

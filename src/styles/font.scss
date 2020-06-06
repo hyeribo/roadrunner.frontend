@@ -1,0 +1,45 @@
+/* Noto Sans */
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/fonts/NotoSans/NotoSansCJKkr-Light.otf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/fonts/NotoSans/NotoSansCJKkr-Regular.otf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans";
+  src: url("/fonts/NotoSans/NotoSansCJKkr-Bold.otf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Roboto */
+@font-face {
+  font-family: "Campton";
+  src: url("/fonts/Campton/Campton-LightDEMO.otf");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Campton";
+  src: url("/fonts/Campton/Campton-BoldDEMO.otf");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Campton";
+  src: url("/fonts/Campton/Campton-BoldDEMO.otf");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
