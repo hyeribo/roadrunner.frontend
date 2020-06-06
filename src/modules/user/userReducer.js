@@ -3,9 +3,9 @@ import { userActions } from "./userActions";
 // ===== 초기 상태값
 export const initialState = {
   mode: "runner",
-  name: "user",
   id: 1,
-  grade: "good",
+  name: "신부르미",
+  email: "sin123@gmail.com",
 };
 
 // ===== 리듀서
