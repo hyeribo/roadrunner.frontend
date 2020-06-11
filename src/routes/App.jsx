@@ -5,6 +5,12 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import { ConfigProvider } from "antd";
+import { useSelector } from "react-redux";
+
+// Antd internationalization
+import enUS from "antd/lib/locale-provider/en_US";
+import koKR from "antd/lib/locale-provider/ko_KR";
 
 // intro
 import Login from "@pages/Intro/Login";
@@ -36,59 +42,68 @@ import Team from "@pages/Public/Team";
 import ChattingsModify from "@pages/Chatting/ChattingsModify";
 import ChattingRoom from "@pages/Chatting/ChattingRoom";
 
+const locale = {
+  en: enUS,
+  ko: koKR,
+};
+
 const App = () => {
+  const lang = useSelector((state) => state.lang);
+
   return (
-    <Router>
-      <Switch>
-        <Redirect exact from="/" to="/home" />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/my/requests" component={MyRequests} />
-        <Route exact path="/chattings" component={Chattings} />
-        <Route exact path="/my" component={MyPage} />
+    <ConfigProvider locale={locale[lang]}>
+      <Router>
+        <Switch>
+          <Redirect exact from="/" to="/home" />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/my/requests" component={MyRequests} />
+          <Route exact path="/chattings" component={Chattings} />
+          <Route exact path="/my" component={MyPage} />
 
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/join" component={Join} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/join" component={Join} />
 
-        <Route exact path="/write" component={Write} />
-        <Route exact path="/request/write" component={RequestWrite} />
-        <Route
-          exact
-          path="/request/modify/:request_id"
-          component={RequestModify}
-        />
-        <Route
-          exact
-          path="/request/detail/:request_id"
-          component={RequestDetail}
-        />
-        <Route exact path="/proposal/write" component={ProposalWrite} />
-        <Route
-          exact
-          path="/proposal/modify/proposal_id"
-          component={ProposalModify}
-        />
-        <Route
-          exact
-          path="/proposal/detail/proposal_id"
-          component={ProposalDetail}
-        />
-        <Route exact path="/my/info" component={MyInfo} />
-        <Route exact path="/my/password" component={MyPassword} />
-        <Route exact path="/my/reviews" component={MyReviews} />
-        <Route exact path="/my/settings" component={MySettings} />
-        <Route exact path="/notice" component={Notice} />
-        <Route exact path="/faq" component={Faq} />
-        <Route exact path="/terms" component={Terms} />
-        <Route exact path="/cs" component={CustomerService} />
-        <Route exact path="/team" component={Team} />
-        <Route exact path="/chattings/modify" component={ChattingsModify} />
-        <Route
-          exact
-          path="/chattings/room/:chatting_id"
-          component={ChattingRoom}
-        />
-      </Switch>
-    </Router>
+          <Route exact path="/write" component={Write} />
+          <Route exact path="/request/write" component={RequestWrite} />
+          <Route
+            exact
+            path="/request/modify/:request_id"
+            component={RequestModify}
+          />
+          <Route
+            exact
+            path="/request/detail/:request_id"
+            component={RequestDetail}
+          />
+          <Route exact path="/proposal/write" component={ProposalWrite} />
+          <Route
+            exact
+            path="/proposal/modify/proposal_id"
+            component={ProposalModify}
+          />
+          <Route
+            exact
+            path="/proposal/detail/proposal_id"
+            component={ProposalDetail}
+          />
+          <Route exact path="/my/info" component={MyInfo} />
+          <Route exact path="/my/password" component={MyPassword} />
+          <Route exact path="/my/reviews" component={MyReviews} />
+          <Route exact path="/my/settings" component={MySettings} />
+          <Route exact path="/notice" component={Notice} />
+          <Route exact path="/faq" component={Faq} />
+          <Route exact path="/terms" component={Terms} />
+          <Route exact path="/cs" component={CustomerService} />
+          <Route exact path="/team" component={Team} />
+          <Route exact path="/chattings/modify" component={ChattingsModify} />
+          <Route
+            exact
+            path="/chattings/room/:chatting_id"
+            component={ChattingRoom}
+          />
+        </Switch>
+      </Router>
+    </ConfigProvider>
   );
 };
 

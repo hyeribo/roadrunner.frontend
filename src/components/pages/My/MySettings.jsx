@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Select, Switch, Modal, message } from "antd";
 import { RightOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
@@ -7,8 +8,8 @@ import { RightOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import TextButton from "@atoms/Buttons/TextButton";
 
+import { setLanguage } from "@modules/lang/langActions";
 import userModel from "@data/userModel";
-import language, { changeLanguage } from "@config/i18n";
 
 const { confirm } = Modal;
 const { Option } = Select;
@@ -31,28 +32,27 @@ const ButtonItem = (props) => (
 
 const MySettings = ({ history }) => {
   const { t } = useTranslation();
+  const lang = useSelector((state) => state.lang);
+  const dispatch = useDispatch();
 
   const deleteAccount = async () => {
     try {
       await userModel.withdrawal(1);
-      message.success("회원 탈퇴 되었습니다.");
+      message.success(t("msg_withdrawal_s"));
     } catch (error) {
       console.log(error);
-      message.error("회원 탈퇴에 실패했습니다.");
+      message.error(t("msg_withdrawal_f"));
     }
   };
 
   const handleDeleteAccount = () => {
     confirm({
-      title: "회원탈퇴",
+      title: t("lbl_withdrawal"),
       icon: <ExclamationCircleOutlined />,
       content: (
         <div>
-          <p>로드러너 회원 탈퇴 하시겠습니까?</p>
-          <p>
-            회원 탈퇴시, 회원 정보 및 이용 내역 등 모든 정보가 삭제되며 복구가
-            불가능합니다.
-          </p>
+          <p>{t("cfm_withdrawal1")}</p>
+          <p>{t("cfm_withdrawal2")}</p>
         </div>
       ),
       onOk() {
@@ -73,30 +73,30 @@ const MySettings = ({ history }) => {
 
   return (
     <CommonLayout
-      pageName="설정"
+      pageName={t("lbl_settings")}
       showMenuButton={false}
       backgroundColor="#ffffff"
     >
       <div id="rr-my-settings" className="global-content-container">
-        {/* <LinkItem text="약관정보" url="/terms">
+        {/* <LinkItem text={t("lbl_terms")} url="/terms">
           <RightOutlined />
         </LinkItem> */}
-        <ButtonItem text="버전 1.0.0">
-          <TextButton underline type="button">
+        <ButtonItem text={`${t("lbl_version")} 1.0.0`}>
+          {/* <TextButton underline type="button">
             1.0.2 버전으로 업데이트
-          </TextButton>
+          </TextButton> */}
         </ButtonItem>
-        <ButtonItem text="언어 설정">
+        <ButtonItem text={t("lbl_setting_lang")}>
           <Select
-            defaultValue={language}
+            defaultValue={lang}
             style={{ width: 90 }}
-            onChange={changeLanguage}
+            onChange={(value) => dispatch(setLanguage(value))}
           >
             <Option value="en">English</Option>
             <Option value="ko">한글</Option>
           </Select>
         </ButtonItem>
-        <ButtonItem text="알림 수신 설정">
+        <ButtonItem text={t("lbl_setting_push")}>
           <Switch defaultChecked={false} onChange={handleChangePush} />
         </ButtonItem>
         <ButtonItem text={t("lbl_logout")} onClick={handleLogout}></ButtonItem>
