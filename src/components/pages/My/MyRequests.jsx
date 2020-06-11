@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import MainLayout from "@templates/Layouts/MainLayout";
 import RoleSwitchSimple from "@molecules/Switch/RoleSwitchSimple";
 import RequestCardList from "@molecules/CardList/RequestCardList";
 import ProposalCardList from "@molecules/CardList/ProposalCardList";
 
+import { setUser } from "@modules/user/userActions";
+
 const MyRequests = () => {
-  const [role, setRole] = useState("runner");
   const [data, setData] = useState([]);
+  const mode = useSelector((state) => state.user.mode);
+  const dispatch = useDispatch();
 
   const fetch = async () => {
     const newData = [];
     try {
-      if (role === "runner") {
+      if (mode === "runner") {
         for (let i = 0; i < 10; i++) {
           newData.push({
             id: i,
@@ -48,13 +52,16 @@ const MyRequests = () => {
 
   useEffect(() => {
     fetch();
-  }, [role]);
+  }, [mode]);
 
   return (
     <MainLayout tabName="myrequest">
-      <RoleSwitchSimple onChange={(newRole) => setRole(newRole)} />
+      <RoleSwitchSimple
+        defaultValue={mode}
+        onChange={(newRole) => dispatch(setUser({ mode: newRole }))}
+      />
       <div className="p-l-15 p-r-15">
-        {role === "runner" ? (
+        {mode === "runner" ? (
           <RequestCardList requests={data} />
         ) : (
           <ProposalCardList proposals={data} />
