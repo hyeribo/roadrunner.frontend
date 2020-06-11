@@ -16,10 +16,9 @@ const Join = ({ history }) => {
     try {
       await userModel.join(values);
       message.success(t("msg_join_s"));
+      history.replace("/login");
     } catch (error) {
       message.error(t("msg_join_f"));
-    } finally {
-      history.replace("/login");
     }
   };
 

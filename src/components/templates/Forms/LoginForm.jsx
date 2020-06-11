@@ -46,6 +46,7 @@ const LoginForm = (props) => {
           <input
             id="password"
             name="password"
+            type="password"
             ref={register({
               required: true,
             })}
