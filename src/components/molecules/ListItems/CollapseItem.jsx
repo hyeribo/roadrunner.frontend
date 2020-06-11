@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { DownOutlined, UpOutlined, RightOutlined } from "@ant-design/icons";
+import { DownOutlined, UpOutlined } from "@ant-design/icons";
 
 const ListItem = (props) => {
   const [active, setActive] = useState(false);
@@ -14,7 +14,18 @@ const ListItem = (props) => {
         </div>
         {active ? <UpOutlined /> : <DownOutlined />}
       </div>
-      {active && <div className="collapse-content">{content}</div>}
+      {active && (
+        <div className="collapse-content">
+          {content.split("\\n").map((item, i) => {
+            return (
+              <p key={i}>
+                {item}
+                <br />
+              </p>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
