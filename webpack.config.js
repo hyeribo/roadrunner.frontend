@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = (env) => ({
   mode: env.mode,
@@ -45,6 +46,7 @@ module.exports = (env) => ({
       template: "./src/index.html",
       favicon: "./public/favicon.ico",
     }),
+    new Dotenv(),
   ],
   devtool: env.mode === "development" ? "source-map" : "",
   // optimization: {

@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import axios from "axios";
 
 import { configureStore } from "./modules";
 import App from "@routes/App";
@@ -17,6 +18,12 @@ import "@styles/style.scss";
 import "@styles/components.scss";
 
 export const store = configureStore();
+
+console.log(
+  `You are running this application in ${process.env.NODE_ENV} mode.`
+);
+
+axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next

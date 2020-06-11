@@ -141,3 +141,5 @@ package-lock.json
 
 ### yol CLI
 command.config.js
+
+.env
