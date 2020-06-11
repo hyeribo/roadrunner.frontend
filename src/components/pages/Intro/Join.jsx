@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { message } from "antd";
+import { useTranslation } from "react-i18next";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import JoinForm from "@templates/Forms/JoinForm";
@@ -8,15 +9,15 @@ import JoinForm from "@templates/Forms/JoinForm";
 import userModel from "@data/userModel";
 
 const Join = ({ history }) => {
+  const { t } = useTranslation();
   const methods = useForm();
 
   const onSubmit = async (values) => {
     try {
-      console.log("values", values);
       await userModel.join(values);
-      message.success("회원가입에 성공했습니다.");
+      message.success(t("msg_join_s"));
     } catch (error) {
-      message.error("회원가입에 실패했습니다.");
+      message.error(t("msg_join_f"));
     } finally {
       history.replace("/login");
     }
@@ -24,12 +25,12 @@ const Join = ({ history }) => {
 
   return (
     <CommonLayout
-      pageName="회원가입"
+      pageName={t("lbl_join")}
       showBackButton
       showMenuButton={false}
       showBottom
       buttonProps={{
-        text: "가입완료",
+        text: t("lbl_join_complete"),
         onClick: methods.handleSubmit(onSubmit),
         color: "primary",
       }}

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import LoginForm from "@templates/Forms/LoginForm";
@@ -8,13 +9,15 @@ import bgImage from "@assets/images/bg-login.png";
 import userModel from "@data/userModel";
 
 const Login = ({ history }) => {
+  const { t } = useTranslation();
+
   const onSubmit = async (values) => {
     try {
       console.log("values", values);
       await userModel.login(values);
-      message.success("회원가입에 성공했습니다.");
+      message.success(t("msg_join_s"));
     } catch (error) {
-      message.error("회원가입에 실패했습니다.");
+      message.error(t("msg_join_f"));
     } finally {
       history.replace("/home");
     }
@@ -25,14 +28,14 @@ const Login = ({ history }) => {
   };
 
   const buttonProps = {
-    text: "회원가입",
+    text: t("lbl_join"),
     onClick: onMoveToJoin,
     color: "default",
   };
 
   return (
     <CommonLayout
-      pageName="로그인"
+      pageName={t("lbl_login")}
       showBackButton={false}
       showMenuButton={false}
       showBottom

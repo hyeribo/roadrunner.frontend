@@ -1,30 +1,10 @@
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 import FormItem from "@molecules/FormItem/FormItem";
 import AvatarUpload from "@molecules/Upload/AvatarUpload";
 import Radio from "@molecules/Radio/Radio";
-
-const radioOptions = [
-  {
-    key: "F",
-    label: "여자",
-    value: "F",
-    span: 6,
-  },
-  {
-    key: "M",
-    label: "남자",
-    value: "M",
-    span: 6,
-  },
-  {
-    key: "O",
-    label: "기타",
-    value: "O",
-    span: 6,
-  },
-];
 
 export const ConnectForm = ({ children }) => {
   const methods = useFormContext();
@@ -35,9 +15,33 @@ export const ConnectForm = ({ children }) => {
 };
 
 export const JoinForm = (props) => {
+  const { t } = useTranslation();
+
   const validatePasswordConfirm = (value, password) => {
     return value === password;
   };
+
+  const radioOptions = [
+    {
+      key: "F",
+      label: t("lbl_gender_f"),
+      value: "F",
+      span: 6,
+    },
+    {
+      key: "M",
+      label: t("lbl_gender_m"),
+      value: "M",
+      span: 6,
+    },
+    {
+      key: "O",
+      label: t("lbl_gender_o"),
+      value: "O",
+      span: 6,
+    },
+  ];
+
   return (
     <ConnectForm>
       {({ register, errors, control, getValues }) => (
@@ -51,7 +55,7 @@ export const JoinForm = (props) => {
             }}
           />
           <FormItem
-            label="이메일"
+            label={t("lbl_email")}
             labelFor="email"
             name="email"
             required
@@ -65,11 +69,11 @@ export const JoinForm = (props) => {
                 required: true,
                 pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
               })}
-              placeholder="이메일을 입력해주세요."
+              placeholder={t("frm_email")}
             />
           </FormItem>
           <FormItem
-            label="이름"
+            label={t("lbl_username")}
             labelFor="realusername"
             name="realusername"
             required
@@ -82,11 +86,11 @@ export const JoinForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="이름을 입력해주세요."
+              placeholder={t("frm_username")}
             />
           </FormItem>
           <FormItem
-            label="비밀번호"
+            label={t("lbl_password")}
             labelFor="realpassword"
             name="realpassword"
             required
@@ -101,11 +105,11 @@ export const JoinForm = (props) => {
                 required: true,
                 pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/,
               })}
-              placeholder="영문+숫자+특수문자 6자리 이상"
+              placeholder={t("frm_password")}
             />
           </FormItem>
           <FormItem
-            label="비밀번호 확인"
+            label={t("lbl_password_confirm")}
             labelFor="realpasswordconfirm"
             name="realpasswordconfirm"
             required
@@ -121,11 +125,11 @@ export const JoinForm = (props) => {
                 validate: (value) =>
                   validatePasswordConfirm(value, getValues("realpassword")),
               })}
-              placeholder="비밀번호를 다시 입력해주세요."
+              placeholder={t("frm_password_confirm")}
             />
           </FormItem>
           <FormItem
-            label="주소"
+            label={t("lbl_address")}
             labelFor="address"
             name="address"
             required
@@ -137,10 +141,10 @@ export const JoinForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="예) A동 301호"
+              placeholder={t("frm_address_placeholder")}
             />
           </FormItem>
-          <FormItem label="성별" name="gender" required error={errors.gender}>
+          <FormItem label={t("lbl_gender")}>
             <Controller
               name="gender"
               as={
