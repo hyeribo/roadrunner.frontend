@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import CollapseItem from "@molecules/ListItems/CollapseItem";
 
 const Faq = () => {
+  const [faqs, setFaqs] = useState([]);
+
+  useEffect(() => {
+    getFaqs();
+  }, []);
+
+  const getFaqs = async () => {
+    try {
+      const result = await boardModel.getBoardItems("information");
+      setFaqs(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CommonLayout
       pageName="이용 안내"

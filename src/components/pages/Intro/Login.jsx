@@ -5,13 +5,25 @@ import LoginForm from "@templates/Forms/LoginForm";
 
 import bgImage from "@assets/images/bg-login.png";
 
+import userModel from "@data/userModel";
+
 const Login = ({ history }) => {
-  const onSubmit = (a, b) => {
-    history.replace("/home");
+  const onSubmit = async (values) => {
+    try {
+      console.log("values", values);
+      await userModel.login(values);
+      message.success("회원가입에 성공했습니다.");
+    } catch (error) {
+      message.error("회원가입에 실패했습니다.");
+    } finally {
+      history.replace("/home");
+    }
   };
+
   const onMoveToJoin = () => {
     history.push("/join");
   };
+
   const buttonProps = {
     text: "회원가입",
     onClick: onMoveToJoin,

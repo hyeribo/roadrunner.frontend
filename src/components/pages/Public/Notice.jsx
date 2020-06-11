@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import CollapseItem from "@molecules/ListItems/CollapseItem";
 
+import boardModel from "@data/boardModel";
+
 const Notice = () => {
+  const [notices, setNotices] = useState([]);
+
+  useEffect(() => {
+    getNotices();
+  }, []);
+
+  const getNotices = async () => {
+    try {
+      const result = await boardModel.getBoardItems("notice");
+      setNotices(result.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CommonLayout
       pageName="공지 사항"

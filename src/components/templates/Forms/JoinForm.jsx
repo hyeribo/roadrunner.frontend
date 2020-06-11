@@ -7,21 +7,21 @@ import Radio from "@molecules/Radio/Radio";
 
 const radioOptions = [
   {
-    key: "1",
+    key: "F",
     label: "여자",
-    value: "1",
+    value: "F",
     span: 6,
   },
   {
-    key: "2",
+    key: "M",
     label: "남자",
-    value: "2",
+    value: "M",
     span: 6,
   },
   {
-    key: "0",
+    key: "O",
     label: "기타",
-    value: "0",
+    value: "O",
     span: 6,
   },
 ];
@@ -137,7 +137,7 @@ export const JoinForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="예) 강남구 역삼동 123-45"
+              placeholder="예) A동 301호"
             />
           </FormItem>
           <FormItem label="성별" name="gender" required error={errors.gender}>
