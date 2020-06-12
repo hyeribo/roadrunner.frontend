@@ -13,6 +13,7 @@ const ko = {
     lbl_logout: "로그아웃",
     lbl_withdrawal: "회원탈퇴",
     lbl_settings: "설정",
+    lbl_cs: "고객센터",
     lbl_version: "버전",
     lbl_terms: "약관정보",
     lbl_setting_lang: "언어 설정",

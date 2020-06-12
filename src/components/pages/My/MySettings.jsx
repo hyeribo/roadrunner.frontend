@@ -62,9 +62,15 @@ const MySettings = ({ history }) => {
   };
 
   const handleLogout = () => {
-    history.entries = [];
-    history.index = -1;
-    history.push("/login");
+    confirm({
+      title: t("cfm_logout"),
+      icon: <ExclamationCircleOutlined />,
+      onOk() {
+        history.entries = [];
+        history.index = -1;
+        history.push("/login");
+      },
+    });
   };
 
   const handleChangePush = (checked) => {
@@ -96,9 +102,9 @@ const MySettings = ({ history }) => {
             <Option value="ko">한글</Option>
           </Select>
         </ButtonItem>
-        <ButtonItem text={t("lbl_setting_push")}>
+        {/* <ButtonItem text={t("lbl_setting_push")}>
           <Switch defaultChecked={false} onChange={handleChangePush} />
-        </ButtonItem>
+        </ButtonItem> */}
         <ButtonItem text={t("lbl_logout")} onClick={handleLogout}></ButtonItem>
         <ButtonItem
           text={t("lbl_withdrawal")}
