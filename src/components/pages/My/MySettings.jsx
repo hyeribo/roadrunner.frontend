@@ -9,7 +9,9 @@ import CommonLayout from "@templates/Layouts/CommonLayout";
 import TextButton from "@atoms/Buttons/TextButton";
 
 import { setLanguage } from "@modules/lang/langActions";
+import { purge } from "@modules/rootActions";
 import userModel from "@data/userModel";
+import constants from "@config/constants";
 
 const { confirm } = Modal;
 const { Option } = Select;
@@ -30,7 +32,7 @@ const ButtonItem = (props) => (
   </div>
 );
 
-const MySettings = ({ history }) => {
+const MySettings = ({ history, setAuthenticated }) => {
   const { t } = useTranslation();
   const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
@@ -66,9 +68,11 @@ const MySettings = ({ history }) => {
       title: t("cfm_logout"),
       icon: <ExclamationCircleOutlined />,
       onOk() {
-        history.entries = [];
-        history.index = -1;
-        history.push("/login");
+        // 리덕스 정보 초기화
+        dispatch(purge());
+        // 로컬스토리지 토큰 삭제
+        localStorage.removeItem(constants.LOCAL_TOKEN_KEY);
+        setAuthenticated(false);
       },
     });
   };
