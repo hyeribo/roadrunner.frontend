@@ -1,4 +1,4 @@
-import axios from "axios";
+import { publicAPI, privateAPI } from "@utils/sendAPI";
 
 // 회원가입
 async function join(data) {
@@ -10,7 +10,7 @@ async function join(data) {
     gender: data.gender,
     profileImagePath: data.files[0],
   };
-  const result = await axios.post(url, requestPayload);
+  const result = await publicAPI.post(url, requestPayload);
   return result;
 }
 
@@ -21,14 +21,15 @@ async function login(data) {
     email: data.email,
     password: data.password,
   };
-  const result = await axios.post(url, requestPayload);
+  const result = await publicAPI.post(url, requestPayload);
   return result;
 }
 
-async function verifyToken(data) {
+// 토큰 유효 체크
+async function verifyToken() {
   const url = "/auth/verifyToken";
-  const result = await axios.post(url);
-  return true;
+  const result = await privateAPI.post(url);
+  return result;
 }
 
 // 로그아웃
@@ -38,27 +39,28 @@ async function logout(data) {
     email: data.email,
     password: data.password,
   };
-  const result = await axios.post(url, requestPayload);
+  const result = await privateAPI.post(url, requestPayload);
   return result;
 }
 
 // 회원탈퇴
 async function withdrawal(userId) {
   const url = `/user/${userId}`;
-  const result = await axios.delete(url);
+  const result = await privateAPI.delete(url);
   return result;
 }
 
 // 유저 정보 조회
 async function getUserInfo(userId) {
   const url = `/user/${userId}`;
-  const result = await axios.get(url);
+  const result = await privateAPI.get(url);
   return result;
 }
 
 export default {
   join,
   login,
+  verifyToken,
   logout,
   withdrawal,
   getUserInfo,

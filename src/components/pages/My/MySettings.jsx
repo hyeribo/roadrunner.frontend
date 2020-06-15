@@ -72,6 +72,7 @@ const MySettings = ({ history, setAuthenticated }) => {
         dispatch(purge());
         // 로컬스토리지 토큰 삭제
         localStorage.removeItem(constants.LOCAL_TOKEN_KEY);
+        // 인증 실패 상태로 변경
         setAuthenticated(false);
       },
     });

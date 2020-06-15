@@ -27,7 +27,7 @@ const Login = ({ history, setAuthenticated }) => {
       // 인증 성공 상태로 변경
       setAuthenticated(true);
       // 메인화면으로 이동
-      history.replace("/home");
+      history.push("/home");
     } catch (error) {
       message.error(t("msg_login_f"));
     }

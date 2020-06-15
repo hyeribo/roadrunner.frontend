@@ -45,7 +45,8 @@ import Team from "@pages/Public/Team";
 import ChattingsModify from "@pages/Chatting/ChattingsModify";
 import ChattingRoom from "@pages/Chatting/ChattingRoom";
 
-import { purge } from "@modules/rootActions";
+import userModel from "@data/userModel";
+import { setUser } from "@modules/user/userActions";
 import constants from "@config/constants";
 
 const locale = {
@@ -57,36 +58,32 @@ const App = () => {
   const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
-  const [authenticated, setAuthenticated] = useState(true);
+  const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const getUserInfo = async () => {
-    await new Promise((res, rej) => {
-      setTimeout(() => {
-        return res(true);
-      }, 1000);
-    });
-    setLoading(false);
-  };
-
-  const handleLogout = async (values) => {
-    // 로그아웃 요청
-    // const result = await userModel.logout(values);
-    // 리덕스 정보 초기화
-    dispatch(purge());
-    // 로컬스토리지 토큰 삭제
-    localStorage.removeItem(constants.LOCAL_TOKEN_KEY);
-    // 로그인 화면으로 이동
-    history.replace("/home");
+  const handleCheckLogin = async () => {
+    try {
+      // 로컬스토리지에서 토큰 가져오기
+      const token = localStorage.getItem(constants.LOCAL_TOKEN_KEY);
+      // 토큰 없으면 에러
+      if (!token) throw Error("Token does not exist.");
+      // 토큰 유효 체크
+      const result = await userModel.verifyToken();
+      // 로그인 유저 정보 리덕스에 저장
+      dispatch(setUser(result.data.data.user));
+      // 인증 성공 상태로 변경
+      setAuthenticated(true);
+    } catch (error) {
+      // 인증 실패 상태로 변경
+      setAuthenticated(false);
+    } finally {
+      // 로딩 해제
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    // 로컬스토리지에서 토큰 가져오기
-    const token = localStorage.getItem(constants.LOCAL_TOKEN_KEY);
-    console.log("!!token", !!token);
-    // 토큰이 있으면 인증 true, 없으면 false
-    setAuthenticated(!!token);
-    getUserInfo();
+    handleCheckLogin();
   }, []);
 
   return (
