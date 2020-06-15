@@ -1,8 +1,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { CustomerServiceFilled, RightOutlined } from "@ant-design/icons";
+import { RightOutlined } from "@ant-design/icons";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
+
+import iconImg from "@assets/images/service-center.png";
 
 const CustomerService = () => {
   const { t } = useTranslation();
@@ -17,7 +19,7 @@ const CustomerService = () => {
     >
       <div id="rr-customer-service">
         <div className="cs-bg">
-          <CustomerServiceFilled />
+          <img src={iconImg} />
         </div>
         <div className="cs-content-wrapper">
           <div className="cs-content">
