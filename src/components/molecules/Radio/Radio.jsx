@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Row, Col } from "antd";
 
@@ -6,13 +6,15 @@ import RadioButton from "@atoms/Buttons/RadioButton";
 
 const Radio = (props) => {
   const { initialValue, options, onChange, gutter, ...rest } = props;
-
   const [state, setState] = useState(initialValue);
 
   const handleChange = (value) => {
     setState(value);
-    onChange(value);
   };
+
+  useEffect(() => {
+    onChange(state);
+  }, [state]);
 
   return (
     <Row gutter={gutter} className="rr-radio" {...rest}>
