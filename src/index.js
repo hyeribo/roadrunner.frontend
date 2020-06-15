@@ -22,7 +22,7 @@ const store = configureStore();
 
 initI18n();
 
-axios.defaults.baseURL = process.env.REACT_APP_DB_HOST;
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 const render = (component) => {
   const Component = hot(component);
