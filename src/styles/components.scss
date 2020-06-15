@@ -215,6 +215,11 @@
     border-bottom: 1px solid #dfdfdf;
     color: #5c5c5c;
   }
+  .input-suffix {
+    font-size: 15px;
+    color: #9c9c9c;
+    margin-left: -28px;
+  }
   .error {
     padding: 8px 6px;
     font-size: 13px;
@@ -267,6 +272,46 @@
     width: 68px;
     height: 68px;
     object-fit: cover;
+  }
+}
+
+.rr-multi-upload {
+  .image-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    object-fit: scale-down;
+    margin-right: 8px;
+    margin-top: 8px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: scale-down;
+    }
+    .image-remove {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      line-height: 90px;
+      text-align: center;
+      background: #00000077;
+      color: white;
+    }
+  }
+  & > span {
+    vertical-align: bottom;
+    .upload-button {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      background-color: #0084ff;
+      color: #ffffff;
+      vertical-align: bottom;
+    }
   }
 }
 
@@ -395,4 +440,49 @@
   text-align: center;
   font-size: 19px;
   color: #9e9e9e;
+}
+
+.rr-req-items {
+  .item {
+    display: flex;
+    .item-name {
+      flex: 5;
+      margin-right: 14px;
+    }
+    .item-count {
+      flex: 2;
+      input {
+        width: 100%;
+      }
+    }
+    .item-button {
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      border-radius: 10px;
+      margin: auto;
+      text-align: center;
+      background-color: #0084ff;
+      color: #ffffff;
+      font-size: 14px;
+    }
+  }
+  .item-price {
+    input {
+      width: 100%;
+      max-width: 220px;
+      padding: 6px 14px;
+      margin: 10px 0;
+      border-radius: 18px;
+      background-color: #f3f7fb;
+      font-size: 15px;
+      border: none;
+      color: #5c5c5c;
+    }
+    .item-price-currency {
+      font-size: 15px;
+      color: #9c9c9c;
+      margin-left: -28px;
+    }
+  }
 }
