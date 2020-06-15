@@ -486,3 +486,28 @@
     }
   }
 }
+
+.rr-time-range-picker {
+  margin-top: 16px;
+  .picker-wrapper {
+    display: flex;
+    .ant-picker {
+      flex: 1;
+      height: 40px;
+      border-radius: 7px;
+      border: solid 1px #dfdfdf;
+      input {
+        border: none;
+        padding: 8px 6px;
+        font-size: 14px;
+      }
+    }
+    & > span {
+      width: 26px;
+      margin: auto 6px;
+      text-align: center;
+      font-size: 12px;
+      color: #5c5c5c;
+    }
+  }
+}

@@ -37,7 +37,7 @@ const errorMessage = {
     validate: "frm_req_items_invalid",
   },
   reqReceiveTime: {
-    required: "frm_receive_time",
+    validate: "frm_receive_time",
   },
   reqPriority: {
     required: "frm_req_priority",

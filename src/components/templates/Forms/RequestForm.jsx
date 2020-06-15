@@ -6,6 +6,7 @@ import FormItem from "@molecules/FormItem/FormItem";
 import Radio from "@molecules/Radio/Radio";
 import RequestItemList from "@organisms/RequestItemList/RequestItemList";
 import MultiUpload from "@molecules/Upload/MultiUpload";
+import TimeRangePicker from "@molecules/TimeRangePicker/TimeRangePicker";
 
 export const ConnectForm = ({ children }) => {
   const methods = useFormContext();
@@ -45,6 +46,12 @@ export const ProposalForm = (props) => {
       return empty;
     });
     return !invalid;
+  };
+
+  const validateReceiveTime = (time) => {
+    if (!time.start || !time.end) return false;
+    if (!time.start.isBefore(time.end)) return false;
+    return true;
   };
 
   return (
@@ -96,6 +103,22 @@ export const ProposalForm = (props) => {
               onChange={([reqImages]) => {
                 return reqImages;
               }}
+            />
+          </FormItem>
+          <FormItem
+            label={t("lbl_receive_time")}
+            name="reqReceiveTime"
+            error={errors.reqReceiveTime}
+          >
+            <Controller
+              name="reqReceiveTime"
+              as={<TimeRangePicker />}
+              control={control}
+              onChange={([reqReceiveTime]) => {
+                console.log("reqReceiveTime", reqReceiveTime);
+                return reqReceiveTime;
+              }}
+              rules={{ validate: validateReceiveTime }}
             />
           </FormItem>
           <FormItem

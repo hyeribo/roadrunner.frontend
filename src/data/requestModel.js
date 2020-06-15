@@ -1,4 +1,5 @@
 import { privateAPI } from "@utils/sendAPI";
+import moment from "moment";
 
 // shopper의 order 생성
 async function postRequest(values) {
@@ -19,6 +20,14 @@ async function postRequest(values) {
     runnerTip: totalExpectedPrice * 0.1,
     orderItems: values.reqItems,
     orderImages: values.files,
+    startReceiveTime: moment(values.reqReceiveTime.start, "HH:mm:ss: A").diff(
+      moment().startOf("day"),
+      "seconds"
+    ),
+    endReceiveTime: moment(values.reqReceiveTime.end, "HH:mm:ss: A").diff(
+      moment().startOf("day"),
+      "seconds"
+    ),
   };
 
   await privateAPI.post(url, requestPayload);
