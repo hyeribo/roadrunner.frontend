@@ -47,11 +47,11 @@ export const JoinForm = (props) => {
       {({ register, errors, control, getValues }) => (
         <div>
           <Controller
-            name="profile_img"
+            name="files"
             as={<AvatarUpload />}
             control={control}
             onChange={(imageUrl) => {
-              return "imageUrl";
+              return imageUrl;
             }}
           />
           <FormItem

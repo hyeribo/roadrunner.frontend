@@ -8,7 +8,7 @@ async function join(data) {
     password: data.realpassword,
     displayName: data.realusername,
     gender: data.gender,
-    profileImagePath: "",
+    profileImagePath: data.files[0],
   };
   const result = await axios.post(url, requestPayload);
   return result;

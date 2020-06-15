@@ -32,11 +32,11 @@ const AvatarUpload = (props) => {
       return;
     }
     if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, (imageUrl) => {
-        setImage(imageUrl);
+      getBase64(info.file.originFileObj, (imageData) => {
+        setImage(imageData);
         setLoading(false);
-        onChange(imageUrl);
+        const fileUrl = info.file.response.data.files[0].path;
+        onChange(fileUrl);
       });
     }
   };
@@ -52,7 +52,7 @@ const AvatarUpload = (props) => {
       listType="picture-card"
       className="avatar-uploader rr-avatar-upload"
       showUploadList={false}
-      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+      action={`${process.env.REACT_APP_API_BASE_URL}/upload/userProfileImage`}
       beforeUpload={beforeUpload}
       onChange={handleChange}
     >
