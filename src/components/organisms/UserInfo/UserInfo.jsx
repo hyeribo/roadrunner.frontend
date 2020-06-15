@@ -2,9 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { CalendarOutlined, ClockCircleOutlined } from "@ant-design/icons";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 import Badge from "@atoms/Badges/Badge";
+
 import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
+import constants from "@config/constants";
 
 const RunnerStatus = (props) => (
   <div className="status">
@@ -52,24 +55,29 @@ const ShopperStatus = ({ data }) => (
 );
 
 const UserInfo = (props) => {
+  const { t } = useTranslation();
   const { type, userInfo, requestInfo } = props;
+  const profileImg = userInfo.profileImagePath
+    ? `${process.env.REACT_APP_IMG_BASE_URL}${userInfo.profileImagePath}`
+    : defaultProfileImg;
+
   return (
     <div className="rr-user-info">
       <div className="profile">
         <div className="profile-img">
-          <img src={userInfo.profile_img || defaultProfileImg} />
+          <img src={profileImg} />
         </div>
         <div className="profile-info">
           <p>
-            <span className="name">{userInfo.name || "신부름"}</span>
-            <span className="gender">{userInfo.gender || "여자"}</span>
+            <span className="name">{userInfo.displayName}</span>
+            <span className="gender">
+              {t(constants.GENDER_MAP[userInfo.gender])}
+            </span>
           </p>
           <p className="address limit-line-1">
             {userInfo.address || "러너대학교 기숙사 A동"}
           </p>
-          <p className="email limit-line-1">
-            {userInfo.email || "runner8282@gmail.com"}
-          </p>
+          <p className="email limit-line-1">{userInfo.email}</p>
         </div>
       </div>
       {type === "runner" ? (

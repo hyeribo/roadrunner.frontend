@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   SolutionOutlined,
@@ -22,10 +23,11 @@ const ListItem = (props) => (
 );
 
 const MyPage = () => {
+  const myInfo = useSelector((state) => state.user);
   return (
     <MainLayout tabName="my" backgroundColor="#ffffff">
       <div id="rr-my-page" className="p-20">
-        <UserInfo type="runner" />
+        <UserInfo type="runner" userInfo={myInfo} />
         <div>
           <ListItem
             text="나의 요청 내역"
