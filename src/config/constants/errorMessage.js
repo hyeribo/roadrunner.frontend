@@ -29,6 +29,22 @@ const errorMessage = {
   distance: {
     required: "frm_distance",
   },
+  reqTitle: {
+    required: "frm_req_title",
+  },
+  reqItems: {
+    required: "frm_req_items",
+    validate: "frm_req_items_invalid",
+  },
+  reqReceiveTime: {
+    required: "frm_receive_time",
+  },
+  reqPriority: {
+    required: "frm_req_priority",
+  },
+  reqReceiveAddress: {
+    required: "frm_receive_address",
+  },
 };
 
 export default errorMessage;

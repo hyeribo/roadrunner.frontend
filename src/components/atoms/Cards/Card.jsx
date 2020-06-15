@@ -20,9 +20,9 @@ const Card = (props) => {
   return (
     <div className="rr-card" {...props}>
       <div className="rr-card-header">
-        <div className="rr-card-grade">{data.grade}</div>
+        <div className="rr-card-grade">{data.priority}</div>
         <div className="rr-card-header-content">
-          <p>{data.address}</p>
+          <p>{data.receiveAddress}</p>
           <p className="p-wname">{data.wname}</p>
         </div>
         {data.status && (
@@ -32,14 +32,14 @@ const Card = (props) => {
       <div className="rr-card-content">
         <Link to={url}>
           <p className="p-title limit-line-3">{data.title}</p>
-          <p className="p-content limit-line-1">{data.content}</p>
+          <p className="p-content limit-line-1">{data.additionalMessage}</p>
           <p className="p-info">
             <CalendarOutlined />
-            {moment(data.wdate).format("YYYY-MM-DD")}
+            {moment(data.createdAt).format("YYYY-MM-DD")}
             <ClockCircleOutlined />
-            {moment(data.wdate).format("HH:mm")}
+            {moment(data.createdAt).format("HH:mm")}
             <EyeOutlined />
-            {data.hits}
+            {data.hits || 0}
           </p>
         </Link>
       </div>

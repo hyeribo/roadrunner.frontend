@@ -1,18 +1,38 @@
 import { privateAPI } from "@utils/sendAPI";
 
 // shopper의 order 생성
-async function postRequest() {
+async function postRequest(values) {
   const url = "/shopper/orders";
-  const requestPayload = {};
+  const totalExpectedPrice = values.reqItems.reduce((total, items) => {
+    return total + +items.price;
+  }, 0);
+
+  const requestPayload = {
+    title: values.reqTitle,
+    contents: "contents",
+    priority: values.reqPriority,
+    startReceiveTime: 55800,
+    endReceiveTime: 64800,
+    receiveAddress: values.reqReceiveAddress,
+    additionalMessage: values.reqMemo,
+    estimatedPrice: totalExpectedPrice,
+    runnerTip: totalExpectedPrice * 0.1,
+    orderItems: values.reqItems,
+    orderImages: values.files,
+  };
+
+  await privateAPI.post(url, requestPayload);
+  return true;
 }
 
 // 모든 shopper가 올린 order 리스트
 async function getRequestList() {
   const url = "/shopper/orders";
   const result = await privateAPI.get(url);
-  return result;
+  return result.data.data.orders;
 }
 
 export default {
+  postRequest,
   getRequestList,
 };

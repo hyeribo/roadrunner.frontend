@@ -17,6 +17,7 @@ const RequestCardList = (props) => {
     try {
       const result = await requestModel.getRequestList();
       console.log("result");
+      setData(result);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +33,7 @@ const RequestCardList = (props) => {
         {data.length > 0 ? (
           data.map((item) => (
             <Card
-              key={item.id}
+              key={item.orderId}
               style={{ marginBottom: "15px" }}
               data={item}
               url={`/request/detail/${item.id}`}
