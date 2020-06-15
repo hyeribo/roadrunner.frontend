@@ -37,6 +37,7 @@ module.exports = {
           ["@modules", "./src/modules"],
           ["@routes", "./src/routes"],
           ["@styles", "./src/styles"],
+          ["@utils", "./src/utils"],
         ],
         extensions: [".js", ".jsx"],
       },
