@@ -5,6 +5,7 @@
 import React, { useState, useEffect } from "react";
 
 import Card from "@atoms/Cards/Card";
+import Empty from "@atoms/Empty/Empty";
 
 import requestModel from "@data/requestModel";
 
@@ -28,18 +29,24 @@ const RequestCardList = (props) => {
   return (
     <div {...rest}>
       <div>
-        {data.map((item) => (
-          <Card
-            key={item.id}
-            style={{ marginBottom: "15px" }}
-            data={item}
-            url={`/request/detail/${item.id}`}
-          />
-        ))}
+        {data.length > 0 ? (
+          data.map((item) => (
+            <Card
+              key={item.id}
+              style={{ marginBottom: "15px" }}
+              data={item}
+              url={`/request/detail/${item.id}`}
+            />
+          ))
+        ) : (
+          <Empty text={"심부름 목록이 없습니다."} />
+        )}
       </div>
-      <div className="list-add-button">
-        <span onClick={() => fetch()}>더보기</span>
-      </div>
+      {data.length ? (
+        <div className="list-add-button">
+          <span onClick={() => fetch()}>더보기</span>
+        </div>
+      ) : null}
     </div>
   );
 };
