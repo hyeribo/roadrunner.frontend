@@ -17,15 +17,20 @@ const Login = ({ history, setAuthenticated }) => {
   const dispatch = useDispatch();
 
   const handleLogin = async (values) => {
-    // 로그인 요청
-    const result = await userModel.login(values);
-    setAuthenticated(true);
-    // 로컬스토리지에 토큰 저장
-    localStorage.setItem(constants.LOCAL_TOKEN_KEY, result.data.data.token);
-    // 로그인 유저 정보 리덕스에 저장
-    dispatch(setUser(result.data.data.user));
-    // 메인화면으로 이동
-    history.replace("/home");
+    try {
+      // 로그인 요청
+      const result = await userModel.login(values);
+      // 로컬스토리지에 토큰 저장
+      localStorage.setItem(constants.LOCAL_TOKEN_KEY, result.data.data.token);
+      // 로그인 유저 정보 리덕스에 저장
+      dispatch(setUser(result.data.data.user));
+      // 인증 성공 상태로 변경
+      setAuthenticated(true);
+      // 메인화면으로 이동
+      history.replace("/home");
+    } catch (error) {
+      message.error(t("msg_login_f"));
+    }
   };
 
   const buttonProps = {
