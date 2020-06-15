@@ -8,10 +8,9 @@ const getToken = () => {
   return token;
 };
 
-export const publicAPI = () =>
-  axios.create({
-    baseURL: process.env.REACT_APP_API_BASE_URL,
-  });
+export const publicAPI = axios.create({
+  baseURL: process.env.REACT_APP_API_BASE_URL,
+});
 
 export const privateAPI = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
