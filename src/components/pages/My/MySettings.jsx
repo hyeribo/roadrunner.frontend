@@ -39,7 +39,14 @@ const MySettings = ({ history, setAuthenticated }) => {
 
   const deleteAccount = async () => {
     try {
-      await userModel.withdrawal(1);
+      // 회원탈퇴 request
+      await userModel.withdrawal();
+      // 리덕스 정보 초기화
+      dispatch(purge());
+      // 로컬스토리지 토큰 삭제
+      localStorage.removeItem(constants.LOCAL_TOKEN_KEY);
+      // 인증 실패 상태로 변경
+      setAuthenticated(false);
       message.success(t("msg_withdrawal_s"));
     } catch (error) {
       console.log(error);

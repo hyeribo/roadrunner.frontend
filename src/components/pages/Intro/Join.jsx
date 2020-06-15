@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { message } from "antd";
 import { useTranslation } from "react-i18next";
@@ -11,14 +11,18 @@ import userModel from "@data/userModel";
 const Join = ({ history }) => {
   const { t } = useTranslation();
   const methods = useForm();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (values) => {
     try {
+      setLoading(true);
       await userModel.join(values);
       message.success(t("msg_join_s"));
       history.replace("/login");
     } catch (error) {
       message.error(t("msg_join_f"));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -31,7 +35,8 @@ const Join = ({ history }) => {
       buttonProps={{
         text: t("lbl_join_complete"),
         onClick: methods.handleSubmit(onSubmit),
-        color: "primary",
+        color: loading ? "disabled" : "primary",
+        disabled: loading,
       }}
       backgroundColor="#ffffff"
     >

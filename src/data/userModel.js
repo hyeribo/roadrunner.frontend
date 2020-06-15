@@ -8,7 +8,7 @@ async function join(data) {
     password: data.realpassword,
     displayName: data.realusername,
     gender: data.gender,
-    profileImagePath: data.files[0],
+    profileImagePath: data.files ? data.files[0] : "",
   };
   const result = await publicAPI.post(url, requestPayload);
   return result;
@@ -44,8 +44,8 @@ async function logout(data) {
 }
 
 // 회원탈퇴
-async function withdrawal(userId) {
-  const url = `/user/${userId}`;
+async function withdrawal() {
+  const url = `/user`;
   const result = await privateAPI.delete(url);
   return result;
 }
