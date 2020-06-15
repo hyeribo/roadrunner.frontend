@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
-import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import ProposalForm from "@templates/Forms/ProposalForm";
 
 const ProposalWrite = () => {
+  const { t } = useTranslation();
   const methods = useForm();
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = (a) => {
     console.log(a);
@@ -17,11 +19,11 @@ const ProposalWrite = () => {
 
   return (
     <CommonLayout
-      pageName="글쓰기"
+      pageName={t("lbl_write")}
       showMenuButton={false}
       showBottom
       buttonProps={{
-        text: "등록하기",
+        text: t("lbl_register"),
         onClick: methods.handleSubmit(onSubmit),
         color: "primary",
       }}
