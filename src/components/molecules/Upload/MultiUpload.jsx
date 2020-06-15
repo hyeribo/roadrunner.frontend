@@ -33,6 +33,8 @@ const MultiUpload = (props) => {
           images.concat({
             data: imageData,
             path: info.file.response.data.files[0].path,
+            filename: info.file.response.data.files[0].filename,
+            size: info.file.response.data.files[0].size,
           })
         );
       });
@@ -48,8 +50,12 @@ const MultiUpload = (props) => {
 
   useEffect(() => {
     if (onChange) {
-      const paths = images.map((img) => img.path);
-      onChange(paths);
+      const imgs = images.map((img) => ({
+        path: img.path,
+        filename: img.filename,
+        size: img.size,
+      }));
+      onChange(imgs);
     }
   }, [images]);
 
@@ -61,8 +67,8 @@ const MultiUpload = (props) => {
         </div>
       ) : (
         images.map((image, i) => (
-          <div className="image-wrapper">
-            <img key={i} src={image.data} />
+          <div className="image-wrapper" key={i}>
+            <img src={image.data} />
             <div className="image-remove">
               <MinusOutlined onClick={() => handleRemoveImage(i)} />
             </div>
