@@ -6,6 +6,7 @@ export const initialState = {
   name: "user",
   id: 1,
   grade: "good",
+  email: "abc@gmail.com",
 };
 
 // ===== 리듀서

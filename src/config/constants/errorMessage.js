@@ -6,6 +6,9 @@ const errorMessage = {
   password: {
     required: "비밀번호를 입력해주세요.",
   },
+  username: {
+    required: "이름을 입력해주세요.",
+  },
   realusername: {
     required: "이름을 입력해주세요.",
   },
@@ -22,6 +25,9 @@ const errorMessage = {
   },
   gender: {
     required: "성별을 선택해주세요.",
+  },
+  distance: {
+    required: "거리를 선택해주세요.",
   },
 };
 

@@ -41,12 +41,12 @@ Radio.propTypes = {
     })
   ).isRequired,
   onChange: PropTypes.func,
-  gutter: PropTypes.number,
+  gutter: PropTypes.array,
 };
 Radio.defaultProps = {
   initialValue: null,
   onChange: () => {},
-  gutter: 8,
+  gutter: [8, 8],
 };
 
 export default Radio;
