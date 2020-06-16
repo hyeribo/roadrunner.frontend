@@ -19,7 +19,11 @@ const Home = (props) => {
         onChange={(newRole) => dispatch(setUser({ mode: newRole }))}
       />
       <div className="p-l-15 p-r-15" style={{ marginTop: "-40px" }}>
-        {mode === "runner" ? <RequestCardList /> : <ProposalCardList />}
+        {mode === "runner" ? (
+          <RequestCardList my={false} />
+        ) : (
+          <ProposalCardList my={false} />
+        )}
       </div>
     </MainLayout>
   );

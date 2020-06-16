@@ -3,6 +3,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Card from "@atoms/Cards/Card";
 import Empty from "@atoms/Empty/Empty";
@@ -10,13 +11,17 @@ import Empty from "@atoms/Empty/Empty";
 import requestModel from "@data/requestModel";
 
 const RequestCardList = (props) => {
-  const { requests, ...rest } = props;
+  const { my, ...rest } = props;
+  const userId = useSelector((state) => state.user.userId);
+
   const [data, setData] = useState([]);
 
   const fetch = async () => {
     try {
-      const result = await requestModel.getRequestList();
-      console.log("result");
+      let result;
+      if (my) result = await requestModel.getMyRequestList(userId);
+      else result = await requestModel.getRequestList();
+
       setData(result);
     } catch (error) {
       console.log(error);

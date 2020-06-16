@@ -41,7 +41,15 @@ async function getRequestList() {
   return result.data.data.orders;
 }
 
+// 내가 올린 order 리스트
+async function getMyRequestList(shopperId) {
+  const url = `/shopper/${shopperId}/orders`;
+  const result = await privateAPI.get(url);
+  return result.data.data.orders;
+}
+
 export default {
   postRequest,
   getRequestList,
+  getMyRequestList,
 };

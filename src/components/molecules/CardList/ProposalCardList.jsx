@@ -6,26 +6,16 @@ import React, { useState, useEffect } from "react";
 
 import Card from "@atoms/Cards/Card";
 
+import proposalModel from "@data/proposalModel";
+
 const ProposalCardList = (props) => {
-  const { proposals, ...rest } = props;
+  const { my, ...rest } = props;
   const [data, setData] = useState([]);
 
   const fetch = async () => {
-    const newData = [];
     try {
-      for (let i = 0; i < 10; i++) {
-        newData.push({
-          id: i,
-          grade: "우수",
-          address: "러너구 러너동 1004번지",
-          wname: "김러너",
-          title: "필요한게 있으면 알려주세요.",
-          content: "ABC마트 2시에 방문 예정",
-          wdate: "2020-04-20 12:30",
-          hits: i * 10,
-        });
-      }
-      setData(data.concat(newData));
+      const result = await proposalModel.getProposalList();
+      console.log("result", result);
     } catch (error) {
       console.log(error);
     }
