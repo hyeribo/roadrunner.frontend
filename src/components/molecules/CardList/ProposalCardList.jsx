@@ -16,6 +16,7 @@ const ProposalCardList = (props) => {
     try {
       const result = await proposalModel.getProposalList();
       console.log("result", result);
+      setData(result);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +33,13 @@ const ProposalCardList = (props) => {
           <Card
             key={item.id}
             style={{ marginBottom: "15px" }}
-            data={item}
+            data={{
+              priority: item.distance,
+              receiveAddress: item.address,
+              title: item.message,
+              additionalMessage: item.estimatedTime,
+              createdAt: item.createdAt,
+            }}
             url={`/proposal/detail/${item.id}`}
           />
         ))}

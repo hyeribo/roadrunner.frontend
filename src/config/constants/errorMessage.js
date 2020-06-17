@@ -45,6 +45,12 @@ const errorMessage = {
   reqReceiveAddress: {
     required: "frm_receive_address",
   },
+  contactTime: {
+    validate: "frm_contact_time",
+  },
+  payments: {
+    required: "frm_payments",
+  },
 };
 
 export default errorMessage;

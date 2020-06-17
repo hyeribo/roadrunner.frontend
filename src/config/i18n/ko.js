@@ -72,6 +72,8 @@ const ko = {
     frm_receive_address: "수령장소를 입력해주세요.",
     frm_req_memo: "추가 요청 사항을 입력해주세요.",
     frm_req_memo_pl: "추가 요청 사항이 있으면 알려주세요.",
+    frm_contact_time: "연락 가능한 시간을 바르게 선택해주세요.",
+    frm_payments: "결제수단을 선택해주세요.",
 
     cfm_logout: "로그아웃 하시겠습니까?",
     cfm_withdrawal1: "로드러너 회원 탈퇴 하시겠습니까?",
