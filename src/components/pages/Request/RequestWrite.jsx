@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { message } from "antd";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
@@ -8,8 +7,7 @@ import RequestForm from "@templates/Forms/RequestForm";
 
 import requestModel from "@data/requestModel";
 
-const RequestWrite = ({ history }) => {
-  const { t } = useTranslation();
+const RequestWrite = ({ history, t }) => {
   const methods = useForm();
   const [loading, setLoading] = useState(false);
 

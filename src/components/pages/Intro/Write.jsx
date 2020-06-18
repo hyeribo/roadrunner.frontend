@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import ModeButton from "@atoms/Buttons/ModeButton";
 
-const Write = ({ history }) => {
+const Write = ({ history, t }) => {
   const [mode, setMode] = useState("");
 
   const handleMovetoWrite = () => {
@@ -15,7 +15,7 @@ const Write = ({ history }) => {
   };
 
   const buttonProps = {
-    text: "다음",
+    text: t("lbl_next"),
     onClick: handleMovetoWrite,
     color: mode ? "primary" : "disabled",
     disabled: !!!mode,
@@ -23,7 +23,7 @@ const Write = ({ history }) => {
 
   return (
     <CommonLayout
-      pageName="글쓰기"
+      pageName={t("lbl_write")}
       showMenuButton={false}
       showBottom
       buttonProps={buttonProps}
@@ -31,8 +31,8 @@ const Write = ({ history }) => {
     >
       <div id="rr-write-intro">
         <div className="paragraph">
-          <p>안녕하세요. 로드러너입니다.</p>
-          <p>당신은 현재 러너인가요, 쇼퍼인가요?</p>
+          <p>{t("lbl_write_intro_1")}</p>
+          <p>{t("lbl_write_intro_2")}</p>
         </div>
         <div className="select-area">
           <div className="select-item">
@@ -42,7 +42,7 @@ const Write = ({ history }) => {
             >
               Runner
             </ModeButton>
-            <p className="select-text">심부름 할게요</p>
+            <p className="select-text">{t("lbl_select_runner")}</p>
           </div>
           <div className="select-item">
             <ModeButton
@@ -51,7 +51,7 @@ const Write = ({ history }) => {
             >
               Shopper
             </ModeButton>
-            <p className="select-text">구매를 원해요</p>
+            <p className="select-text">{t("lbl_select_shopper")}</p>
           </div>
         </div>
       </div>

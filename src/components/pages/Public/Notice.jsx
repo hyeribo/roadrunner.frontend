@@ -6,7 +6,7 @@ import CollapseItem from "@molecules/ListItems/CollapseItem";
 
 import boardModel from "@data/boardModel";
 
-const Notice = () => {
+const Notice = ({ t }) => {
   const [notices, setNotices] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Notice = () => {
 
   return (
     <CommonLayout
-      pageName="공지 사항"
+      pageName={t("lbl_notice")}
       showMenuButton={false}
       backgroundColor="#ffffff"
     >

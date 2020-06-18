@@ -6,7 +6,7 @@ import CollapseItem from "@molecules/ListItems/CollapseItem";
 
 import boardModel from "@data/boardModel";
 
-const Faq = () => {
+const Faq = ({ t }) => {
   const [faqs, setFaqs] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Faq = () => {
 
   return (
     <CommonLayout
-      pageName="이용 안내"
+      pageName={t("lbl_faq")}
       showMenuButton={false}
       backgroundColor="#ffffff"
     >

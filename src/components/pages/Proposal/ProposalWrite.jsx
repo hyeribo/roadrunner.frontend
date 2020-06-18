@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { message } from "antd";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import ProposalForm from "@templates/Forms/ProposalForm";
 import proposalModel from "@data/proposalModel";
 
-const ProposalWrite = ({ history }) => {
-  const { t } = useTranslation();
+const ProposalWrite = ({ history, t }) => {
   const methods = useForm();
   const [loading, setLoading] = useState(false);
 

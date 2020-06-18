@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
 import { message } from "antd";
-import { useTranslation } from "react-i18next";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import JoinForm from "@templates/Forms/JoinForm";
 
 import userModel from "@data/userModel";
 
-const Join = ({ history }) => {
-  const { t } = useTranslation();
+const Join = ({ history, t }) => {
   const methods = useForm();
   const [loading, setLoading] = useState(false);
 

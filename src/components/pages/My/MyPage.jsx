@@ -22,23 +22,40 @@ const ListItem = (props) => (
   </Link>
 );
 
-const MyPage = () => {
+const MyPage = ({ t }) => {
   const myInfo = useSelector((state) => state.user);
+
   return (
     <MainLayout tabName="my" backgroundColor="#ffffff">
       <div id="rr-my-page" className="p-20">
         <UserInfo type="runner" userInfo={myInfo} />
         <div>
           <ListItem
-            text="나의 요청 내역"
+            text={t("lbl_myrequest")}
             url="/my/requests"
             icon={<SolutionOutlined />}
           />
-          <ListItem text="이용 안내" url="/faq" icon={<InfoCircleOutlined />} />
-          <ListItem text="공지 사항" url="/notice" icon={<BellOutlined />} />
-          <ListItem text="고객센터" url="/cs" icon={<CommentOutlined />} />
-          <ListItem text="설정" url="/my/settings" icon={<SettingOutlined />} />
-          <ListItem text="팀 소개" url="/team" icon={<TeamOutlined />} />
+          <ListItem
+            text={t("lbl_faq")}
+            url="/faq"
+            icon={<InfoCircleOutlined />}
+          />
+          <ListItem
+            text={t("lbl_notice")}
+            url="/notice"
+            icon={<BellOutlined />}
+          />
+          <ListItem text={t("lbl_cs")} url="/cs" icon={<CommentOutlined />} />
+          <ListItem
+            text={t("lbl_settings")}
+            url="/my/settings"
+            icon={<SettingOutlined />}
+          />
+          <ListItem
+            text={t("lbl_intro_team")}
+            url="/team"
+            icon={<TeamOutlined />}
+          />
         </div>
       </div>
     </MainLayout>
