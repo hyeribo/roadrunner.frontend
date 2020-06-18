@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { message } from "antd";
 import { useDispatch } from "react-redux";
 
@@ -12,8 +11,7 @@ import { setUser } from "@modules/user/userActions";
 import bgImage from "@assets/images/bg-login.png";
 import constants from "@config/constants";
 
-const Login = ({ history, setAuthenticated }) => {
-  const { t } = useTranslation();
+const Login = ({ history, setAuthenticated, t }) => {
   const dispatch = useDispatch();
 
   const handleLogin = async (values) => {

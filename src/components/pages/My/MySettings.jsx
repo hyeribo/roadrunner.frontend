@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { Select, Switch, Modal, message } from "antd";
 import { RightOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
@@ -32,8 +31,7 @@ const ButtonItem = (props) => (
   </div>
 );
 
-const MySettings = ({ history, setAuthenticated }) => {
-  const { t } = useTranslation();
+const MySettings = ({ history, setAuthenticated, t }) => {
   const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
