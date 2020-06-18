@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { ConfigProvider } from "antd";
 import { useSelector, useDispatch } from "react-redux";
+import { changeI18nLanguage } from "@config/i18n";
 
 // Antd internationalization
 import enUS from "antd/lib/locale-provider/en_US";
@@ -60,6 +61,10 @@ const App = () => {
 
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    changeI18nLanguage(lang); // change i18n
+  }, [lang]);
 
   const handleCheckLogin = async () => {
     try {
