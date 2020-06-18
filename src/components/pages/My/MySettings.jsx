@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 import { Select, Switch, Modal, message } from "antd";
 import { RightOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 
@@ -32,8 +31,7 @@ const ButtonItem = (props) => (
   </div>
 );
 
-const MySettings = ({ history, setAuthenticated }) => {
-  const { t } = useTranslation();
+const MySettings = ({ history, t }) => {
   const lang = useSelector((state) => state.lang);
   const dispatch = useDispatch();
 
@@ -45,8 +43,6 @@ const MySettings = ({ history, setAuthenticated }) => {
       dispatch(purge());
       // 로컬스토리지 토큰 삭제
       localStorage.removeItem(constants.LOCAL_TOKEN_KEY);
-      // 인증 실패 상태로 변경
-      setAuthenticated(false);
       message.success(t("msg_withdrawal_s"));
     } catch (error) {
       console.log(error);
@@ -79,8 +75,6 @@ const MySettings = ({ history, setAuthenticated }) => {
         dispatch(purge());
         // 로컬스토리지 토큰 삭제
         localStorage.removeItem(constants.LOCAL_TOKEN_KEY);
-        // 인증 실패 상태로 변경
-        setAuthenticated(false);
       },
     });
   };

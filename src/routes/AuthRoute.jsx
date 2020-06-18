@@ -9,6 +9,7 @@ const AuthRoute = ({
   render,
   component: Component,
   location,
+  componentProps,
   ...rest
 }) => {
   if (loading) {
@@ -20,7 +21,9 @@ const AuthRoute = ({
   return (
     <Route
       {...rest}
-      render={(props) => (render ? render(props) : <Component {...props} />)}
+      render={(props) =>
+        render ? render(props) : <Component {...props} {...componentProps} />
+      }
     />
   );
 };

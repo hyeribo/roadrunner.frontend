@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { message } from "antd";
 import { useDispatch } from "react-redux";
 
@@ -12,8 +11,7 @@ import { setUser } from "@modules/user/userActions";
 import bgImage from "@assets/images/bg-login.png";
 import constants from "@config/constants";
 
-const Login = ({ history, setAuthenticated }) => {
-  const { t } = useTranslation();
+const Login = ({ history, t }) => {
   const dispatch = useDispatch();
 
   const handleLogin = async (values) => {
@@ -23,9 +21,12 @@ const Login = ({ history, setAuthenticated }) => {
       // 로컬스토리지에 토큰 저장
       localStorage.setItem(constants.LOCAL_TOKEN_KEY, result.data.data.token);
       // 로그인 유저 정보 리덕스에 저장
-      dispatch(setUser(result.data.data.user));
-      // 인증 성공 상태로 변경
-      setAuthenticated(true);
+      dispatch(
+        setUser({
+          ...result.data.data.user,
+          authenticated: true,
+        })
+      );
       // 메인화면으로 이동
       history.push("/home");
     } catch (error) {

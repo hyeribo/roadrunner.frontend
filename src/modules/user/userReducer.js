@@ -4,6 +4,7 @@ import { rootActions } from "@modules/rootActions";
 // ===== 초기 상태값
 export const initialState = {
   mode: "runner",
+  authenticated: false,
 };
 
 // ===== 리듀서
