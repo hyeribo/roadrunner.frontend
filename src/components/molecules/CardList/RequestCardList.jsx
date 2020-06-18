@@ -3,7 +3,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Card from "@atoms/Cards/Card";
 import Empty from "@atoms/Empty/Empty";
@@ -11,17 +11,15 @@ import Empty from "@atoms/Empty/Empty";
 import requestModel from "@data/requestModel";
 
 const RequestCardList = (props) => {
-  const { my, ...rest } = props;
-  const userId = useSelector((state) => state.user.userId);
-
+  const { shopperId, ...rest } = props;
+  const { t } = useTranslation();
   const [data, setData] = useState([]);
 
   const fetch = async () => {
     try {
       let result;
-      if (my) result = await requestModel.getMyRequestList(userId);
+      if (shopperId) result = await requestModel.getUserRequestList(shopperId);
       else result = await requestModel.getRequestList();
-
       setData(result);
     } catch (error) {
       console.log(error);
@@ -38,19 +36,27 @@ const RequestCardList = (props) => {
         {data.length > 0 ? (
           data.map((item) => (
             <Card
-              key={item.orderId}
+              key={`request-${item.orderId}`}
               style={{ marginBottom: "15px" }}
-              data={item}
+              data={{
+                grade: item.priority,
+                address: item.receiveAddress,
+                name: item.shopperName,
+                status: item.status,
+                title: item.title,
+                content: item.contents,
+                date: item.createdAt,
+              }}
               url={`/request/detail/${item.id}`}
             />
           ))
         ) : (
-          <Empty text={"심부름 목록이 없습니다."} />
+          <Empty text={t("lbl_no_orders")} />
         )}
       </div>
       {data.length ? (
         <div className="list-add-button">
-          <span onClick={() => fetch()}>더보기</span>
+          <span onClick={() => fetch()}>{t("lbl_more")}</span>
         </div>
       ) : null}
     </div>

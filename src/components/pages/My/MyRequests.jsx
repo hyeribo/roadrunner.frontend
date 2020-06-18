@@ -10,17 +10,21 @@ import { setUser } from "@modules/user/userActions";
 
 const MyRequests = () => {
   const [data, setData] = useState([]);
-  const mode = useSelector((state) => state.user.mode);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (
     <MainLayout tabName="myrequest">
       <RoleSwitchSimple
-        defaultValue={mode}
+        defaultValue={user.mode}
         onChange={(newRole) => dispatch(setUser({ mode: newRole }))}
       />
       <div className="p-l-15 p-r-15">
-        {mode === "runner" ? <RequestCardList my /> : <ProposalCardList my />}
+        {user.mode === "runner" ? (
+          <RequestCardList shopperId={user.userId} />
+        ) : (
+          <ProposalCardList runnerId={user.userId} />
+        )}
       </div>
     </MainLayout>
   );

@@ -41,8 +41,8 @@ async function getRequestList() {
   return result.data.data.orders;
 }
 
-// 내가 올린 order 리스트
-async function getMyRequestList(shopperId) {
+// 특정 shopper의 order 리스트
+async function getUserRequestList(shopperId) {
   const url = `/shopper/${shopperId}/orders`;
   const result = await privateAPI.get(url);
   return result.data.data.orders;
@@ -51,5 +51,5 @@ async function getMyRequestList(shopperId) {
 export default {
   postRequest,
   getRequestList,
-  getMyRequestList,
+  getUserRequestList,
 };

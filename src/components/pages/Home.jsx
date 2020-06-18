@@ -9,21 +9,17 @@ import ProposalCardList from "@molecules/CardList/ProposalCardList";
 import { setUser } from "@modules/user/userActions";
 
 const Home = (props) => {
-  const mode = useSelector((state) => state.user.mode);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (
     <MainLayout tabName="home" containPaddingTop={false}>
       <RoleSwitch
-        defaultValue={mode}
+        defaultValue={user.mode}
         onChange={(newRole) => dispatch(setUser({ mode: newRole }))}
       />
       <div className="p-l-15 p-r-15" style={{ marginTop: "-40px" }}>
-        {mode === "runner" ? (
-          <RequestCardList my={false} />
-        ) : (
-          <ProposalCardList my={false} />
-        )}
+        {user.mode === "runner" ? <RequestCardList /> : <ProposalCardList />}
       </div>
     </MainLayout>
   );

@@ -26,7 +26,15 @@ async function getProposalList() {
   return result.data.data.orders;
 }
 
+// 특정 runner의 order 리스트
+async function getUserProposalList(runnerId) {
+  const url = `/runner/${runnerId}/orders`;
+  const result = await privateAPI.get(url);
+  return result.data.data.orders;
+}
+
 export default {
   postProposal,
   getProposalList,
+  getUserProposalList,
 };

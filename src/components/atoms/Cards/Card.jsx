@@ -20,10 +20,10 @@ const Card = (props) => {
   return (
     <div className="rr-card" {...props}>
       <div className="rr-card-header">
-        <div className="rr-card-grade">{data.priority}</div>
+        <div className="rr-card-grade">{data.grade}</div>
         <div className="rr-card-header-content">
-          <p>{data.receiveAddress}</p>
-          <p className="p-wname">{data.wname}</p>
+          <p>{data.address}</p>
+          <p className="p-name">{data.name}</p>
         </div>
         {data.status && (
           <Badge text={data.status} style={{ marginTop: "8px" }} />
@@ -32,12 +32,12 @@ const Card = (props) => {
       <div className="rr-card-content">
         <Link to={url}>
           <p className="p-title limit-line-3">{data.title}</p>
-          <p className="p-content limit-line-1">{data.additionalMessage}</p>
+          <p className="p-content limit-line-1">{data.content}</p>
           <p className="p-info">
             <CalendarOutlined />
-            {moment(data.createdAt).format("YYYY-MM-DD")}
+            {moment(data.date).format("YYYY-MM-DD")}
             <ClockCircleOutlined />
-            {moment(data.createdAt).format("HH:mm")}
+            {moment(data.date).format("HH:mm")}
             <EyeOutlined />
             {data.hits || 0}
           </p>
@@ -50,12 +50,13 @@ const Card = (props) => {
 
 Card.propTypes = {
   data: PropTypes.shape({
+    grade: PropTypes.string,
     address: PropTypes.string,
-    wname: PropTypes.string,
+    name: PropTypes.string,
     status: PropTypes.string,
     title: PropTypes.string,
     content: PropTypes.string,
-    wdate: PropTypes.string,
+    date: PropTypes.string,
   }),
   footer: PropTypes.node,
 };
