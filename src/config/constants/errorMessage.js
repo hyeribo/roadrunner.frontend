@@ -51,6 +51,15 @@ const errorMessage = {
   payments: {
     required: "frm_payments",
   },
+  message: {
+    required: "frm_message",
+  },
+  estimatedTime: {
+    required: "frm_estimated_time",
+  },
+  introduce: {
+    required: "frm_introduce",
+  },
 };
 
 export default errorMessage;

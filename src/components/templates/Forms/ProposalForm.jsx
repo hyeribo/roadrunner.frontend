@@ -112,7 +112,7 @@ export const ProposalForm = (props) => {
             />
           </FormItem>
           <FormItem
-            label="이메일"
+            label={t("email")}
             labelFor="email"
             name="email"
             error={errors.email}
@@ -129,7 +129,7 @@ export const ProposalForm = (props) => {
             />
           </FormItem>
           <FormItem
-            label="활동 지역 주소"
+            label={t("lbl_move_area")}
             labelFor="address"
             name="address"
             error={errors.address}
@@ -144,7 +144,7 @@ export const ProposalForm = (props) => {
             />
           </FormItem>
           <FormItem
-            label="이동 가능 거리"
+            label={t("lbl_enable_distanc")}
             name="distance"
             required
             error={errors.distance}
@@ -162,7 +162,7 @@ export const ProposalForm = (props) => {
             />
           </FormItem>
           <FormItem
-            label="연락 가능 시간"
+            label={t("lbl_contact_time")}
             name="contactTime"
             error={errors.contactTime}
             required
@@ -179,7 +179,7 @@ export const ProposalForm = (props) => {
             />
           </FormItem>
           <FormItem
-            label="결제수단"
+            label={t("lbl_payment_method")}
             name="payments"
             required
             error={errors.payments}
@@ -201,7 +201,7 @@ export const ProposalForm = (props) => {
           </FormItem>
 
           <FormItem
-            label="현재 메세지"
+            label={t("lbl_now_message")}
             labelFor="message"
             name="message"
             error={errors.message}
@@ -217,7 +217,7 @@ export const ProposalForm = (props) => {
           </FormItem>
 
           <FormItem
-            label="예상 일정"
+            label={t("lbl_expect_schedule")}
             labelFor="estimatedTime"
             name="estimatedTime"
             error={errors.estimatedTime}
@@ -233,7 +233,7 @@ export const ProposalForm = (props) => {
           </FormItem>
 
           <FormItem
-            label="한줄 소개"
+            label={t("lbl_introduce")}
             labelFor="introduce"
             name="introduce"
             error={errors.introduce}

@@ -20,14 +20,8 @@ async function postRequest(values) {
     runnerTip: totalExpectedPrice * 0.1,
     orderItems: values.reqItems,
     orderImages: values.files,
-    startReceiveTime: moment(values.reqReceiveTime.start, "HH:mm:ss: A").diff(
-      moment().startOf("day"),
-      "seconds"
-    ),
-    endReceiveTime: moment(values.reqReceiveTime.end, "HH:mm:ss: A").diff(
-      moment().startOf("day"),
-      "seconds"
-    ),
+    startContactableTime: values.reqReceiveTime.start.format("HH:mm:ss"),
+    endContactableTime: values.reqReceiveTime.end.format("HH:mm:ss"),
   };
 
   await privateAPI.post(url, requestPayload);
