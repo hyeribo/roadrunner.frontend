@@ -20,16 +20,16 @@ async function postProposal(values) {
 }
 
 // 모든 runner가 올린 order 리스트
-async function getProposalList() {
+async function getProposalList(pagination) {
   const url = "/runner/orders";
-  const result = await privateAPI.get(url);
+  const result = await privateAPI.get(url, { params: pagination });
   return result.data.data.orders;
 }
 
 // 특정 runner의 order 리스트
-async function getUserProposalList(runnerId) {
+async function getUserProposalList(runnerId, pagination) {
   const url = `/runner/${runnerId}/orders`;
-  const result = await privateAPI.get(url);
+  const result = await privateAPI.get(url, { params: pagination });
   return result.data.data.orders;
 }
 

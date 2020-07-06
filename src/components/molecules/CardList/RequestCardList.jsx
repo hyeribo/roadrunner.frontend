@@ -14,12 +14,22 @@ const RequestCardList = (props) => {
   const { shopperId, ...rest } = props;
   const { t } = useTranslation();
   const [data, setData] = useState([]);
+  const [pagination, setPagination] = useState({
+    offset: 0,
+    limit: 20,
+    showMore: false,
+  });
 
   const fetch = async () => {
     try {
       let result;
-      if (shopperId) result = await requestModel.getUserRequestList(shopperId);
-      else result = await requestModel.getRequestList();
+      if (shopperId)
+        result = await requestModel.getUserRequestList(shopperId, pagination);
+      else result = await requestModel.getRequestList(pagination);
+      setPagination({
+        ...pagination,
+        offset: pagination.offset + pagination.limit,
+      });
       setData(result);
     } catch (error) {
       console.log(error);
@@ -54,7 +64,7 @@ const RequestCardList = (props) => {
           <Empty text={t("lbl_no_orders")} />
         )}
       </div>
-      {data.length ? (
+      {pagination.showMore ? (
         <div className="list-add-button">
           <span onClick={() => fetch()}>{t("lbl_more")}</span>
         </div>

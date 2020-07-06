@@ -29,16 +29,16 @@ async function postRequest(values) {
 }
 
 // 모든 shopper가 올린 order 리스트
-async function getRequestList() {
+async function getRequestList(pagination) {
   const url = "/shopper/orders";
-  const result = await privateAPI.get(url);
+  const result = await privateAPI.get(url, { params: pagination });
   return result.data.data.orders;
 }
 
 // 특정 shopper의 order 리스트
-async function getUserRequestList(shopperId) {
+async function getUserRequestList(shopperId, pagination) {
   const url = `/shopper/${shopperId}/orders`;
-  const result = await privateAPI.get(url);
+  const result = await privateAPI.get(url, { params: pagination });
   return result.data.data.orders;
 }
 
