@@ -200,12 +200,23 @@
 .rr-form-item {
   width: 100%;
   margin-bottom: 30px;
-  label {
-    display: block;
-    margin-bottom: 6px;
-    padding: 0 6px;
-    font-size: 13px;
-    color: #5c5c5c;
+  .label-wrapper {
+    display: flex;
+    label {
+      display: block;
+      margin-bottom: 6px;
+      padding: 0 6px;
+      font-size: 13px;
+      color: #5c5c5c;
+    }
+    .label-extra {
+      flex: 1;
+      text-align: right;
+      & > span {
+        font-size: 11px;
+        color: #468ee5;
+      }
+    }
   }
   input {
     width: 100%;
@@ -219,6 +230,10 @@
     font-size: 15px;
     color: #9c9c9c;
     margin-left: -28px;
+  }
+  .helpbox {
+    font-size: 14px;
+    color: #ef4a52;
   }
   .error {
     padding: 8px 6px;

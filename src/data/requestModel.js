@@ -12,12 +12,16 @@ async function postRequest(values) {
     title: values.reqTitle,
     contents: "contents",
     priority: values.reqPriority,
-    startReceiveTime: 55800,
-    endReceiveTime: 64800,
+    startReceiveTime: values.reqReceiveTime.start.format("HH:mm:ss"),
+    endReceiveTime: values.reqReceiveTime.end.format("HH:mm:ss"),
+    discussYn: !!values.discussYn,
     receiveAddress: values.reqReceiveAddress,
     additionalMessage: values.reqMemo,
     estimatedPrice: totalExpectedPrice,
-    runnerTip: totalExpectedPrice * 0.1,
+    runnerTip:
+      values.reqPriority === "URGENT"
+        ? totalExpectedPrice * 0.15
+        : totalExpectedPrice * 0.1,
     orderItems: values.reqItems,
     orderImages: values.files,
     startContactableTime: values.reqReceiveTime.start.format("HH:mm:ss"),

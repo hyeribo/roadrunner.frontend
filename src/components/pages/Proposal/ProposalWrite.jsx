@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useForm, FormContext } from "react-hook-form";
-import { message } from "antd";
+import { Modal, message } from "antd";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import ProposalForm from "@templates/Forms/ProposalForm";
+
 import proposalModel from "@data/proposalModel";
+
+const { confirm } = Modal;
 
 const ProposalWrite = ({ history, t }) => {
   const methods = useForm();
   const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (values) => {
+  const handleWrite = async (values) => {
     try {
       setLoading(true);
       await proposalModel.postProposal(values);
@@ -31,7 +34,11 @@ const ProposalWrite = ({ history, t }) => {
       showBottom
       buttonProps={{
         text: t("lbl_register"),
-        onClick: methods.handleSubmit(onSubmit),
+        onClick: () =>
+          confirm({
+            title: "심부름 제안을 등록하시겠습니까?",
+            onOk: () => methods.handleSubmit(handleWrite)(),
+          }),
         color: loading ? "disabled" : "primary",
         disabled: loading,
       }}

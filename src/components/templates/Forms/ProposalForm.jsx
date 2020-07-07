@@ -141,6 +141,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
+              placeholder="예) 기숙사 A, B, C동"
             />
           </FormItem>
           <FormItem
@@ -213,6 +214,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
+              placeholder="예) 필요한 제품 사드립니다."
             />
           </FormItem>
 
@@ -222,6 +224,7 @@ export const ProposalForm = (props) => {
             name="estimatedTime"
             error={errors.estimatedTime}
             required
+            extra="예상 일정은 고객의 결정에 도움이 됩니다."
           >
             <input
               id="estimatedTime"
@@ -229,6 +232,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
+              placeholder="예) 1시에 A마트 방문 예정입니다."
             />
           </FormItem>
 
@@ -245,6 +249,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
+              placeholder="예) 집 앞까지 전달해드립니다."
             />
           </FormItem>
         </div>

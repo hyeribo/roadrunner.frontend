@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormContext, Controller } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import FormItem from "@molecules/FormItem/FormItem";
@@ -16,7 +17,8 @@ export const ConnectForm = ({ children }) => {
   });
 };
 
-export const ProposalForm = (props) => {
+export const RequestForm = (props) => {
+  const user = useSelector((state) => state.user);
   const { t } = useTranslation();
 
   const radioOptions = [
@@ -56,8 +58,11 @@ export const ProposalForm = (props) => {
 
   return (
     <ConnectForm>
-      {({ register, errors, control }) => (
+      {({ register, errors, control, setValue }) => (
         <div>
+          <FormItem style={{ display: "none" }} name="discussYn">
+            <input id="discussYn" name="discussYn" ref={register()} />
+          </FormItem>
           <FormItem
             label={t("lbl_req_title")}
             labelFor="reqTitle"
@@ -80,6 +85,7 @@ export const ProposalForm = (props) => {
             name="reqItems"
             required
             error={errors.reqItems}
+            helpbox="* 러너 팁은 총 금액의 10% 입니다."
           >
             <Controller
               name="reqItems"
@@ -95,6 +101,7 @@ export const ProposalForm = (props) => {
             label={t("lbl_req_img")}
             name="reqImages"
             error={errors.reqImages}
+            extra="이미지가 있으면 등록해주세요."
           >
             <Controller
               name="files"
@@ -109,13 +116,16 @@ export const ProposalForm = (props) => {
             label={t("lbl_receive_time")}
             name="reqReceiveTime"
             error={errors.reqReceiveTime}
+            extra="협의 가능"
+            onToggleExtra={(checked) => {
+              setValue("discussYn", checked);
+            }}
           >
             <Controller
               name="reqReceiveTime"
               as={<TimeRangePicker />}
               control={control}
               onChange={([reqReceiveTime]) => {
-                console.log("reqReceiveTime", reqReceiveTime);
                 return reqReceiveTime;
               }}
               rules={{ validate: validateReceiveTime }}
@@ -126,6 +136,8 @@ export const ProposalForm = (props) => {
             name="reqPriority"
             required
             error={errors.reqPriority}
+            helpbox="* 긴급 선택시 추가요금 5%"
+            helpboxPlacement="right"
           >
             <Controller
               name="reqPriority"
@@ -149,6 +161,12 @@ export const ProposalForm = (props) => {
             name="reqReceiveAddress"
             required
             error={errors.reqReceiveAddress}
+            extra="주소지와 동일"
+            onToggleExtra={(checked) => {
+              if (checked) {
+                setValue("reqReceiveAddress", user.address);
+              }
+            }}
           >
             <input
               id="reqReceiveAddress"
@@ -178,4 +196,4 @@ export const ProposalForm = (props) => {
   );
 };
 
-export default ProposalForm;
+export default RequestForm;
