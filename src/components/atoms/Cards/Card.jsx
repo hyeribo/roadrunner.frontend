@@ -38,8 +38,6 @@ const Card = (props) => {
             {moment(data.date).format("YYYY-MM-DD")}
             <ClockCircleOutlined />
             {moment(data.date).format("HH:mm")}
-            <EyeOutlined />
-            {data.hits || 0}
           </p>
         </Link>
       </div>

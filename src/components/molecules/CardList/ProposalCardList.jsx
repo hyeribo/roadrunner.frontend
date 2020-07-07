@@ -12,7 +12,6 @@ import Empty from "@atoms/Empty/Empty";
 import proposalModel from "@data/proposalModel";
 
 const ProposalCardList = (props) => {
-  const { runnerId, ...rest } = props;
   const user = useSelector((state) => state.user);
   const { t } = useTranslation();
   const [data, setData] = useState([]);
@@ -24,10 +23,7 @@ const ProposalCardList = (props) => {
 
   const fetch = async () => {
     try {
-      let result;
-      if (runnerId)
-        result = await proposalModel.getUserProposalList(runnerId, pagination);
-      else result = await proposalModel.getProposalList(pagination);
+      const result = await proposalModel.getProposalList(pagination);
       setPagination({
         ...pagination,
         offset: pagination.offset + pagination.limit,
@@ -43,7 +39,7 @@ const ProposalCardList = (props) => {
   }, []);
 
   return (
-    <div {...rest}>
+    <div {...props}>
       <div>
         {data.length > 0 ? (
           data.map((item) => (

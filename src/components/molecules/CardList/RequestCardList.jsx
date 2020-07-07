@@ -12,7 +12,6 @@ import Empty from "@atoms/Empty/Empty";
 import requestModel from "@data/requestModel";
 
 const RequestCardList = (props) => {
-  const { shopperId, ...rest } = props;
   const user = useSelector((state) => state.user);
   const { t } = useTranslation();
   const [data, setData] = useState([]);
@@ -24,10 +23,7 @@ const RequestCardList = (props) => {
 
   const fetch = async () => {
     try {
-      let result;
-      if (shopperId)
-        result = await requestModel.getUserRequestList(shopperId, pagination);
-      else result = await requestModel.getRequestList(pagination);
+      const result = await requestModel.getRequestList(pagination);
       setPagination({
         ...pagination,
         offset: pagination.offset + pagination.limit,
@@ -43,7 +39,7 @@ const RequestCardList = (props) => {
   }, []);
 
   return (
-    <div {...rest}>
+    <div {...props}>
       <div>
         {data.length > 0 ? (
           data.map((item) => (

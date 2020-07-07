@@ -11,12 +11,13 @@
   width: 100%;
   height: auto;
   border-radius: 20px;
-  padding: 15px;
+  padding: 15px 30px;
+  padding-bottom: 5px;
   background-color: #ffffff;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.05);
   .rr-card-header {
     display: flex;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #dae0ec;
     .rr-card-header-content {
       padding: 4px 10px 0 10px;
@@ -31,7 +32,7 @@
     }
   }
   .rr-card-content {
-    padding: 15px 20px 0 20px;
+    padding: 15px 10px;
     .p-title {
       line-height: 22px;
       margin-bottom: 12px;
@@ -50,6 +51,30 @@
     line-height: 44px;
     text-align: center;
     color: #ffffff;
+  }
+  .rr-card-footer {
+    display: flex;
+    padding: 10px 0;
+    border-top: 1px solid #dae0ec;
+    .footer-left {
+      flex: 1;
+      font-size: 13px;
+      line-height: 40px;
+      .text-name {
+        color: #5c5c5c;
+      }
+      .text-blue {
+        color: #0084ff;
+      }
+    }
+    .footer-left-button {
+      flex: 1;
+    }
+    .footer-right {
+      button {
+        margin-left: 5px;
+      }
+    }
   }
 }
 
@@ -152,6 +177,21 @@
   font-weight: bold;
   letter-spacing: 0.69px;
   border-radius: 28px;
+}
+.rr-action-button {
+  @extend .rr-button;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-align: center;
+  padding: 12px 22px;
+  border-radius: 20px;
+
+  &.black {
+    color: #5c5c5c;
+    background-color: #ffffff;
+    border-color: #9e9e9e;
+  }
 }
 .rr-mode-button {
   @extend .rr-button;
