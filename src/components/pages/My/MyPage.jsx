@@ -28,7 +28,7 @@ const MyPage = ({ t }) => {
   return (
     <MainLayout tabName="my" backgroundColor="#ffffff">
       <div id="rr-my-page" className="p-20">
-        <UserInfo type="runner" userInfo={myInfo} />
+        <UserInfo type="proposal" userInfo={myInfo} />
         <div>
           <ListItem
             text={t("lbl_myrequest")}
