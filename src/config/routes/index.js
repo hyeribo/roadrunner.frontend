@@ -13,9 +13,11 @@ import Write from "@pages/Intro/Write";
 import RequestWrite from "@pages/Request/RequestWrite";
 import RequestModify from "@pages/Request/RequestModify";
 import RequestDetail from "@pages/Request/RequestDetail";
+import MyRequestDetail from "@pages/Request/MyRequestDetail";
 import ProposalWrite from "@pages/Proposal/ProposalWrite";
 import ProposalModify from "@pages/Proposal/ProposalModify";
 import ProposalDetail from "@pages/Proposal/ProposalDetail";
+import MyProposalDetail from "@pages/Proposal/MyProposalDetail";
 import MyInfo from "@pages/My/MyInfo";
 import MyPassword from "@pages/My/MyPassword";
 import MyReviews from "@pages/My/MyReviews";
@@ -47,6 +49,16 @@ const routes = [
   {
     path: "/my/requests",
     component: MyRequests,
+    auth: true,
+  },
+  {
+    path: "/my/request/detail/:request_id",
+    component: MyRequestDetail,
+    auth: true,
+  },
+  {
+    path: "/my/proposal/detail/:proposal_id",
+    component: MyProposalDetail,
     auth: true,
   },
   {

@@ -31,6 +31,8 @@ const en = {
     lbl_intro_team: "Team",
     lbl_more: "More",
     lbl_no_orders: "심부름 목록이 없습니다.",
+    lbl_order_detail: "Detail",
+    lbl_request: "Request",
 
     lbl_email: "Email",
     lbl_username: "Username",

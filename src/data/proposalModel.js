@@ -33,8 +33,24 @@ async function getUserProposalList(runnerId, pagination) {
   return result.data.data.orders;
 }
 
+// proposal 상세조회
+async function getProposalDetail(proposalId) {
+  const url = `/runner/orders/${proposalId}`;
+  const result = await privateAPI.get(url);
+  return result.data.data.order;
+}
+
+// runner의 proposal에 요청을 보냄
+async function acceptProposal(proposalId) {
+  const url = `/runner/orders/${proposalId}/requests`;
+  await privateAPI.post(url);
+  return true;
+}
+
 export default {
   postProposal,
   getProposalList,
   getUserProposalList,
+  getProposalDetail,
+  acceptProposal,
 };

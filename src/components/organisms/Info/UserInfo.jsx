@@ -9,45 +9,37 @@ import Badge from "@atoms/Badges/Badge";
 import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
 import constants from "@config/constants";
 
-const RunnerStatus = (props) => (
+const RunnerStatus = ({ userInfo }) => (
   <div className="status">
     <ul>
       <li>
         <span className="title">완료 건수</span>
-        <span className="value">7건</span>
+        <span className="value">{userInfo.completeCnt || 0}</span>
       </li>
       <li>
         <span className="title">진행중</span>
-        <span className="value">1건</span>
-      </li>
-      <li>
-        <span className="title">평점</span>
-        <span className="value">4.5</span>
-      </li>
-      <li>
-        <span className="title">리뷰</span>
-        <span className="value">7개</span>
+        <span className="value">{userInfo.processingCnt || 0}</span>
       </li>
     </ul>
   </div>
 );
 
-const ShopperStatus = ({ data }) => (
+const ShopperStatus = ({ order }) => (
   <div className="status">
     <ul>
       <li className="status-badge">
-        <Badge text={data.requestStatus} />
+        <Badge text={order.status} />
       </li>
       <li>
         <span className="title">받은 연락</span>
-        <span className="value">{data.responseCnt}</span>
+        <span className="value">{order.responseCnt}</span>
       </li>
       <li className="float-r">
         <p className="p-info">
           <CalendarOutlined />
-          {moment(data.wdate).format("YYYY-MM-DD")}
+          {moment(order.createdAt).format("YYYY-MM-DD")}
           <ClockCircleOutlined />
-          {moment(data.wdate).format("HH:mm")}
+          {moment(order.createdAt).format("HH:mm")}
         </p>
       </li>
     </ul>
@@ -56,7 +48,7 @@ const ShopperStatus = ({ data }) => (
 
 const UserInfo = (props) => {
   const { t } = useTranslation();
-  const { type, userInfo, requestInfo } = props;
+  const { type, userInfo, order } = props;
   const profileImg = userInfo.profileImagePath
     ? `${process.env.REACT_APP_IMG_BASE_URL}${userInfo.profileImagePath}`
     : defaultProfileImg;
@@ -69,43 +61,33 @@ const UserInfo = (props) => {
         </div>
         <div className="profile-info">
           <p>
-            <span className="name">{userInfo.displayName}</span>
+            <span className="name">{userInfo.displayName || "이름"}</span>
             <span className="gender">
-              {t(constants.GENDER_MAP[userInfo.gender])}
+              {t(constants.GENDER_MAP[userInfo.gender] || "여자")}
             </span>
           </p>
-          <p className="address limit-line-1">
-            {userInfo.address || "러너대학교 기숙사 A동"}
-          </p>
-          <p className="email limit-line-1">{userInfo.email}</p>
+          <p className="address limit-line-1">{userInfo.address || "주소"}</p>
+          <p className="email limit-line-1">{userInfo.email || "이메일"}</p>
         </div>
       </div>
-      {type === "runner" ? (
-        <RunnerStatus />
+      {type === "proposal" ? (
+        <RunnerStatus userInfo={userInfo} />
       ) : (
-        <ShopperStatus data={requestInfo} />
+        <ShopperStatus order={order} />
       )}
     </div>
   );
 };
 
 UserInfo.propTypes = {
-  type: PropTypes.oneOf(["runner", "shopper"]).isRequired,
+  type: PropTypes.oneOf(["request", "proposal"]).isRequired,
   userInfo: PropTypes.object,
-  requestInfo: PropTypes.shape({
-    wdate: PropTypes.string,
-    requestStatus: PropTypes.string,
-    responseCnt: PropTypes.number,
-  }),
+  order: PropTypes.object,
 };
 
 UserInfo.defaultProps = {
   userInfo: {},
-  requestInfo: {
-    wdate: "2020-04-17 12:30",
-    requestStatus: "배달중",
-    responseCnt: 3,
-  },
+  order: {},
 };
 
 export default UserInfo;

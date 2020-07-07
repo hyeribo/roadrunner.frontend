@@ -3,6 +3,7 @@
  */
 
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 import Card from "@atoms/Cards/Card";
@@ -12,6 +13,7 @@ import proposalModel from "@data/proposalModel";
 
 const ProposalCardList = (props) => {
   const { runnerId, ...rest } = props;
+  const user = useSelector((state) => state.user);
   const { t } = useTranslation();
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -56,7 +58,11 @@ const ProposalCardList = (props) => {
                 content: item.introduce,
                 date: item.createdAt,
               }}
-              url={`/proposal/detail/${item.id}`}
+              url={
+                item.runnerId === user.userId
+                  ? `my/proposal/detail/${item.orderId}`
+                  : `/proposal/detail/${item.orderId}`
+              }
             />
           ))
         ) : (

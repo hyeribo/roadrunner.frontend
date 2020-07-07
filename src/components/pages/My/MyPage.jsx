@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 
 import MainLayout from "@templates/Layouts/MainLayout";
-import UserInfo from "@organisms/UserInfo/UserInfo";
+import UserInfo from "@organisms/Info/UserInfo";
 
 const ListItem = (props) => (
   <Link to={props.url}>

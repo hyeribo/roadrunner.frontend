@@ -42,8 +42,24 @@ async function getUserRequestList(shopperId, pagination) {
   return result.data.data.orders;
 }
 
+// request 상세조회
+async function getRequestDetail(requestId) {
+  const url = `/shopper/orders/${requestId}`;
+  const result = await privateAPI.get(url);
+  return result.data.data.order;
+}
+
+// shopper의 request에 요청을 보냄
+async function acceptRequest(requestId) {
+  const url = `/shopper/orders/${requestId}/requests`;
+  await privateAPI.post(url);
+  return true;
+}
+
 export default {
   postRequest,
   getRequestList,
   getUserRequestList,
+  getRequestDetail,
+  acceptRequest,
 };

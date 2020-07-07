@@ -11,6 +11,10 @@ const Badge = (props) => {
 };
 
 Badge.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
+Badge.defaultProps = {
+  text: "",
+};
+
 export default Badge;

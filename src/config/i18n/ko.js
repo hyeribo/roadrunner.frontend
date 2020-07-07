@@ -31,6 +31,8 @@ const ko = {
     lbl_intro_team: "팀 소개",
     lbl_more: "더보기",
     lbl_no_orders: "심부름 목록이 없습니다.",
+    lbl_order_detail: "심부름 상세",
+    lbl_request: "신청하기",
 
     lbl_email: "이메일",
     lbl_username: "이름",
