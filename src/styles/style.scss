@@ -111,6 +111,43 @@
     }
   }
 }
+.rr-sidebar {
+  .title {
+    display: flex;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    border-bottom: 1px solid #d2d2d2;
+    font-size: 17px;
+    font-weight: bold;
+    span {
+      flex: 1;
+      color: #050505;
+    }
+    svg {
+      font-size: 22px;
+      vertical-align: inherit;
+    }
+  }
+  .filter-items {
+    .filter-item-title {
+      font-size: 16px;
+      padding: 15px;
+      color: #5c5c5c;
+    }
+    .filter-item {
+      padding: 15px 25px;
+      border-top: 1px solid #dfdfdf;
+    }
+    .ant-checkbox-group {
+      display: block;
+      .ant-checkbox-group-item {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
 /* // Main Layout */
 
 /* Common Layout */
