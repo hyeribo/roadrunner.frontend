@@ -6,6 +6,9 @@ import BottomTab from "@organisms/Bottoms/BottomTab";
 
 const MainLayout = (props) => {
   const {
+    editable,
+    onEditComplete,
+    onChangeMode,
     tabName,
     backgroundColor,
     containPaddingTop,
@@ -17,7 +20,11 @@ const MainLayout = (props) => {
 
   return (
     <div className="rr-main-layout" {...rest}>
-      <MainHeader />
+      <MainHeader
+        editable={editable}
+        onEditComplete={onEditComplete}
+        onChangeMode={onChangeMode}
+      />
       <div className="rr-main-layout-wrapper">
         <div className="global-content-wrapper">
           <div className="rr-main-layout-content" style={style}>
@@ -31,12 +38,17 @@ const MainLayout = (props) => {
 };
 
 MainLayout.propTypes = {
+  editable: PropTypes.bool,
+  onEditComplete: PropTypes.func,
+  onChangeMode: PropTypes.func,
   tabName: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string,
   containPaddingTop: PropTypes.bool,
 };
 
 MainLayout.defaultProps = {
+  editable: false,
+  onChangeMode: () => {},
   backgroundColor: "#f5f5f5",
   containPaddingTop: true,
 };

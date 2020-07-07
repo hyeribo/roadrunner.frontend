@@ -52,10 +52,28 @@
     color: #000000;
     font-family: "Campton";
   }
-  .icon-menu {
+  .title-text {
+    flex: 1;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    color: #050505;
+  }
+  .menu-icon {
     line-height: 62px;
     font-size: 22px;
     color: #000000;
+  }
+  .menu-text {
+    font-size: 15px;
+    text-align: right;
+    color: #5c5c5c;
+    svg {
+      color: #050505;
+    }
+    &.blue {
+      color: #0084ff;
+    }
   }
 }
 .rr-bottom-tab {
@@ -324,6 +342,7 @@
 //   padding-top: 22px;
 // }
 
+/* CustomerService */
 #rr-customer-service {
   .cs-bg {
     height: 270px;
@@ -406,6 +425,7 @@
     }
   }
 }
+/* // CustomerService */
 
 #rr-loading-page {
   width: 100vw;

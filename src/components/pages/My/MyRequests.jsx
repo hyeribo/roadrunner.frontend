@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import MainLayout from "@templates/Layouts/MainLayout";
 import RoleSwitchSimple from "@molecules/Switch/RoleSwitchSimple";
-import MyRequestCardList from "@molecules/CardList/MyRequestCardList";
-import MyProposalCardList from "@molecules/CardList/MyProposalCardList";
+import MyRequestCardList from "@molecules/List/MyRequestCardList";
+import MyProposalCardList from "@molecules/List/MyProposalCardList";
 
 import { setUser } from "@modules/user/userActions";
 
