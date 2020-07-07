@@ -148,3 +148,12 @@ input::placeholder,
 textarea::placeholder {
   color: #9c9c9c;
 }
+
+.ant-checkbox-inner {
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+}
+.ant-checkbox-checked::after {
+  border: none;
+}
