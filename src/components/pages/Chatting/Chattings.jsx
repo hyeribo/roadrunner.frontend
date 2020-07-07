@@ -7,6 +7,7 @@ import ChattingList from "@molecules/List/ChattingList";
 const Chattings = () => {
   const user = useSelector((state) => state.user);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState(false);
   const [chattings, setChattings] = useState([
     {
       username: "신부름1",
@@ -33,7 +34,7 @@ const Chattings = () => {
   ]);
 
   const handleDelete = () => {
-    console.log("delete!");
+    console.log("delete!", selectedIds);
   };
 
   return (
@@ -44,7 +45,11 @@ const Chattings = () => {
       onEditComplete={handleDelete}
       onChangeMode={(editMode) => setIsEditMode(editMode)}
     >
-      <ChattingList chattings={chattings} isEditMode={isEditMode} />
+      <ChattingList
+        chattings={chattings}
+        isEditMode={isEditMode}
+        onChange={setSelectedIds}
+      />
     </MainLayout>
   );
 };
