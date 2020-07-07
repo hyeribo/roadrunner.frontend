@@ -113,7 +113,16 @@ const RequestDetail = ({ t, match }) => {
             },
             {
               label: "수령시간",
-              content: `${data.order.startReceiveTime} ~ ${data.order.endReceiveTime}`,
+              content: (
+                <div>
+                  <span>
+                    {data.order.startReceiveTime} ~ {data.order.endReceiveTime}
+                  </span>
+                  {!data.order.discussYn && (
+                    <span className="help m-l-10">협의가능</span>
+                  )}
+                </div>
+              ),
             },
             {
               label: "수령장소",

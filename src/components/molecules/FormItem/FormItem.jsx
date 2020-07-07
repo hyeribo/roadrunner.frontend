@@ -38,7 +38,7 @@ const FormItem = (props) => {
               onChange={(e) => onToggleExtra(e.target.checked)}
             ></Checkbox>
           )}
-          <span>{extra}</span>
+          <span className="help">{extra}</span>
         </div>
       </div>
       {children}
