@@ -53,6 +53,13 @@ async function getRequestDetail(requestId) {
   return result.data.data.order;
 }
 
+// 나의 요청에 제안한 리스트 조회
+async function getRequestProposals(requestId) {
+  const url = `/shopper/orders/${requestId}/requests`;
+  const result = await privateAPI.get(url);
+  return result.data.data.requests;
+}
+
 // shopper의 request에 요청을 보냄
 async function acceptRequest(requestId) {
   const url = `/shopper/orders/${requestId}/requests`;
@@ -65,5 +72,6 @@ export default {
   getRequestList,
   getUserRequestList,
   getRequestDetail,
+  getRequestProposals,
   acceptRequest,
 };

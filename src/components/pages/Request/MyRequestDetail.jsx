@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Modal, message } from "antd";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
@@ -11,6 +12,7 @@ import requestModel from "@data/requestModel";
 const { confirm } = Modal;
 
 const MyRequestDetail = ({ t, match }) => {
+  const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({
     shopper: {},
@@ -27,16 +29,21 @@ const MyRequestDetail = ({ t, match }) => {
         price: 30000,
       },
     ],
+    requests: [],
   });
 
   const fetch = async () => {
     try {
-      const result = await requestModel.getMyRequestDetail(
+      const order = await requestModel.getRequestDetail(
+        match.params.request_id
+      );
+      const requests = await requestModel.getRequestProposals(
         match.params.request_id
       );
       setData({
         ...data,
-        order: result,
+        order: order,
+        requests: requests,
       });
     } catch (error) {
       console.log(error);
@@ -104,6 +111,9 @@ const MyRequestDetail = ({ t, match }) => {
         id="rr-request-detail-page"
         className="global-content-container p-t-20"
       >
+        <p className="detail-title">
+          {user.userId === data.order.shopperId ? "나의 제안" : "쇼퍼의 요청"}
+        </p>
         <UserInfo type="request" userInfo={data.shopper} order={data.order} />
         <Contents
           items={[
@@ -129,7 +139,10 @@ const MyRequestDetail = ({ t, match }) => {
             },
           ]}
         />
-        <TotalPrice price={data.order.estimatedPrice} />
+        <TotalPrice
+          price={data.order.estimatedPrice}
+          tip={data.order.runnerTip}
+        />
       </div>
     </CommonLayout>
   );

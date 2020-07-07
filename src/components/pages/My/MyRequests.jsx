@@ -20,9 +20,9 @@ const MyRequests = () => {
       />
       <div className="p-l-15 p-r-15">
         {user.mode === "runner" ? (
-          <MyRequestCardList />
-        ) : (
           <MyProposalCardList />
+        ) : (
+          <MyRequestCardList />
         )}
       </div>
     </MainLayout>

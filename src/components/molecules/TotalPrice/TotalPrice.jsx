@@ -1,6 +1,6 @@
 import React from "react";
 
-const TotalPrice = ({ price }) => {
+const TotalPrice = ({ price, tip }) => {
   return (
     <div className="rr-total-price">
       <div className="total">
@@ -9,7 +9,7 @@ const TotalPrice = ({ price }) => {
       </div>
       <div className="runner-tip">
         <span className="label">러너 팁 </span>
-        <span className="price">{price * 0.1}</span>
+        <span className="price">{tip}</span>
         <div className="helpbox">(물품 가격의 10%)</div>
       </div>
     </div>

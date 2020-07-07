@@ -114,7 +114,7 @@ const MyRequestCardList = (props) => {
                 content: item.contents,
                 date: item.createdAt,
               }}
-              url={`my/request/detail/${item.orderId}`}
+              url={`/my/request/detail/${item.orderId}`}
               footer={
                 <CardFooter
                   myUserId={user.userId}
