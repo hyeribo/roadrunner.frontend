@@ -9,7 +9,7 @@ import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
 
 const ChattingItem = ({ chatting }) => {
   const profileImg = chatting.profileImagePath
-    ? `${process.env.REACT_APP_IMG_BASE_URL}${userInfo.profileImagePath}`
+    ? `${process.env.REACT_APP_IMG_BASE_URL}${chatting.profileImagePath}`
     : defaultProfileImg;
 
   return (

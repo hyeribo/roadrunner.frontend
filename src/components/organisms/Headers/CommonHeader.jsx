@@ -1,13 +1,22 @@
 import React from "react";
-import { MenuOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
+import { ArrowLeftOutlined, MenuOutlined } from "@ant-design/icons";
 
-const CommonHeader = () => {
+const CommonHeader = (props) => {
+  const { pageName, showBackButton, showMenuButton } = props;
+  const history = useHistory();
+
   return (
     <div className="rr-common-header">
       <div className="global-content-wrapper">
         <div className="content">
-          <p className="title">Road Runner</p>
-          <MenuOutlined className="icon-menu" />
+          <div className="header-icon">
+            {showBackButton && <ArrowLeftOutlined onClick={history.goBack} />}
+          </div>
+          <p className="title">{pageName}</p>
+          <div className="header-icon">
+            {showMenuButton && <MenuOutlined />}
+          </div>
         </div>
       </div>
     </div>

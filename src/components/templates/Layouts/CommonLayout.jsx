@@ -1,43 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
-import { ArrowLeftOutlined, MenuOutlined } from "@ant-design/icons";
 
-import MainButton from "@atoms/Buttons/MainButton";
+import CommonHeader from "@organisms/Headers/CommonHeader";
+import CommonBottom from "@organisms/Bottoms/CommonBottom";
 
-const CommonLayoutHeader = (props) => {
-  const { pageName, showBackButton, showMenuButton } = props;
-  const history = useHistory();
-
-  return (
-    <div className="rr-common-header">
-      <div className="global-content-wrapper">
-        <div className="content">
-          <div className="header-icon">
-            {showBackButton && <ArrowLeftOutlined onClick={history.goBack} />}
-          </div>
-          <p className="title">{pageName}</p>
-          <div className="header-icon">
-            {showMenuButton && <MenuOutlined />}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const CommonLayoutBottom = (props) => {
-  const { text, ...rest } = props.buttonProps;
-  return (
-    <div className="rr-common-bottom">
-      <div className="global-content-wrapper">
-        <div className="bottom-content">
-          <MainButton {...rest}>{text}</MainButton>
-        </div>
-      </div>
-    </div>
-  );
-};
 const CommonLayout = (props) => {
   const {
     pageName,
@@ -46,13 +12,14 @@ const CommonLayout = (props) => {
     showBottom,
     buttonProps,
     backgroundColor,
+    extraBottom,
     children,
     ...rest
   } = props;
 
   return (
     <div className="rr-common-layout" {...rest}>
-      <CommonLayoutHeader
+      <CommonHeader
         pageName={pageName}
         showBackButton={showBackButton}
         showMenuButton={showMenuButton}
@@ -70,7 +37,9 @@ const CommonLayout = (props) => {
           </div>
         </div>
       </div>
-      {showBottom && <CommonLayoutBottom buttonProps={buttonProps} />}
+      {showBottom && (
+        <CommonBottom buttonProps={buttonProps} extraBottom={extraBottom} />
+      )}
     </div>
   );
 };
@@ -86,6 +55,7 @@ CommonLayout.propTypes = {
     type: PropTypes.string,
   }),
   backgroundColor: PropTypes.string,
+  extraBottom: PropTypes.node,
 };
 
 CommonLayout.defaultProps = {
@@ -94,6 +64,7 @@ CommonLayout.defaultProps = {
   showBottom: false,
   buttonProps: {},
   backgroundColor: "#f5f5f5",
+  extraBottom: null,
 };
 
 export default CommonLayout;
