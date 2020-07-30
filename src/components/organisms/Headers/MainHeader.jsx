@@ -6,10 +6,12 @@ import Sidebar from "@organisms/Sidebar/Sidebar";
 
 import { toggleFilter } from "@modules/filter/filterActions";
 
-const NormalHeader = ({ onClickMenu }) => (
+const NormalHeader = ({ showMenuButton, onClickMenu }) => (
   <div className="content">
     <p className="title">Road Runner</p>
-    <MenuOutlined className="menu-icon" onClick={() => onClickMenu()} />
+    {showMenuButton && (
+      <MenuOutlined className="menu-icon" onClick={() => onClickMenu()} />
+    )}
   </div>
 );
 
@@ -38,7 +40,12 @@ const EditableHeader = ({ isEditMode, setIsEditMode, onEditComplete }) => {
   }
 };
 
-const MainHeader = ({ editable, onEditComplete, onChangeMode }) => {
+const MainHeader = ({
+  showMenuButton,
+  editable,
+  onEditComplete,
+  onChangeMode,
+}) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const dispatch = useDispatch();
 
@@ -56,7 +63,10 @@ const MainHeader = ({ editable, onEditComplete, onChangeMode }) => {
             onEditComplete={onEditComplete}
           />
         ) : (
-          <NormalHeader onClickMenu={() => dispatch(toggleFilter())} />
+          <NormalHeader
+            showMenuButton={showMenuButton}
+            onClickMenu={() => dispatch(toggleFilter())}
+          />
         )}
       </div>
       <Sidebar />

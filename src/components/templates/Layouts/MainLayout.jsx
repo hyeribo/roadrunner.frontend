@@ -6,6 +6,7 @@ import BottomTab from "@organisms/Bottoms/BottomTab";
 
 const MainLayout = (props) => {
   const {
+    showMenuButton,
     editable,
     onEditComplete,
     onChangeMode,
@@ -21,6 +22,7 @@ const MainLayout = (props) => {
   return (
     <div className="rr-main-layout" {...rest}>
       <MainHeader
+        showMenuButton={showMenuButton}
         editable={editable}
         onEditComplete={onEditComplete}
         onChangeMode={onChangeMode}
@@ -38,6 +40,7 @@ const MainLayout = (props) => {
 };
 
 MainLayout.propTypes = {
+  showMenuButton: PropTypes.bool,
   editable: PropTypes.bool,
   onEditComplete: PropTypes.func,
   onChangeMode: PropTypes.func,
@@ -47,6 +50,7 @@ MainLayout.propTypes = {
 };
 
 MainLayout.defaultProps = {
+  showMenuButton: false,
   editable: false,
   onChangeMode: () => {},
   backgroundColor: "#f5f5f5",

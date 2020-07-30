@@ -18,25 +18,30 @@ const RequestCardList = (props) => {
   const [pagination, setPagination] = useState({
     offset: 0,
     limit: 20,
-    showMore: false,
   });
+  const [totalCount, setTotalCount] = useState(0);
 
   const fetch = async () => {
     try {
       const result = await requestModel.getRequestList(pagination);
-      setPagination({
-        ...pagination,
-        offset: pagination.offset + pagination.limit,
-      });
-      setData(result);
+      setData(data.concat(result.orders));
+      setTotalCount(result.totalCount);
     } catch (error) {
       console.log(error);
     }
   };
 
+  // 더보기
+  const handleClickMore = () => {
+    setPagination({
+      ...pagination,
+      offset: pagination.offset + pagination.limit,
+    });
+  };
+
   useEffect(() => {
     fetch();
-  }, []);
+  }, [pagination]);
 
   return (
     <div {...props}>
@@ -52,7 +57,7 @@ const RequestCardList = (props) => {
                 name: item.shopperName,
                 status: item.status,
                 title: item.title,
-                content: item.contents,
+                content: item.additionalMessage,
                 date: item.createdAt,
               }}
               url={
@@ -66,9 +71,9 @@ const RequestCardList = (props) => {
           <Empty text={t("lbl_no_orders")} />
         )}
       </div>
-      {pagination.showMore ? (
+      {pagination.offset + pagination.limit < totalCount ? (
         <div className="list-add-button">
-          <span onClick={() => fetch()}>{t("lbl_more")}</span>
+          <span onClick={() => handleClickMore()}>{t("lbl_more")}</span>
         </div>
       ) : null}
     </div>

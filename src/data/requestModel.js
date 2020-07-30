@@ -36,7 +36,14 @@ async function postRequest(values) {
 async function getRequestList(pagination) {
   const url = "/shopper/orders";
   const result = await privateAPI.get(url, { params: pagination });
-  return result.data.data.orders;
+  return result.data.data;
+}
+
+// 나의 request order 리스트
+async function getMyRequestList(pagination) {
+  const url = `/shopper/orders?shopperId=me`;
+  const result = await privateAPI.get(url, { params: pagination });
+  return result.data.data;
 }
 
 // 특정 shopper의 order 리스트
@@ -50,7 +57,8 @@ async function getUserRequestList(shopperId, pagination) {
 async function getRequestDetail(requestId) {
   const url = `/shopper/orders/${requestId}`;
   const result = await privateAPI.get(url);
-  return result.data.data.order;
+  console.log("result", result.data.data);
+  return result.data.data;
 }
 
 // 나의 요청에 제안한 리스트 조회
@@ -67,11 +75,23 @@ async function acceptRequest(requestId) {
   return true;
 }
 
+// 나의 요청에 대한 제안 상태 변경
+async function changeRequestStatus(requestId, status) {
+  const url = `/shopper/orders/requests/${requestId}`;
+  const requestPayload = {
+    requestStatus: status,
+  };
+  const result = await privateAPI.put(url, requestPayload);
+  return result.data.data;
+}
+
 export default {
   postRequest,
   getRequestList,
+  getMyRequestList,
   getUserRequestList,
   getRequestDetail,
   getRequestProposals,
   acceptRequest,
+  changeRequestStatus,
 };

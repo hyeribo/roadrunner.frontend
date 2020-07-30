@@ -7,6 +7,7 @@ import Card from "@atoms/Cards/Card";
 import Empty from "@atoms/Empty/Empty";
 import ActionButton from "@atoms/Buttons/ActionButton";
 
+import requestModel from "@data/requestModel";
 import proposalModel from "@data/proposalModel";
 
 const CardFooter = ({
@@ -18,6 +19,10 @@ const CardFooter = ({
   onChat,
   onComplete,
 }) => {
+  console.log("order", order);
+  console.log("requests", requests);
+  console.log("myUserId", myUserId);
+
   // 나의 제안일 경우
   if (order.runnerId === myUserId) {
     return requests.map((request, i) => {
@@ -97,23 +102,26 @@ const MyProposalCardList = (props) => {
   const [pagination, setPagination] = useState({
     offset: 0,
     limit: 20,
-    showMore: false,
   });
+  const [totalCount, setTotalCount] = useState(0);
 
   const fetch = async () => {
     try {
-      const result = await proposalModel.getUserProposalList(
-        user.userId,
-        pagination
-      );
-      setPagination({
-        ...pagination,
-        offset: pagination.offset + pagination.limit,
-      });
-      setData(result);
+      const result = await proposalModel.getMyProposalList(pagination);
+      setTotalCount(result.totalCount);
+      setData(data.concat(result.orders));
+      console.log("result", result.orders);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // 더보기
+  const handleClickMore = () => {
+    setPagination({
+      ...pagination,
+      offset: pagination.offset + pagination.limit,
+    });
   };
 
   // 심부름 요청 삭제
@@ -138,7 +146,7 @@ const MyProposalCardList = (props) => {
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [pagination]);
 
   return (
     <div {...props}>
@@ -162,10 +170,7 @@ const MyProposalCardList = (props) => {
                   myUserId={user.userId}
                   order={item}
                   // requests={item.requests}
-                  requests={[
-                    { userName: "이러너", userId: 1, status: "WAITING" },
-                    { userName: "김러너", userId: 2, status: "ACCEPT" },
-                  ]}
+                  requests={item.runnerOrderRequests}
                   onDelete={handleDeleteRequest}
                   onAccept={handleAcceptRequest}
                   onChat={handleChat}
@@ -178,9 +183,9 @@ const MyProposalCardList = (props) => {
           <Empty text={t("lbl_no_orders")} />
         )}
       </div>
-      {pagination.showMore ? (
+      {pagination.offset + pagination.limit < totalCount ? (
         <div className="list-add-button">
-          <span onClick={() => fetch()}>{t("lbl_more")}</span>
+          <span onClick={() => handleClickMore()}>{t("lbl_more")}</span>
         </div>
       ) : null}
     </div>

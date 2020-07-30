@@ -3,43 +3,57 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Checkbox } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 import Empty from "@atoms/Empty/Empty";
 import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
 
-const ChattingItem = ({ chatting }) => {
-  const profileImg = chatting.profileImagePath
-    ? `${process.env.REACT_APP_IMG_BASE_URL}${chatting.profileImagePath}`
+const ChattingItem = ({ chatting, myUserId }) => {
+  let other = {};
+  if (chatting.users && chatting.users.length > 0) {
+    other = chatting.users.filter((user) => user.userId !== myUserId)[0];
+  }
+  const profileImg = other.profileImagePath
+    ? `${process.env.REACT_APP_IMG_BASE_URL}${other.profileImagePath}`
     : defaultProfileImg;
 
+  console.log("other", other);
+
   return (
-    <Link to={`/chattings/room/${chatting.chattingId}`}>
+    <Link to={`/chattings/room/${chatting.roomKey}`}>
       <div className="chatting-room-item">
         <div className="profile-img">
           <img src={profileImg} />
         </div>
         <div className="user-info">
-          <div className="username">{chatting.username}</div>
-          <div className="preview limit-line-2">{chatting.preview}</div>
+          <div className="username">{other.displayName}</div>
+          <div className="preview limit-line-2">{chatting.type}</div>
         </div>
         <div className="chat-info">
-          <div className="date">{chatting.lastTime}</div>
-          <div className="badge">{chatting.count}</div>
+          <div className="date">
+            {moment(chatting.updatedAt).format("HH:mm")}
+          </div>
+          {/* <div className="badge">{chatting.count}</div> */}
         </div>
       </div>
     </Link>
   );
 };
 
-const ChattingEditItem = ({ chatting, onToggleSelect, selected }) => {
-  const profileImg = chatting.profileImagePath
-    ? `${process.env.REACT_APP_IMG_BASE_URL}${userInfo.profileImagePath}`
+const ChattingEditItem = ({ chatting, onToggleSelect, selected, myUserId }) => {
+  let other = {};
+  if (chatting.users && chatting.users.length > 0) {
+    other = chatting.users.filter((user) => user.userId !== myUserId)[0];
+  }
+  const profileImg = other.profileImagePath
+    ? `${process.env.REACT_APP_IMG_BASE_URL}${other.profileImagePath}`
     : defaultProfileImg;
 
   return (
     <div
       className="chatting-room-item"
-      onClick={() => onToggleSelect(chatting.chattingId)}
+      onClick={() => onToggleSelect(chatting.roomId)}
     >
       <div className="profile-img">
         <img src={profileImg} />
@@ -50,12 +64,12 @@ const ChattingEditItem = ({ chatting, onToggleSelect, selected }) => {
         )}
       </div>
       <div className="user-info">
-        <div className="username">{chatting.username}</div>
-        <div className="preview limit-line-2">{chatting.preview}</div>
+        <div className="username">{other.displayName}</div>
+        <div className="preview limit-line-2">{chatting.type}</div>
       </div>
       <div className="chat-info">
-        <div className="date">{chatting.lastTime}</div>
-        <div className="badge">{chatting.count}</div>
+        <div className="date">{moment(chatting.updatedAt).format("HH:mm")}</div>
+        {/* <div className="badge">{chatting.count}</div> */}
       </div>
     </div>
   );
@@ -80,21 +94,24 @@ const ChattingEditManage = ({ chattings, selectedIds, onToggleSelectAll }) => {
 };
 
 const ChattingList = ({ chattings, isEditMode, onChange }) => {
+  if (!chattings.length) return <Empty text="대화 목록이 없습니다." />;
+
+  const user = useSelector((state) => state.user);
   const [selectedIds, setSelectedIds] = useState([]);
 
-  const handleToggleSelect = (chattingId) => {
-    const selectedIndex = selectedIds.indexOf(chattingId);
+  const handleToggleSelect = (roomId) => {
+    const selectedIndex = selectedIds.indexOf(roomId);
     if (selectedIndex >= 0) {
-      const newSelectedIds = selectedIds.filter((id) => id !== chattingId);
+      const newSelectedIds = selectedIds.filter((id) => id !== roomId);
       setSelectedIds(newSelectedIds);
     } else {
-      setSelectedIds(selectedIds.concat([chattingId]));
+      setSelectedIds(selectedIds.concat([roomId]));
     }
   };
 
   const handleToggleSelectAll = (checked) => {
     if (checked) {
-      const newSelectedIds = chattings.map((chatting) => chatting.chattingId);
+      const newSelectedIds = chattings.map((chatting) => chatting.roomId);
       setSelectedIds(newSelectedIds);
     } else {
       setSelectedIds([]);
@@ -119,17 +136,25 @@ const ChattingList = ({ chattings, isEditMode, onChange }) => {
         />
       )}
       {chattings.map((chatting) => {
+        console.log("chatting", chatting);
         if (isEditMode) {
           return (
             <ChattingEditItem
-              key={chatting.chattingId}
+              key={chatting.roomId}
               chatting={chatting}
               onToggleSelect={handleToggleSelect}
-              selected={selectedIds.includes(chatting.chattingId)}
+              selected={selectedIds.includes(chatting.roomId)}
+              myUserId={user.userId}
             />
           );
         } else {
-          return <ChattingItem key={chatting.chattingId} chatting={chatting} />;
+          return (
+            <ChattingItem
+              key={chatting.roomId}
+              chatting={chatting}
+              myUserId={user.userId}
+            />
+          );
         }
       })}
     </div>

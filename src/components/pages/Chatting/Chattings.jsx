@@ -4,44 +4,37 @@ import { useSelector } from "react-redux";
 import MainLayout from "@templates/Layouts/MainLayout";
 import ChattingList from "@molecules/List/ChattingList";
 
+import chattingModel from "@data/chattingModel";
+
 const Chattings = () => {
   const user = useSelector((state) => state.user);
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedIds, setSelectedIds] = useState(false);
-  const [chattings, setChattings] = useState([
-    {
-      username: "신부름1",
-      preview:
-        "안녕하세요. 신부름입니다. 안녕하세요. 신부름입니다. 안녕하세요. 신부름입니다. 안녕하세요. 신부름입니다.",
-      count: 3,
-      lastTime: "오후 1:02",
-      chattingId: 1,
-    },
-    {
-      username: "신부름2",
-      preview: "안녕하세요. 신부름입니다.",
-      count: 3,
-      lastTime: "오후 1:02",
-      chattingId: 2,
-    },
-    {
-      username: "신부름3",
-      preview: "안녕하세요. 신부름입니다.",
-      count: 3,
-      lastTime: "오후 1:02",
-      chattingId: 3,
-    },
-  ]);
+  const [chattings, setChattings] = useState([]);
+
+  const fetch = async () => {
+    try {
+      const result = await chattingModel.getChattingList();
+      setChattings(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleDelete = () => {
     console.log("delete!", selectedIds);
   };
 
+  useEffect(() => {
+    fetch();
+  }, []);
+
   return (
     <MainLayout
       tabName="chattings"
       id="rr-chattings"
-      editable
+      showMenuButton={false}
+      editable={chattings.length > 0}
       onEditComplete={handleDelete}
       onChangeMode={(editMode) => setIsEditMode(editMode)}
     >

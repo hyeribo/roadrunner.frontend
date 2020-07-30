@@ -157,7 +157,7 @@ const routes = [
     auth: true,
   },
   {
-    path: "/chattings/room/:chatting_id",
+    path: "/chattings/room/:room_key",
     component: ChattingRoom,
     auth: true,
   },

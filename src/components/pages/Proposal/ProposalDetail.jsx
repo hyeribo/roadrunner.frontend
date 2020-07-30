@@ -7,25 +7,26 @@ import ProposalInfo from "@organisms/Info/ProposalInfo";
 import Contents from "@templates/Detail/Contents";
 
 import proposalModel from "@data/proposalModel";
+import userModel from "@data/userModel";
 
 const { confirm } = Modal;
 
 const ProposalDetail = ({ t, match }) => {
   const [loading, setLoading] = useState(false);
+  const [runner, setRunner] = useState({});
   const [data, setData] = useState({
-    runner: {},
     order: {},
+    requests: [],
   });
 
   const fetch = async () => {
     try {
-      const result = await proposalModel.getProposalDetail(
+      const orderInfo = await proposalModel.getProposalDetail(
         match.params.proposal_id
       );
-      setData({
-        ...data,
-        order: result,
-      });
+      const runnerInfo = await userModel.getUserInfo(orderInfo.order.runnerId);
+      setData(orderInfo);
+      setRunner(runnerInfo);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +71,7 @@ const ProposalDetail = ({ t, match }) => {
         id="rr-proposal-detail-page"
         className="global-content-container p-t-20"
       >
-        <UserInfo type="proposal" userInfo={data.runner} order={data.order} />
+        <UserInfo type="proposal" userInfo={runner} order={data.order} />
         <Contents
           items={[
             {

@@ -14,11 +14,11 @@ const RunnerStatus = ({ userInfo }) => (
     <ul>
       <li>
         <span className="title">완료 건수</span>
-        <span className="value">{userInfo.completeCnt || 0}</span>
+        <span className="value">{userInfo.completedOrders || 0}</span>
       </li>
       <li>
         <span className="title">진행중</span>
-        <span className="value">{userInfo.processingCnt || 0}</span>
+        <span className="value">{userInfo.processedOrders || 0}</span>
       </li>
     </ul>
   </div>

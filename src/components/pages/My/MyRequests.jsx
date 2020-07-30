@@ -8,9 +8,14 @@ import MyProposalCardList from "@molecules/List/MyProposalCardList";
 
 import { setUser } from "@modules/user/userActions";
 
-const MyRequests = () => {
+const MyRequests = ({ history }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const handleChatting = (userId, myId) => {
+    const roomKey = [userId, myId].sort((a, b) => a - b).join("-");
+    history.push(`/chattings/room/${roomKey}`);
+  };
 
   return (
     <MainLayout tabName="myrequest">
@@ -20,9 +25,9 @@ const MyRequests = () => {
       />
       <div className="p-l-15 p-r-15">
         {user.mode === "runner" ? (
-          <MyProposalCardList />
+          <MyProposalCardList onChatting={handleChatting} />
         ) : (
-          <MyRequestCardList />
+          <MyRequestCardList onChatting={handleChatting} />
         )}
       </div>
     </MainLayout>

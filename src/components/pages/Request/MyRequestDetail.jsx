@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Modal, message } from "antd";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import UserInfo from "@organisms/Info/UserInfo";
@@ -8,63 +7,38 @@ import Contents from "@templates/Detail/Contents";
 import TotalPrice from "@molecules/TotalPrice/TotalPrice";
 
 import requestModel from "@data/requestModel";
+import userModel from "@data/userModel";
 
-const { confirm } = Modal;
+const imageUrl = `${process.env.REACT_APP_IMG_BASE_URL}`;
 
 const MyRequestDetail = ({ t, match }) => {
   const user = useSelector((state) => state.user);
-  const [loading, setLoading] = useState(false);
+  const [shopper, setShopper] = useState({});
   const [data, setData] = useState({
-    shopper: {},
-    order: {},
-    orderItems: [
-      {
-        name: "일반 샴푸",
-        count: 1,
-        price: 10000,
-      },
-      {
-        name: "고급 샴푸",
-        count: 2,
-        price: 30000,
-      },
-    ],
-    requests: [],
+    order: {
+      shopperOrderItems: [],
+      shopperOrderImages: [],
+    },
   });
 
   const fetch = async () => {
     try {
-      const order = await requestModel.getRequestDetail(
+      const orderInfo = await requestModel.getRequestDetail(
         match.params.request_id
       );
-      const requests = await requestModel.getRequestProposals(
-        match.params.request_id
+      const shopperInfo = await userModel.getUserInfo(
+        orderInfo.order.shopperId
       );
-      setData({
-        ...data,
-        order: order,
-        requests: requests,
-      });
+      setData(orderInfo);
+      setShopper(shopperInfo);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const acceptOrder = async () => {
-    try {
-      setLoading(true);
-      await requestModel.acceptRequest(match.params.request_id);
-      message.success("요청되었습니다.");
-      fetch();
-    } catch (error) {
-      message.error("요청에 실패했습니다.");
-      console.log("error", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const getItemContent = (items) => {
+    if (!items || !items.length) return "";
+
     const itemContent = items.reduce((result, arr, i) => {
       if (!i) result += `${arr.name} ${arr.count}개`;
       else result += `, ${arr.name} ${arr.count}개`;
@@ -73,13 +47,30 @@ const MyRequestDetail = ({ t, match }) => {
     return itemContent;
   };
 
+  const getItemImage = (images) => {
+    if (!images || !images.length) return "";
+
+    return (
+      <div className="rr-multi-upload">
+        {images.map((image, i) => (
+          <div className="image-wrapper" key={i}>
+            <img src={`${imageUrl}${image.path}`} />
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   const getItemPrice = (items) => {
+    if (!items || !items.length) return "";
+
     return (
       <div>
         {items.map((item, i) => (
           <p key={i}>
-            {`${item.name} ${item.price}원`}
-            {item.count > 1 && ` (1개 ${item.price / item.count}원)`}
+            {`${item.name} ${item.price.toLocaleString()}원`}
+            {item.count > 1 &&
+              ` (1개 ${item.price.toLocaleString() / item.count}원)`}
           </p>
         ))}
       </div>
@@ -94,17 +85,7 @@ const MyRequestDetail = ({ t, match }) => {
     <CommonLayout
       pageName={t("lbl_order_detail")}
       showMenuButton={false}
-      showBottom={data.order.status === "MATCHING"}
-      buttonProps={{
-        text: t("lbl_request"),
-        onClick: () =>
-          confirm({
-            title: "심부름을 요청하시겠습니까?",
-            onOk: acceptOrder,
-          }),
-        color: loading ? "disabled" : "primary",
-        disabled: loading,
-      }}
+      showBottom={false}
       backgroundColor="#ffffff"
     >
       <div
@@ -112,14 +93,18 @@ const MyRequestDetail = ({ t, match }) => {
         className="global-content-container p-t-20"
       >
         <p className="detail-title">
-          {user.userId === data.order.shopperId ? "나의 제안" : "쇼퍼의 요청"}
+          {data.order.shopperId === user.userId ? "나의 요청" : "쇼퍼의 요청"}
         </p>
-        <UserInfo type="request" userInfo={data.shopper} order={data.order} />
+        <UserInfo type="request" userInfo={shopper} order={data.order} />
         <Contents
           items={[
             {
               label: "요청항목",
-              content: getItemContent(data.orderItems) || "요청항목",
+              content: getItemContent(data.shopperOrderItems) || "요청항목",
+            },
+            {
+              label: "",
+              content: getItemImage(data.order.shopperOrderImages) || [],
             },
             {
               label: "수령시간",
@@ -135,7 +120,7 @@ const MyRequestDetail = ({ t, match }) => {
             },
             {
               label: "예상 가격",
-              content: getItemPrice(data.orderItems),
+              content: getItemPrice(data.order.shopperOrderItems),
             },
           ]}
         />

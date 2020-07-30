@@ -21,7 +21,7 @@ Contents.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string,
-      content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+      content: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     })
   ),
 };

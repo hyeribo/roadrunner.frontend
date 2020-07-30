@@ -8,6 +8,7 @@ async function join(data) {
     password: data.realpassword,
     displayName: data.realusername,
     gender: data.gender,
+    address: data.address,
     profileImagePath: data.files ? data.files[0] : "",
   };
   const result = await publicAPI.post(url, requestPayload);
@@ -54,7 +55,7 @@ async function withdrawal() {
 async function getUserInfo(userId) {
   const url = `/user/${userId}`;
   const result = await privateAPI.get(url);
-  return result;
+  return result.data.data;
 }
 
 export default {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, message } from "antd";
+import { useSelector } from "react-redux";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import UserInfo from "@organisms/Info/UserInfo";
@@ -8,40 +8,21 @@ import Contents from "@templates/Detail/Contents";
 
 import proposalModel from "@data/proposalModel";
 
-const { confirm } = Modal;
-
 const MyProposalDetail = ({ t, match }) => {
-  const [loading, setLoading] = useState(false);
+  const user = useSelector((state) => state.user);
   const [data, setData] = useState({
-    runner: {},
     order: {},
+    requests: [],
   });
 
   const fetch = async () => {
     try {
-      const result = await proposalModel.getMyProposalDetail(
+      const orderInfo = await proposalModel.getProposalDetail(
         match.params.proposal_id
       );
-      setData({
-        ...data,
-        order: result,
-      });
+      setData(orderInfo);
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const requestOrder = async () => {
-    try {
-      setLoading(true);
-      await proposalModel.acceptProposal(match.params.proposal_id);
-      message.success("요청되었습니다.");
-      fetch();
-    } catch (error) {
-      message.error("요청에 실패했습니다.");
-      console.log("error", error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -53,24 +34,15 @@ const MyProposalDetail = ({ t, match }) => {
     <CommonLayout
       pageName={t("lbl_order_detail")}
       showMenuButton={false}
-      showBottom
-      buttonProps={{
-        text: t("lbl_request"),
-        onClick: () =>
-          confirm({
-            title: "심부름을 요청하시겠습니까?",
-            onOk: requestOrder,
-          }),
-        color: loading ? "disabled" : "primary",
-        disabled: loading,
-      }}
+      showBottom={false}
       backgroundColor="#ffffff"
     >
       <div
         id="rr-proposal-detail-page"
         className="global-content-container p-t-20"
       >
-        <UserInfo type="proposal" userInfo={data.runner} order={data.order} />
+        <p className="detail-title">나의 제안</p>
+        <UserInfo type="proposal" userInfo={user} order={data.order} />
         <Contents
           items={[
             {
