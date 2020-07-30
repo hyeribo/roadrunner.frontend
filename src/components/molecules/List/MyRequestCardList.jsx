@@ -141,7 +141,6 @@ const MyRequestCardList = (props) => {
           await chattingModel.registChattingRoom(userId);
           message.success("수락되었습니다.");
           setData([]);
-
           fetch();
         } catch (error) {
           console.log(error);

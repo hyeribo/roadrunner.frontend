@@ -90,7 +90,7 @@ const ChattingRoom = ({ t, match }) => {
   const fetch = async () => {
     try {
       const result = await chattingModel.getMessages(match.params.room_key);
-      setMessages(result);
+      setMessages(result.reverse());
     } catch (error) {
       console.log(error);
     }
@@ -118,11 +118,7 @@ const ChattingRoom = ({ t, match }) => {
       extraBottom={<SendMessage onSendMessage={handleSendMessage} />}
     >
       <div>
-        <MessageList
-          messages={messages}
-          // myUserId={user.userId}
-          myUserId={2}
-        />
+        <MessageList messages={messages} myUserId={user.userId} />
       </div>
     </CommonLayout>
   );

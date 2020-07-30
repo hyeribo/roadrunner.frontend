@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 
 import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
 
@@ -39,16 +40,25 @@ const MessageList = ({ messages, myUserId }) => {
     <div className="rr-message-list">
       {messages.map((message, i) => {
         const components = [];
-        if (i === 0 || message.date !== messages[i - 1].date) {
-          components.push(<Date key={message.date} date={message.date} />);
-        }
-        if (message.sendUserId !== myUserId) {
+        if (
+          i === 0 ||
+          moment(message.createdAt).format("YYYY-MM-DD") !==
+            moment(messages[i - 1].createdAt).format("YYYY-MM-DD")
+        ) {
           components.push(
-            <ReceiveMessage key={`r-${message.messageId}`} message={message} />
+            <Date
+              key={`message.date-${i}`}
+              date={moment(message.createdAt).format("YYYY-MM-DD")}
+            />
+          );
+        }
+        if (message.userId === myUserId) {
+          components.push(
+            <SendMessage key={`s-${message.messageId}`} message={message} />
           );
         } else {
           components.push(
-            <SendMessage key={`s-${message.messageId}`} message={message} />
+            <ReceiveMessage key={`r-${message.messageId}`} message={message} />
           );
         }
         return components;

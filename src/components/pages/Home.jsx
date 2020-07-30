@@ -13,7 +13,7 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <MainLayout tabName="home" containPaddingTop={false}>
+    <MainLayout tabName="home" containPaddingTop={false} showMenuButton>
       <RoleSwitch
         defaultValue={user.mode}
         onChange={(newRole) => dispatch(setUser({ mode: newRole }))}

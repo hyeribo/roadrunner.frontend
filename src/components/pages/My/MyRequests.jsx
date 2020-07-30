@@ -18,7 +18,7 @@ const MyRequests = ({ history }) => {
   };
 
   return (
-    <MainLayout tabName="myrequest">
+    <MainLayout tabName="myrequest" showMenuButton>
       <RoleSwitchSimple
         defaultValue={user.mode}
         onChange={(newRole) => dispatch(setUser({ mode: newRole }))}
