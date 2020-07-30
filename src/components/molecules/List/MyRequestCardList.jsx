@@ -60,7 +60,7 @@ const CardFooter = ({
                 color="default"
                 onClick={() => onChatting(request.runnerId, myUserId)}
               >
-                채팅
+                {t("lbl_chat")}
               </ActionButton>
             )}
             {request.requestStatus === "DELIVERED_REQUEST" && (
@@ -178,10 +178,11 @@ const MyRequestCardList = (props) => {
               key={`request-${item.orderId}`}
               style={{ marginBottom: "15px" }}
               data={{
-                grade: item.priority,
+                grade: t(`lbl_${item.priority}`),
+                gradeColor: item.priority,
                 address: item.receiveAddress,
                 name: item.shopperName,
-                status: item.status,
+                status: t(`lbl_${item.status}`),
                 title: item.title,
                 content: item.contents,
                 date: item.createdAt,

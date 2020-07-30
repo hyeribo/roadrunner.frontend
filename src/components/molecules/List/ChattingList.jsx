@@ -5,6 +5,7 @@ import { Checkbox } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 import Empty from "@atoms/Empty/Empty";
 import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
@@ -77,6 +78,7 @@ const ChattingEditItem = ({ chatting, onToggleSelect, selected, myUserId }) => {
 
 const ChattingEditManage = ({ chattings, selectedIds, onToggleSelectAll }) => {
   if (!chattings.length) return <Empty text="대화 목록이 없습니다." />;
+  const { t } = useTranslation();
 
   const selectedAll = chattings.length === selectedIds.length;
   return (
@@ -88,7 +90,9 @@ const ChattingEditManage = ({ chattings, selectedIds, onToggleSelectAll }) => {
         ></Checkbox>
         <span>전체</span>
       </div>
-      <div className="count">{selectedIds.length}개 선택됨</div>
+      <div className="count">
+        {t("lbl_selected_count", { count: selectedIds.length })}
+      </div>
     </div>
   );
 };

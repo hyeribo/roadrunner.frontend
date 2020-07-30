@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ArrowLeftOutlined, MenuOutlined } from "@ant-design/icons";
+import { useTranslation } from "react-i18next";
 
 import Sidebar from "@organisms/Sidebar/Sidebar";
 
@@ -16,12 +17,13 @@ const NormalHeader = ({ showMenuButton, onClickMenu }) => (
 );
 
 const EditableHeader = ({ isEditMode, setIsEditMode, onEditComplete }) => {
+  const { t } = useTranslation();
   if (!isEditMode) {
     return (
       <div className="content">
         <p className="title">Road Runner</p>
         <span className="menu-text" onClick={() => setIsEditMode(true)}>
-          편집
+          {t("lbl_edit")}
         </span>
       </div>
     );
@@ -31,9 +33,9 @@ const EditableHeader = ({ isEditMode, setIsEditMode, onEditComplete }) => {
         <span className="menu-text">
           <ArrowLeftOutlined onClick={() => setIsEditMode(false)} />
         </span>
-        <p className="title-text">편집</p>
+        <p className="title-text">{t("lbl_edit")}</p>
         <span className="menu-text blue" onClick={() => onEditComplete()}>
-          삭제
+          {t("lbl_remove")}
         </span>
       </div>
     );

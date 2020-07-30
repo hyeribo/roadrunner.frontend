@@ -47,10 +47,19 @@
     width: 44px;
     height: 44px;
     border-radius: 22px;
-    background-color: lightblue;
+    background-image: linear-gradient(138deg, #e396c9, #b2affd 111%);
     line-height: 44px;
     text-align: center;
     color: #ffffff;
+    &.NORMAL {
+      background-image: linear-gradient(148deg, #75bdff -16%, #81c3b8 106%);
+    }
+    &.FREE {
+      background-image: linear-gradient(135deg, #fae482, #c4f8a0 99%);
+    }
+    &.URGENT {
+      background-image: linear-gradient(135deg, #fa8283, #f8baa0 99%);
+    }
   }
   .rr-card-footer {
     display: flex;

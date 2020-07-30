@@ -20,7 +20,7 @@ const Card = (props) => {
   return (
     <div className="rr-card" {...props}>
       <div className="rr-card-header">
-        <div className="rr-card-grade">{data.grade}</div>
+        <div className={`rr-card-grade ${data.gradeColor}`}>{data.grade}</div>
         <div className="rr-card-header-content">
           <p>{data.address}</p>
           <p className="p-name">{data.name}</p>
@@ -49,6 +49,7 @@ const Card = (props) => {
 Card.propTypes = {
   data: PropTypes.shape({
     grade: PropTypes.string,
+    gradeColor: PropTypes.string,
     address: PropTypes.string,
     name: PropTypes.string,
     status: PropTypes.string,

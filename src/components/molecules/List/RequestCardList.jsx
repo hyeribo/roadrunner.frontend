@@ -52,10 +52,11 @@ const RequestCardList = (props) => {
               key={`request-${item.orderId}`}
               style={{ marginBottom: "15px" }}
               data={{
-                grade: item.priority,
+                grade: t(`lbl_${item.priority}`),
+                gradeColor: item.priority,
                 address: item.receiveAddress,
                 name: item.shopperName,
-                status: item.status,
+                status: t(`lbl_${item.status}`),
                 title: item.title,
                 content: item.additionalMessage,
                 date: item.createdAt,
