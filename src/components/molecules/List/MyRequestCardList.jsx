@@ -1,5 +1,5 @@
 /**
- * Home-Runner에 보여질 요청 카드 리스트
+ * Home-Shopper에 보여질 요청 카드 리스트
  */
 
 import React, { useState, useEffect } from "react";
@@ -11,91 +11,139 @@ import Card from "@atoms/Cards/Card";
 import Empty from "@atoms/Empty/Empty";
 
 import requestModel from "@data/requestModel";
+import proposalModel from "@data/proposalModel";
 import chattingModel from "@data/chattingModel";
 
 import ActionButton from "@atoms/Buttons/ActionButton";
 
 const { confirm } = Modal;
 
+// 다른 러너의 제안에 내가 심부름요청을 한 경우
+// REQUESTING(요청중), MATCHED(매칭됨), DELIVERED_REQUEST(완료요청중), DELIVERED(완료)
+const OtherRunnerCard = ({ data, onChatting, onComplete }) => {
+  const { t } = useTranslation();
+  return (
+    <Card
+      style={{ marginBottom: "15px" }}
+      data={{
+        grade: data.runnerOrders.distance,
+        address: data.runnerOrders.address,
+        name: data.runnerOrders.runner.displayName,
+        title: data.runnerOrders.message,
+        content: data.runnerOrders.introduce,
+        date: data.runnerOrders.createdAt,
+        status: t(`lbl_${data.requestStatus}`),
+      }}
+      url={`/my/proposal/detail/${data.runnerOrders.orderId}`}
+      footer={
+        <div className="rr-card-footer">
+          <div className="footer-left-button"></div>
+          <div className="footer-right">
+            {data.requestStatus !== "REQUESTING" &&
+              data.requestStatus !== "DELIVERED" && (
+                <ActionButton
+                  color="default"
+                  onClick={() =>
+                    onChatting(
+                      data.runnerOrders.runnerId,
+                      data.shopperOrders.shopperId
+                    )
+                  }
+                >
+                  채팅
+                </ActionButton>
+              )}
+            {data.requestStatus === "DELIVERED_REQUEST" && (
+              <ActionButton
+                color="primary"
+                onClick={() => onComplete(data.requestId)}
+              >
+                완료
+              </ActionButton>
+            )}
+          </div>
+        </div>
+      }
+    />
+  );
+};
+
+// 나의 요청에 다른 러너가 심부름 제안을 한 경우
+// REQUESTING(요청중), MATCHED(매칭됨), DELIVERED_REQUEST(완료요청중), DELIVERED(완료)
+const MyRequestCard = ({ data, onChatting, onAccept, onComplete }) => {
+  const { t } = useTranslation();
+  return (
+    <Card
+      style={{ marginBottom: "15px" }}
+      data={{
+        grade: t(`lbl_${data.priority}`),
+        address: data.shopper.address,
+        name: data.shopper.displayName,
+        title: data.title,
+        content: data.additionalMessage,
+        date: data.createdAt,
+        status: t(`lbl_${data.status}`),
+      }}
+      url={`/my/request/detail/${data.orderId}`}
+      footer={
+        <CardFooter
+          onChatting={onChatting}
+          order={data}
+          requests={data.shopperOrderRequests}
+          onAccept={onAccept}
+          onComplete={onComplete}
+        />
+      }
+    />
+  );
+};
+
 const CardFooter = ({
   t,
-  myUserId,
   order,
   requests,
-  onDelete,
   onAccept,
   onChatting,
   onComplete,
 }) => {
-  console.log("order", order);
-  console.log("requests", requests);
-  console.log("myUserId", myUserId);
   if (!requests || !requests.length) return null;
   // 나의 요청일 경우
-  if (order.shopperId === myUserId) {
-    return requests.map((request, i) => {
-      return (
-        <div key={i} className="rr-card-footer">
-          <div className="footer-left">
-            <span className="text-name">{request.runner.displayName}의 </span>
-            <span className="text-blue">심부름 신청</span>
-          </div>
-          <div className="footer-right">
-            {/* <ActionButton
-              color="black"
-              onClick={() => onDelete(order.orderId, request.userId)}
-            >
-              삭제
-            </ActionButton> */}
-            {request.requestStatus === "REQUESTING" && (
-              <ActionButton
-                color="primary"
-                onClick={() => onAccept(request.requestId, request.runnerId)}
-              >
-                수락하기
-              </ActionButton>
-            )}
-            {request.requestStatus === "MATCHED" && (
-              <ActionButton
-                color="default"
-                onClick={() => onChatting(request.runnerId, myUserId)}
-              >
-                {t("lbl_chat")}
-              </ActionButton>
-            )}
-            {request.requestStatus === "DELIVERED_REQUEST" && (
-              <ActionButton
-                color="primary"
-                onClick={() => onComplete(order.orderId, request.runnerId)}
-              >
-                완료확인
-              </ActionButton>
-            )}
-          </div>
-        </div>
-      );
-    });
-
-    // 남의 요청에 내가 심부름요청을 한 경우
-  } else {
-    const index = requests.findIndex((req) => req.runner.userId === myUserId);
-    let requestStatus = "REQUESTING";
-    if (index >= 0) {
-      requestStatus = requests[index].requestStatus;
-    }
-
+  return requests.map((request, i) => {
     return (
-      <div className="rr-card-footer">
-        <div className="footer-left"></div>
+      <div key={i} className="rr-card-footer">
+        <div className="footer-left">
+          <span className="text-name">{request.runner.displayName}의 </span>
+          <span className="text-blue">심부름 제안</span>
+        </div>
         <div className="footer-right">
-          <ActionButton color="pending" disabled>
-            {t(`lbl_request_${requestStatus}`)}
-            {/* {order.myRequestStatus === "WAITING" ? "수락대기중" : "수락완료"} */}
-          </ActionButton>
+          {request.requestStatus !== "REQUESTING" && (
+            <ActionButton
+              color="default"
+              onClick={() => onChatting(order.shopperId, request.runnerId)}
+            >
+              채팅
+            </ActionButton>
+          )}
+          {request.requestStatus === "REQUESTING" && (
+            <ActionButton
+              color="primary"
+              onClick={() => onAccept(request.requestId, request.runnerId)}
+            >
+              수락하기
+            </ActionButton>
+          )}
+          {request.requestStatus === "DELIVERED_REQUEST" && (
+            <ActionButton
+              color="primary"
+              onClick={() => onComplete(request.requestId)}
+            >
+              완료확인
+            </ActionButton>
+          )}
         </div>
       </div>
     );
-  }
+  });
 };
 
 const MyRequestCardList = (props) => {
@@ -104,31 +152,17 @@ const MyRequestCardList = (props) => {
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
     offset: 0,
-    limit: 20,
+    limit: 10000,
   });
-  const [totalCount, setTotalCount] = useState(0);
 
   const fetch = async () => {
     try {
       const result = await requestModel.getMyRequestList(pagination);
-      setData(data.concat(result.orders));
-      setTotalCount(result.totalCount);
+      setData(result);
+      console.log("result", result);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  // 더보기
-  const handleClickMore = () => {
-    setPagination({
-      ...pagination,
-      offset: pagination.offset + pagination.limit,
-    });
-  };
-
-  // 심부름 신청 삭제
-  const handleDeleteRequest = (requestId, requestUserId) => {
-    console.log("delete!", requestId, requestUserId);
   };
 
   // 심부름 신청 수락
@@ -149,14 +183,30 @@ const MyRequestCardList = (props) => {
     });
   };
 
-  const handleComplete = (requestId) => {
+  // 내가 제안한 심부름 완료 요청
+  const handleCompleteMyOrder = (requestId) => {
     confirm({
-      title: "완료확인 처리 하시겠습니까?",
+      title: "완료 처리 하시겠습니까?",
       onOk: async () => {
         try {
           await requestModel.changeRequestStatus(requestId, "DELIVERED");
+          message.success("완료 처리 되었습니다.");
+          fetch();
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    });
+  };
+
+  // 내가 요청한 심부름 완료 처리
+  const handleCompleteOtherOrder = (requestId) => {
+    confirm({
+      title: "완료 처리 하시겠습니까?",
+      onOk: async () => {
+        try {
+          await proposalModel.changeProposalStatus(requestId, "DELIVERED");
           message.success("완료확인 처리 되었습니다.");
-          setData([]);
           fetch();
         } catch (error) {
           console.log(error);
@@ -167,51 +217,39 @@ const MyRequestCardList = (props) => {
 
   useEffect(() => {
     fetch();
-  }, [pagination]);
+  }, []);
 
+  if (!data.length)
+    return (
+      <div {...props}>
+        <Empty text={t("lbl_no_orders")} />
+      </div>
+    );
   return (
     <div {...props}>
-      <div>
-        {data.length > 0 ? (
-          data.map((item) => (
-            <Card
-              key={`request-${item.orderId}`}
-              style={{ marginBottom: "15px" }}
-              data={{
-                grade: t(`lbl_${item.priority}`),
-                gradeColor: item.priority,
-                address: item.receiveAddress,
-                name: item.shopperName,
-                status: t(`lbl_${item.status}`),
-                title: item.title,
-                content: item.contents,
-                date: item.createdAt,
-              }}
-              url={`/my/request/detail/${item.orderId}`}
-              footer={
-                <CardFooter
-                  t={t}
-                  myUserId={user.userId}
-                  order={item}
-                  // requests={item.requests}
-                  requests={item.shopperOrderRequests}
-                  onDelete={handleDeleteRequest}
-                  onAccept={handleAcceptRequest}
-                  onChatting={props.onChatting}
-                  onComplete={handleComplete}
-                />
-              }
+      {data.map((item, index) => {
+        console.log("item", item);
+        if (item.runnerOrders) {
+          return (
+            <OtherRunnerCard
+              key={index}
+              data={item}
+              onChatting={props.onChatting}
+              onComplete={handleCompleteOtherOrder}
             />
-          ))
-        ) : (
-          <Empty text={t("lbl_no_orders")} />
-        )}
-      </div>
-      {pagination.offset + pagination.limit < totalCount ? (
-        <div className="list-add-button">
-          <span onClick={() => handleClickMore()}>{t("lbl_more")}</span>
-        </div>
-      ) : null}
+          );
+        } else {
+          return (
+            <MyRequestCard
+              key={index}
+              data={item}
+              onChatting={props.onChatting}
+              onAccept={handleAcceptRequest}
+              onComplete={handleCompleteMyOrder}
+            />
+          );
+        }
+      })}
     </div>
   );
 };

@@ -39,11 +39,20 @@ async function getRequestList(pagination) {
   return result.data.data;
 }
 
-// 나의 request order 리스트
+// 나의 request order 리스트 & 남의 심부름제안에 요청한 리스트
 async function getMyRequestList(pagination) {
-  const url = `/shopper/orders?shopperId=me`;
-  const result = await privateAPI.get(url, { params: pagination });
-  return result.data.data;
+  const myOrderUrl = `/shopper/orders?shopperId=me`;
+  const myOrderResult = await privateAPI.get(myOrderUrl, {
+    params: pagination,
+  });
+  const myRequestUrl = `/shopper/requests?shopperId=me`;
+  const myRequestResult = await privateAPI.get(myRequestUrl, {
+    params: pagination,
+  });
+  const result = myRequestResult.data.data.orderRequests.concat(
+    myOrderResult.data.data.orders
+  );
+  return result;
 }
 
 // 특정 shopper의 order 리스트

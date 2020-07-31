@@ -6,9 +6,9 @@ import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
 
 const Date = ({ date }) => <div className="date-wrapper">{date}</div>;
 
-const ReceiveMessage = ({ message }) => {
-  const profileImg = message.sendUserImg
-    ? `${process.env.REACT_APP_IMG_BASE_URL}${message.sendUserImg}`
+const ReceiveMessage = ({ message, profile }) => {
+  const profileImg = profile
+    ? `${process.env.REACT_APP_IMG_BASE_URL}${profile}`
     : defaultProfileImg;
 
   return (
@@ -35,7 +35,7 @@ const SendMessage = ({ message }) => {
   );
 };
 
-const MessageList = ({ messages, myUserId }) => {
+const MessageList = ({ messages, myUserId, users }) => {
   return (
     <div className="rr-message-list">
       {messages.map((message, i) => {
@@ -58,7 +58,11 @@ const MessageList = ({ messages, myUserId }) => {
           );
         } else {
           components.push(
-            <ReceiveMessage key={`r-${message.messageId}`} message={message} />
+            <ReceiveMessage
+              key={`r-${message.messageId}`}
+              message={message}
+              profile={users.other.profileImagePath}
+            />
           );
         }
         return components;

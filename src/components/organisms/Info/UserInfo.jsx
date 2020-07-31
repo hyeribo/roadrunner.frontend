@@ -24,11 +24,11 @@ const RunnerStatus = ({ userInfo }) => (
   </div>
 );
 
-const ShopperStatus = ({ order }) => (
+const ShopperStatus = ({ order, t }) => (
   <div className="status">
     <ul>
       <li className="status-badge">
-        <Badge text={order.status} />
+        <Badge text={t(`lbl_${order.status}`)} />
       </li>
       <li>
         <span className="title">받은 연락</span>
@@ -73,7 +73,7 @@ const UserInfo = (props) => {
       {type === "proposal" ? (
         <RunnerStatus userInfo={userInfo} />
       ) : (
-        <ShopperStatus order={order} />
+        <ShopperStatus order={order} t={t} />
       )}
     </div>
   );

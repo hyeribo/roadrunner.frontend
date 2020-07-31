@@ -7,6 +7,13 @@ async function getChattingList() {
   return result.data.data.chattingRooms;
 }
 
+// 채팅 리스트 조회
+async function getChattingRoomDetail(roomKey) {
+  const url = `/chatting/room?roomKey=${roomKey}`;
+  const result = await privateAPI.get(url);
+  return result.data.data;
+}
+
 // 채팅룸 생성
 async function registChattingRoom(userId) {
   const url = `/chatting/joinRoom`;
@@ -39,6 +46,7 @@ async function sendMessage(roomKey, message) {
 
 export default {
   getChattingList,
+  getChattingRoomDetail,
   registChattingRoom,
   getMessages,
   sendMessage,

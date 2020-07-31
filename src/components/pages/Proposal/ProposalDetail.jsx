@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, message } from "antd";
+import { useSelector } from "react-redux";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import UserInfo from "@organisms/Info/UserInfo";
@@ -12,12 +13,14 @@ import userModel from "@data/userModel";
 const { confirm } = Modal;
 
 const ProposalDetail = ({ t, match }) => {
+  const user = useSelector((state) => state.user);
   const [loading, setLoading] = useState(false);
   const [runner, setRunner] = useState({});
   const [data, setData] = useState({
     order: {},
     requests: [],
   });
+  const [showBottom, setShowBottom] = useState(true);
 
   const fetch = async () => {
     try {
@@ -25,6 +28,13 @@ const ProposalDetail = ({ t, match }) => {
         match.params.proposal_id
       );
       const runnerInfo = await userModel.getUserInfo(orderInfo.order.runnerId);
+      if (orderInfo.requests.length) {
+        const myRequest = orderInfo.requests.filter(
+          (req) => req.shopperId === user.userId
+        );
+        if (myRequest.length > 0) setShowBottom(false);
+      }
+
       setData(orderInfo);
       setRunner(runnerInfo);
     } catch (error) {
@@ -54,7 +64,7 @@ const ProposalDetail = ({ t, match }) => {
     <CommonLayout
       pageName={t("lbl_order_detail")}
       showMenuButton={false}
-      showBottom
+      showBottom={showBottom}
       buttonProps={{
         text: t("lbl_request"),
         onClick: () =>

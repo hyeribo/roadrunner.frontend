@@ -26,11 +26,20 @@ async function getProposalList(pagination) {
   return result.data.data;
 }
 
-// 나의 proposal order 리스트
+// 나의 proposal order 리스트 & 남의 심부름에 요청한 리스트
 async function getMyProposalList(pagination) {
-  const url = `/runner/orders?runnerId=me`;
-  const result = await privateAPI.get(url, { params: pagination });
-  return result.data.data;
+  const myProposalUrl = `/runner/orders?runnerId=me`;
+  const myProposalResult = await privateAPI.get(myProposalUrl, {
+    params: pagination,
+  });
+  const myRequestUrl = `/runner/requests?runnerId=me`;
+  const myRequestResult = await privateAPI.get(myRequestUrl, {
+    params: pagination,
+  });
+  const result = myRequestResult.data.data.orderRequests.concat(
+    myProposalResult.data.data.orders
+  );
+  return result;
 }
 
 // 특정 runner의 order 리스트
@@ -50,7 +59,32 @@ async function getProposalDetail(proposalId) {
 // runner의 proposal에 요청을 보냄
 async function acceptProposal(proposalId) {
   const url = `/runner/orders/${proposalId}/requests`;
-  await privateAPI.post(url);
+  const body = {
+    title: "order request title",
+    priority: "FREE",
+    contents: "test contents",
+    startReceiveTime: "15:30:00",
+    endReceiveTime: "18:00:00",
+    receiveAddress: "somewhere",
+    additionalMessage: "nothing",
+    estimatedPrice: 15000,
+    runnerTip: 1500,
+    orderItems: [
+      {
+        name: "order item name",
+        count: 2,
+        price: 8000,
+      },
+    ],
+    orderImages: [
+      {
+        filename: "image file name",
+        size: 38756,
+        path: "/uploads/dog-1592044901355.jpg",
+      },
+    ],
+  };
+  await privateAPI.post(url, body);
   return true;
 }
 
@@ -60,7 +94,7 @@ async function changeProposalStatus(proposalId, status) {
   const requestPayload = {
     requestStatus: status,
   };
-  const result = await privateAPI.post(url, requestPayload);
+  const result = await privateAPI.put(url, requestPayload);
   return result.data.data;
 }
 

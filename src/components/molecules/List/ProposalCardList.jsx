@@ -54,7 +54,7 @@ const ProposalCardList = (props) => {
               data={{
                 grade: item.distance,
                 address: item.address,
-                name: item.runnerName,
+                name: item.runner.displayName,
                 title: item.message,
                 content: item.introduce,
                 date: item.createdAt,

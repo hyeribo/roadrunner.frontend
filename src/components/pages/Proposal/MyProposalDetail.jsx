@@ -41,7 +41,9 @@ const MyProposalDetail = ({ t, match }) => {
         id="rr-proposal-detail-page"
         className="global-content-container p-t-20"
       >
-        <p className="detail-title">나의 제안</p>
+        <p className="detail-title">
+          {data.order.runnerId === user.userId ? "나의 제안" : "쇼퍼의 제안"}
+        </p>
         <UserInfo type="proposal" userInfo={user} order={data.order} />
         <Contents
           items={[

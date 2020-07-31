@@ -55,7 +55,7 @@ const RequestCardList = (props) => {
                 grade: t(`lbl_${item.priority}`),
                 gradeColor: item.priority,
                 address: item.receiveAddress,
-                name: item.shopperName,
+                name: item.shopper.displayName,
                 status: t(`lbl_${item.status}`),
                 title: item.title,
                 content: item.additionalMessage,
