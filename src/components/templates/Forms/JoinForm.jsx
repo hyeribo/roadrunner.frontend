@@ -105,7 +105,7 @@ export const JoinForm = (props) => {
                 required: true,
                 pattern: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/,
               })}
-              placeholder={t("frm_password")}
+              placeholder={t("frm_password_reg")}
             />
           </FormItem>
           <FormItem

@@ -18,7 +18,7 @@ const errorMessage = {
   },
   realpasswordconfirm: {
     required: "frm_password_confirm",
-    validate: "frm_password_invalid",
+    validate: "frm_password_confirm_invalid",
   },
   address: {
     required: "frm_address",

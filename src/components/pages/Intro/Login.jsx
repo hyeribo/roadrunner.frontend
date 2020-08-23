@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import CommonLayout from "@templates/Layouts/CommonLayout";
 import LoginForm from "@templates/Forms/LoginForm";
+import MainButton from "@atoms/Buttons/MainButton";
 
 import userModel from "@data/userModel";
 import { setUser } from "@modules/user/userActions";
@@ -31,19 +32,12 @@ const Login = ({ history, setAuthenticated, t }) => {
     }
   };
 
-  const buttonProps = {
-    text: t("lbl_join"),
-    onClick: () => history.push("/join"),
-    color: "default",
-  };
-
   return (
     <CommonLayout
       pageName={t("lbl_login")}
       showBackButton={false}
       showMenuButton={false}
-      showBottom
-      buttonProps={buttonProps}
+      showBottom={false}
       backgroundColor="#ffffff"
     >
       <div id="rr-login-page" className="global-content-container">
@@ -51,6 +45,15 @@ const Login = ({ history, setAuthenticated, t }) => {
           <img src={bgImage} alt="login-bg" />
         </div>
         <LoginForm onSubmit={handleLogin} />
+        <div className="m-t-10">
+          <MainButton
+            type="button"
+            color="default"
+            onClick={() => history.push("/join")}
+          >
+            {t("lbl_join")}
+          </MainButton>
+        </div>
       </div>
     </CommonLayout>
   );
