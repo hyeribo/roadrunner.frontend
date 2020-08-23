@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import FormItem from "@molecules/FormItem/FormItem";
 import AvatarUpload from "@molecules/Upload/AvatarUpload";
 import Radio from "@molecules/Radio/Radio";
+import TermsCheckboxes from "@organisms/Terms/TermsCheckboxes";
 
 export const ConnectForm = ({ children }) => {
   const methods = useFormContext();
@@ -14,7 +15,7 @@ export const ConnectForm = ({ children }) => {
   });
 };
 
-export const JoinForm = (props) => {
+export const JoinForm = ({ onViewTerms }) => {
   const { t } = useTranslation();
 
   const validatePasswordConfirm = (value, password) => {
@@ -154,6 +155,18 @@ export const JoinForm = (props) => {
               onChange={([gender]) => {
                 return gender;
               }}
+              rules={{ required: true }}
+            />
+          </FormItem>
+          <FormItem name="agree" error={errors.agree}>
+            <Controller
+              name="agree"
+              as={<TermsCheckboxes />}
+              control={control}
+              onChange={([agree]) => {
+                return agree;
+              }}
+              onView={onViewTerms}
               rules={{ required: true }}
             />
           </FormItem>

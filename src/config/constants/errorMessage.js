@@ -60,6 +60,9 @@ const errorMessage = {
   introduce: {
     required: "frm_introduce",
   },
+  agree: {
+    required: "frm_agree",
+  },
 };
 
 export default errorMessage;

@@ -433,3 +433,21 @@
   background-image: url("../assets/images/bg-intro.png");
   background-size: contain;
 }
+
+#rr-join-page {
+  position: relative;
+  .terms-container {
+    background-color: white;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 23px 25px;
+    .terms-wrapper {
+      height: calc(100vh - 146px - 25px);
+      overflow-y: scroll;
+      line-height: 20px;
+    }
+  }
+}

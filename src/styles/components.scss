@@ -846,3 +846,36 @@
     margin: auto;
   }
 }
+
+.rr-terms {
+  width: 100%;
+  .terms-item {
+    width: 100%;
+    display: flex;
+    .checkbox-wrapper {
+      width: 20px;
+      height: 20px;
+      margin-right: 14px;
+    }
+    .text-wrapper {
+      flex: 1;
+      .title {
+        line-height: 19px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 18px;
+        color: #000000;
+      }
+      .text {
+        line-height: 20px;
+        font-size: 13px;
+        color: #000000;
+        margin-bottom: 8px;
+      }
+    }
+    .icon-wrapper {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

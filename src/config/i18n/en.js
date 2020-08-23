@@ -87,6 +87,11 @@ const en = {
     lbl_edit: "Edit",
     lbl_remove: "Delete",
     lbl_selected_count: "{{count}} items selected",
+    lbl_agree_all: "전체 동의",
+    lbl_agree_privacy: "개인정보 이용 동의",
+    lbl_agree_id: "고유식별정보 처리 동의",
+    lbl_agree_id_service: "본인확인 서비스 이용 동의",
+    lbl_reqiured: "필수",
 
     frm_email: "이메일을 입력해주세요.",
     frm_email_pattern: "이메일을 바르게 입력해주세요.",
@@ -117,6 +122,7 @@ const en = {
     frm_message: "메세지를 입력해주세요.",
     frm_estimated_time: "예상 일정을 입력해주세요.",
     frm_introduce: "한줄 소개를 입력해주세요.",
+    frm_agree: "약관에 동의해주세요.",
 
     cfm_logout: "로그아웃 하시겠습니까?",
     cfm_withdrawal1: "로드러너 회원 탈퇴 하시겠습니까?",
