@@ -139,7 +139,7 @@ const routes = [
   {
     path: "/terms",
     component: Terms,
-    auth: true,
+    auth: false,
   },
   {
     path: "/cs",

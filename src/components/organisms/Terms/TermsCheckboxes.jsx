@@ -4,7 +4,7 @@ import { Checkbox } from "antd";
 import { RightOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
-const TermsCheckboxes = ({ onChange, onView }) => {
+const TermsCheckboxes = ({ onChange, history }) => {
   const { t } = useTranslation();
 
   const [agree, setAgree] = useState({
@@ -28,13 +28,6 @@ const TermsCheckboxes = ({ onChange, onView }) => {
     }
   };
 
-  const handleView = (key, checked) => {
-    if (checked) {
-      onView(key);
-    } else {
-      onView(null);
-    }
-  };
   useEffect(() => {
     setAgreeAll(agree.privacy && agree.id);
     onChange(agree.privacy);
@@ -71,7 +64,7 @@ const TermsCheckboxes = ({ onChange, onView }) => {
           </p>
         </div>
         <div className="icon-wrapper">
-          <RightOutlined onClick={() => onView("privacy")} />
+          <RightOutlined onClick={() => history.push("/terms")} />
         </div>
       </div>
 
@@ -88,7 +81,7 @@ const TermsCheckboxes = ({ onChange, onView }) => {
           </p>
         </div>
         <div className="icon-wrapper">
-          <RightOutlined onClick={() => onView("id")} />
+          <RightOutlined onClick={() => console.log("id")} />
         </div>
       </div> */}
 

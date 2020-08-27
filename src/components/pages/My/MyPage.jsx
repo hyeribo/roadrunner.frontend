@@ -51,11 +51,11 @@ const MyPage = ({ t }) => {
             url="/my/settings"
             icon={<SettingOutlined />}
           />
-          <ListItem
+          {/* <ListItem
             text={t("lbl_intro_team")}
             url="/team"
             icon={<TeamOutlined />}
-          />
+          /> */}
         </div>
       </div>
     </MainLayout>

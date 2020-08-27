@@ -15,7 +15,7 @@ export const ConnectForm = ({ children }) => {
   });
 };
 
-export const JoinForm = ({ onViewTerms }) => {
+export const JoinForm = ({ history }) => {
   const { t } = useTranslation();
 
   const validatePasswordConfirm = (value, password) => {
@@ -161,12 +161,11 @@ export const JoinForm = ({ onViewTerms }) => {
           <FormItem name="agree" error={errors.agree}>
             <Controller
               name="agree"
-              as={<TermsCheckboxes />}
+              as={<TermsCheckboxes history={history} />}
               control={control}
               onChange={([agree]) => {
                 return agree;
               }}
-              onView={onViewTerms}
               rules={{ required: true }}
             />
           </FormItem>
