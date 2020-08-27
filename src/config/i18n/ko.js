@@ -88,7 +88,7 @@ const ko = {
     lbl_remove: "삭제",
     lbl_selected_count: "{{count}}개 선택됨",
     lbl_agree_all: "전체 동의",
-    lbl_agree_privacy: "개인정보 이용 동의",
+    lbl_agree_privacy: "개인정보 보호정책",
     lbl_agree_id: "고유식별정보 처리 동의",
     lbl_agree_id_service: "본인확인 서비스 이용 동의",
     lbl_reqiured: "필수",

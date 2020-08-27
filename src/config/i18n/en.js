@@ -88,7 +88,7 @@ const en = {
     lbl_remove: "Delete",
     lbl_selected_count: "{{count}} items selected",
     lbl_agree_all: "Full Agreement",
-    lbl_agree_privacy: "Consent to the use of personal information",
+    lbl_agree_privacy: "Privacy Policy",
     lbl_agree_id: "Consent to processing uniquely identifiable information",
     lbl_agree_id_service: "Consent to use identity verification service",
     lbl_reqiured: "required",
