@@ -3,7 +3,7 @@ import constants from "@config/constants";
 
 // ===== 초기 상태값
 export const initialState =
-  localStorage.getItem(constants.LOCAL_LANG_KEY) || "ko";
+  localStorage.getItem(constants.LOCAL_LANG_KEY) || "en";
 
 // ===== 리듀서
 const reducer = (state = initialState, action) => {

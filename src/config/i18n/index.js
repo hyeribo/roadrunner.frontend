@@ -6,7 +6,7 @@ import en from "./en";
 import ko from "./ko";
 
 export function initI18n() {
-  const lang = localStorage.getItem(constants.LOCAL_LANG_KEY) || "ko";
+  const lang = localStorage.getItem(constants.LOCAL_LANG_KEY) || "en";
 
   i18n
     .use(initReactI18next) // passes i18n down to react-i18next
