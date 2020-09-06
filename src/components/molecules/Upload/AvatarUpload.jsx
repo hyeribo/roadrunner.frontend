@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Upload, message, Spin } from "antd";
 
 import defaultImg from "@assets/images/bedge-card-urgent.png";
@@ -9,14 +10,16 @@ function getBase64(img, callback) {
   reader.readAsDataURL(img);
 }
 
-function beforeUpload(file) {
+function beforeUpload(file, t) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
   if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
+    // message.error("You can only upload JPG/PNG file!");
+    message.error(t("frm_file_ext"));
   }
-  const isLt2M = file.size / 1024 / 1024 < 2;
+  const isLt2M = file.size / 1024 / 1024 < 5;
   if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
+    // message.error("Image must smaller than 2MB!");
+    message.error(t("frm_file_size"));
   }
   return isJpgOrPng && isLt2M;
 }
@@ -25,6 +28,7 @@ const AvatarUpload = (props) => {
   const [loading, setLoading] = useState(false);
   const [image, setImage] = useState("");
   const { name, onChange } = props;
+  const { t } = useTranslation();
 
   const handleChange = (info) => {
     if (info.file.status === "uploading") {
@@ -53,7 +57,7 @@ const AvatarUpload = (props) => {
       className="avatar-uploader rr-avatar-upload"
       showUploadList={false}
       action={`${process.env.REACT_APP_API_BASE_URL}/upload/userProfileImage`}
-      beforeUpload={beforeUpload}
+      beforeUpload={(file) => beforeUpload(file, t)}
       onChange={handleChange}
     >
       {image ? (

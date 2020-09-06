@@ -9,6 +9,11 @@ import {
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
+const paymentsKey = {
+  현금결제: "lbl_cash",
+  계좌이체: "lbl_bank",
+};
+
 const ProposalInfo = ({ userInfo, order }) => {
   const { t } = useTranslation();
 
@@ -18,7 +23,7 @@ const ProposalInfo = ({ userInfo, order }) => {
         <span>
           <DatabaseOutlined />
         </span>
-        <span>{userInfo.count || 0}회 완료 경력</span>
+        <span>{t("lbl_career", { count: userInfo.completedOrders || 0 })}</span>
       </div>
       <div className="info-item">
         <span>
@@ -30,7 +35,7 @@ const ProposalInfo = ({ userInfo, order }) => {
         <span>
           <RadarChartOutlined />
         </span>
-        <span>{order.distance} 이동 가능</span>
+        <span>{t("lbl_movable", { distance: order.distance || 0 })}</span>
       </div>
       <div className="info-item">
         <span>
@@ -42,7 +47,7 @@ const ProposalInfo = ({ userInfo, order }) => {
         <span>
           <CreditCardOutlined />
         </span>
-        <span>{order.payments}</span>
+        <span>{t(paymentsKey[order.payments])}</span>
       </div>
     </div>
   );

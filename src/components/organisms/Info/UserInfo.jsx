@@ -9,15 +9,15 @@ import Badge from "@atoms/Badges/Badge";
 import defaultProfileImg from "@assets/images/bedge-card-urgent.png";
 import constants from "@config/constants";
 
-const RunnerStatus = ({ userInfo }) => (
+const RunnerStatus = ({ userInfo, t }) => (
   <div className="status">
     <ul>
       <li>
-        <span className="title">완료 건수</span>
+        <span className="title">{t("lbl_count_complete")}</span>
         <span className="value">{userInfo.completedOrders || 0}</span>
       </li>
       <li>
-        <span className="title">진행중</span>
+        <span className="title">{t("lbl_ing")}</span>
         <span className="value">{userInfo.processedOrders || 0}</span>
       </li>
     </ul>
@@ -31,7 +31,7 @@ const ShopperStatus = ({ order, t }) => (
         <Badge text={t(`lbl_${order.status}`)} />
       </li>
       <li>
-        <span className="title">받은 연락</span>
+        <span className="title">{t("lbl_received_contact")}</span>
         <span className="value">{order.responseCnt}</span>
       </li>
       <li className="float-r">
@@ -61,17 +61,17 @@ const UserInfo = (props) => {
         </div>
         <div className="profile-info">
           <p>
-            <span className="name">{userInfo.displayName || "이름"}</span>
+            <span className="name">{userInfo.displayName || "-"}</span>
             <span className="gender">
-              {t(constants.GENDER_MAP[userInfo.gender] || "여자")}
+              {t(constants.GENDER_MAP[userInfo.gender] || "-")}
             </span>
           </p>
-          <p className="address limit-line-1">{userInfo.address || "주소"}</p>
-          <p className="email limit-line-1">{userInfo.email || "이메일"}</p>
+          <p className="address limit-line-1">{userInfo.address || "-"}</p>
+          <p className="email limit-line-1">{userInfo.email || "-"}</p>
         </div>
       </div>
       {type === "proposal" ? (
-        <RunnerStatus userInfo={userInfo} />
+        <RunnerStatus userInfo={userInfo} t={t} />
       ) : (
         <ShopperStatus order={order} t={t} />
       )}

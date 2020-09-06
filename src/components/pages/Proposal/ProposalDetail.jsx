@@ -46,11 +46,10 @@ const ProposalDetail = ({ t, match }) => {
     try {
       setLoading(true);
       await proposalModel.acceptProposal(match.params.proposal_id);
-      message.success("요청되었습니다.");
+      message.success(t("msg_req_write_s"));
       fetch();
     } catch (error) {
-      message.error("요청에 실패했습니다.");
-      console.log("error", error);
+      message.error(t("msg_req_write_f"));
     } finally {
       setLoading(false);
     }
@@ -69,7 +68,7 @@ const ProposalDetail = ({ t, match }) => {
         text: t("lbl_request"),
         onClick: () =>
           confirm({
-            title: "심부름을 요청하시겠습니까?",
+            title: t("cfm_request_delivery"),
             onOk: requestOrder,
           }),
         color: loading ? "disabled" : "primary",
@@ -85,19 +84,19 @@ const ProposalDetail = ({ t, match }) => {
         <Contents
           items={[
             {
-              label: "현재 메세지",
+              label: t("lbl_now_message"),
               content: data.order.message,
             },
             {
-              label: "예상 일정",
+              label: t("lbl_expect_schedule"),
               content: data.order.estimatedTime,
             },
             {
-              label: "힌즐 소개",
+              label: t("lbl_introduce"),
               content: data.order.introduce,
             },
             {
-              label: "기본정보",
+              label: t("lbl_basic_info"),
               content: (
                 <ProposalInfo userInfo={data.runner} order={data.order} />
               ),

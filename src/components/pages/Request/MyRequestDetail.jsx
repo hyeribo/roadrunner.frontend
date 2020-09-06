@@ -40,8 +40,8 @@ const MyRequestDetail = ({ t, match }) => {
     if (!items || !items.length) return "";
 
     const itemContent = items.reduce((result, arr, i) => {
-      if (!i) result += `${arr.name} ${arr.count}개`;
-      else result += `, ${arr.name} ${arr.count}개`;
+      if (!i) result += `${arr.name} ${arr.count}${t("lbl_measure")}`;
+      else result += `, ${arr.name} ${arr.count}${t("lbl_measure")}`;
       return result;
     }, "");
     return itemContent;
@@ -68,9 +68,11 @@ const MyRequestDetail = ({ t, match }) => {
       <div>
         {items.map((item, i) => (
           <p key={i}>
-            {`${item.name} ${item.price.toLocaleString()}원`}
+            {`${item.name} ${item.price.toLocaleString()}${t("lbl_currency")}`}
             {item.count > 1 &&
-              ` (1개 ${item.price.toLocaleString() / item.count}원)`}
+              ` (1${t("lbl_measure")} ${
+                item.price.toLocaleString() / item.count
+              }${t("lbl_currency")})`}
           </p>
         ))}
       </div>
@@ -93,33 +95,35 @@ const MyRequestDetail = ({ t, match }) => {
         className="global-content-container p-t-20"
       >
         <p className="detail-title">
-          {data.order.shopperId === user.userId ? "나의 요청" : "쇼퍼의 요청"}
+          {data.order.shopperId === user.userId
+            ? t("lbl_my_request")
+            : t("lbl_shoppers_request")}
         </p>
         <UserInfo type="request" userInfo={shopper} order={data.order} />
         <Contents
           items={[
             {
-              label: "요청항목",
-              content: getItemContent(data.shopperOrderItems) || "요청항목",
+              label: t("lbl_req_items"),
+              content: getItemContent(data.shopperOrderItems) || "-",
             },
             {
               label: "",
               content: getItemImage(data.order.shopperOrderImages) || [],
             },
             {
-              label: "수령시간",
+              label: t("lbl_receive_time"),
               content: `${data.order.startReceiveTime} ~ ${data.order.endReceiveTime}`,
             },
             {
-              label: "수령장소",
+              label: t("lbl_receive_address"),
               content: data.order.receiveAddress,
             },
             {
-              label: "추가 요청 메세지",
+              label: t("lbl_req_memo"),
               content: data.order.additionalMessage,
             },
             {
-              label: "예상 가격",
+              label: t("lbl_expected_price"),
               content: getItemPrice(data.order.shopperOrderItems),
             },
           ]}

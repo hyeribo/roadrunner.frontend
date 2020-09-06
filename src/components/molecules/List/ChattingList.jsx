@@ -19,8 +19,6 @@ const ChattingItem = ({ chatting, myUserId }) => {
     ? `${process.env.REACT_APP_IMG_BASE_URL}${other.profileImagePath}`
     : defaultProfileImg;
 
-  console.log("other", other);
-
   return (
     <Link to={`/chattings/room/${chatting.roomKey}`}>
       <div className="chatting-room-item">
@@ -29,7 +27,7 @@ const ChattingItem = ({ chatting, myUserId }) => {
         </div>
         <div className="user-info">
           <div className="username">{other.displayName}</div>
-          <div className="preview limit-line-2">{chatting.type}</div>
+          {/* <div className="preview limit-line-2">{chatting.type}</div> */}
         </div>
         <div className="chat-info">
           <div className="date">
@@ -66,7 +64,7 @@ const ChattingEditItem = ({ chatting, onToggleSelect, selected, myUserId }) => {
       </div>
       <div className="user-info">
         <div className="username">{other.displayName}</div>
-        <div className="preview limit-line-2">{chatting.type}</div>
+        {/* <div className="preview limit-line-2">{chatting.type}</div> */}
       </div>
       <div className="chat-info">
         <div className="date">{moment(chatting.updatedAt).format("HH:mm")}</div>
@@ -77,8 +75,8 @@ const ChattingEditItem = ({ chatting, onToggleSelect, selected, myUserId }) => {
 };
 
 const ChattingEditManage = ({ chattings, selectedIds, onToggleSelectAll }) => {
-  if (!chattings.length) return <Empty text="대화 목록이 없습니다." />;
   const { t } = useTranslation();
+  if (!chattings.length) return <Empty text={t("lbl_no_chattings")} />;
 
   const selectedAll = chattings.length === selectedIds.length;
   return (
@@ -88,7 +86,7 @@ const ChattingEditManage = ({ chattings, selectedIds, onToggleSelectAll }) => {
           checked={selectedAll}
           onChange={(e) => onToggleSelectAll(e.target.checked)}
         ></Checkbox>
-        <span>전체</span>
+        <span>{t("lbl_all")}</span>
       </div>
       <div className="count">
         {t("lbl_selected_count", { count: selectedIds.length })}
@@ -98,7 +96,7 @@ const ChattingEditManage = ({ chattings, selectedIds, onToggleSelectAll }) => {
 };
 
 const ChattingList = ({ chattings, isEditMode, onChange }) => {
-  if (!chattings.length) return <Empty text="대화 목록이 없습니다." />;
+  // if (!chattings.length) return <Empty text={("lbl_no_chattings")} />;
 
   const user = useSelector((state) => state.user);
   const [selectedIds, setSelectedIds] = useState([]);

@@ -10,7 +10,7 @@ import chattingModel from "@data/chattingModel";
 const ChattingRoom = ({ t, match }) => {
   const user = useSelector((state) => state.user);
   const [chatting, setChatting] = useState({
-    userName: "심부름",
+    userName: "",
   });
   const [users, setUsers] = useState({ me: {}, other: {} });
   const [messages, setMessages] = useState([]);
@@ -21,7 +21,6 @@ const ChattingRoom = ({ t, match }) => {
       const chattingRoomInfo = await chattingModel.getChattingRoomDetail(
         match.params.room_key
       );
-      console.log("chattingRoomInfo", chattingRoomInfo);
       const me = chattingRoomInfo.users.filter(
         (u) => u.userId === user.userId
       )[0];
@@ -29,7 +28,6 @@ const ChattingRoom = ({ t, match }) => {
         (u) => u.userId !== user.userId
       )[0];
       setUsers({ me, other });
-      console.log("users!!!", { me, other });
       setMessages(result.reverse());
     } catch (error) {
       console.log(error);

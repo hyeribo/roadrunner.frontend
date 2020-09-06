@@ -17,11 +17,11 @@ const RequestWrite = ({ history, t }) => {
     try {
       setLoading(true);
       await requestModel.postRequest(values);
-      message.success("요청이 등록되었습니다.");
+      message.success(t("msg_write_request_s"));
       history.push("/home");
     } catch (error) {
       console.log(error);
-      message.error("요청 등록에 실패했습니다.");
+      message.error(t("msg_write_request_f"));
     } finally {
       setLoading(false);
     }
@@ -36,7 +36,7 @@ const RequestWrite = ({ history, t }) => {
         text: t("lbl_register"),
         onClick: () =>
           confirm({
-            title: "심부름 요청을 등록하시겠습니까?",
+            title: t("cfm_write_request"),
             onOk: () => methods.handleSubmit(handleWrite)(),
           }),
         color: loading ? "disabled" : "primary",

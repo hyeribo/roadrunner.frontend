@@ -19,8 +19,7 @@ const { confirm } = Modal;
 
 // 다른 쇼퍼의 요청에 내가 심부름제안을 한 경우
 // REQUESTING(요청중), MATCHED(매칭됨), DELIVERED_REQUEST(완료요청중), DELIVERED(완료)
-const OtherShopperCard = ({ data, onChatting, onCompleteRequest }) => {
-  const { t } = useTranslation();
+const OtherShopperCard = ({ data, onChatting, onCompleteRequest, t }) => {
   return (
     <Card
       style={{ marginBottom: "15px" }}
@@ -45,12 +44,12 @@ const OtherShopperCard = ({ data, onChatting, onCompleteRequest }) => {
                   onChatting(data.runnerId, data.shopperOrders.shopperId)
                 }
               >
-                채팅
+                {t("lbl_chat")}
               </ActionButton>
             )}
             {data.requestStatus === "REQUESTING" && (
               <ActionButton color="pending" disabled>
-                요청중
+                {t("lbl_requesting")}
               </ActionButton>
             )}
             {data.requestStatus === "MATCHED" && (
@@ -58,17 +57,17 @@ const OtherShopperCard = ({ data, onChatting, onCompleteRequest }) => {
                 color="primary"
                 onClick={() => onCompleteRequest(data.requestId)}
               >
-                완료요청
+                {t("lbl_request_complete")}
               </ActionButton>
             )}
             {data.requestStatus === "DELIVERED_REQUEST" && (
               <ActionButton color="pending" disabled>
-                완료요청중
+                {t("lbl_requesting_complete")}
               </ActionButton>
             )}
             {data.requestStatus === "DELIVERED" && (
               <ActionButton color="pending" disabled>
-                완료
+                {t("lbl_complete")}
               </ActionButton>
             )}
           </div>
@@ -80,7 +79,13 @@ const OtherShopperCard = ({ data, onChatting, onCompleteRequest }) => {
 
 // 나의 제안에 다른 쇼퍼가 요청을 한 경우
 // REQUESTING(요청중), MATCHED(매칭됨), DELIVERED_REQUEST(완료요청중), DELIVERED(완료)
-const MyProposalCard = ({ data, onChatting, onAccept, onCompleteRequest }) => {
+const MyProposalCard = ({
+  data,
+  onChatting,
+  onAccept,
+  onCompleteRequest,
+  t,
+}) => {
   return (
     <Card
       style={{ marginBottom: "15px" }}
@@ -100,6 +105,7 @@ const MyProposalCard = ({ data, onChatting, onAccept, onCompleteRequest }) => {
           requests={data.runnerOrderRequests}
           onAccept={onAccept}
           onCompleteRequest={onCompleteRequest}
+          t={t}
         />
       }
     />
@@ -112,21 +118,18 @@ const CardFooter = ({
   onAccept,
   onChatting,
   onCompleteRequest,
+  t,
 }) => {
   return requests.map((request, i) => {
     return (
       <div key={i} className="rr-card-footer">
-        <div className="footer-left">
-          <span className="text-name">{request.shopper.displayName}의 </span>
-          <span className="text-blue">심부름 신청</span>
-        </div>
         <div className="footer-right">
           {request.requestStatus !== "REQUESTING" && (
             <ActionButton
               color="default"
               onClick={() => onChatting(order.runnerId, request.shopperId)}
             >
-              채팅
+              {t("lbl_chatting")}
             </ActionButton>
           )}
           {request.requestStatus === "REQUESTING" && (
@@ -134,7 +137,7 @@ const CardFooter = ({
               color="primary"
               onClick={() => onAccept(request.requestId, request.shopperId)}
             >
-              수락하기
+              {t("lbl_accept")}
             </ActionButton>
           )}
           {request.requestStatus === "MATCHED" && (
@@ -142,17 +145,17 @@ const CardFooter = ({
               color="primary"
               onClick={() => onCompleteRequest(request.requestId)}
             >
-              완료요청
+              {t("lbl_request_complete")}
             </ActionButton>
           )}
           {request.requestStatus === "DELIVERED_REQUEST" && (
             <ActionButton color="pending" disabled>
-              완료요청중
+              {t("lbl_requesting_complete")}
             </ActionButton>
           )}
           {request.requestStatus === "DELIVERED" && (
             <ActionButton color="pending" disabled>
-              완료
+              {t("lbl_complete")}
             </ActionButton>
           )}
         </div>
@@ -184,12 +187,12 @@ const MyProposalCardList = (props) => {
   // 심부름 요청 수락
   const handleAcceptRequest = (proposalId, userId) => {
     confirm({
-      title: "심부름 제안을 수락하시겠습니까?",
+      title: t("cfm_accept_proposal"),
       onOk: async () => {
         try {
           await proposalModel.changeProposalStatus(proposalId, "MATCHED");
           await chattingModel.registChattingRoom(userId);
-          message.success("수락되었습니다.");
+          message.success(t("msg_accept_s"));
           fetch();
         } catch (error) {
           console.log(error);
@@ -201,14 +204,14 @@ const MyProposalCardList = (props) => {
   // 내가 요청한 심부름 완료 요청
   const handleCompleteMyRequest = (requestId) => {
     confirm({
-      title: "심부름 완료 요청하시겠습니까?",
+      title: t("cfm_request_complete"),
       onOk: async () => {
         try {
           await requestModel.changeRequestStatus(
             requestId,
             "DELIVERED_REQUEST"
           );
-          message.success("요청되었습니다.");
+          message.success(t("msg_req_write_s"));
           fetch();
         } catch (error) {
           console.log(error);
@@ -220,14 +223,14 @@ const MyProposalCardList = (props) => {
   // 내가 제안한 심부름 완료 요청
   const handleCompleteOtherRequest = (requestId) => {
     confirm({
-      title: "심부름 완료 요청하시겠습니까?",
+      title: t("cfm_request_complete"),
       onOk: async () => {
         try {
           await proposalModel.changeProposalStatus(
             requestId,
             "DELIVERED_REQUEST"
           );
-          message.success("요청되었습니다.");
+          message.success(t("msg_req_write_s"));
           fetch();
         } catch (error) {
           console.log(error);
@@ -256,6 +259,7 @@ const MyProposalCardList = (props) => {
               data={item}
               onChatting={props.onChatting}
               onCompleteRequest={handleCompleteMyRequest}
+              t={t}
             />
           );
         } else {
@@ -266,6 +270,7 @@ const MyProposalCardList = (props) => {
               onChatting={props.onChatting}
               onAccept={handleAcceptRequest}
               onCompleteRequest={handleCompleteOtherRequest}
+              t={t}
             />
           );
         }

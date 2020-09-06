@@ -53,11 +53,10 @@ const RequestDetail = ({ t, match }) => {
   const acceptOrder = async () => {
     try {
       await requestModel.acceptRequest(match.params.request_id);
-      message.success("요청되었습니다.");
+      message.success(t("msg_req_write_s"));
       fetch();
     } catch (error) {
-      message.error("요청에 실패했습니다.");
-      console.log("error", error);
+      message.error(t("msg_req_write_f"));
     }
   };
 
@@ -65,8 +64,8 @@ const RequestDetail = ({ t, match }) => {
     if (!items || !items.length) return "";
 
     const itemContent = items.reduce((result, arr, i) => {
-      if (!i) result += `${arr.name} ${arr.count}개`;
-      else result += `, ${arr.name} ${arr.count}개`;
+      if (!i) result += `${arr.name} ${arr.count}${t("lbl_measure")}`;
+      else result += `, ${arr.name} ${arr.count}${t("lbl_measure")}`;
       return result;
     }, "");
     return itemContent;
@@ -93,9 +92,11 @@ const RequestDetail = ({ t, match }) => {
       <div>
         {items.map((item, i) => (
           <p key={i}>
-            {`${item.name} ${item.price.toLocaleString()}원`}
+            {`${item.name} ${item.price.toLocaleString()}${t("lbl_currency")}`}
             {item.count > 1 &&
-              ` (1개 ${item.price.toLocaleString() / item.count}원)`}
+              ` (1${t("lbl_measure")} ${
+                item.price.toLocaleString() / item.count
+              }${t("lbl_currency")})`}
           </p>
         ))}
       </div>
@@ -115,7 +116,7 @@ const RequestDetail = ({ t, match }) => {
         text: t(`lbl_request_${requestStatus}`),
         onClick: () =>
           confirm({
-            title: "심부름을 요청하시겠습니까?",
+            title: t("cfm_request_delivery"),
             onOk: acceptOrder,
           }),
         color: requestStatus !== "ORDER" ? "pending" : "primary",
@@ -131,7 +132,7 @@ const RequestDetail = ({ t, match }) => {
         <Contents
           items={[
             {
-              label: "요청항목",
+              label: t("lbl_req_items"),
               content: getItemContent(data.order.shopperOrderItems) || [],
             },
             {
@@ -139,28 +140,28 @@ const RequestDetail = ({ t, match }) => {
               content: getItemImage(data.order.shopperOrderImages) || [],
             },
             {
-              label: "수령기간",
+              label: t("lbl_receive_time"),
               content: (
                 <div>
                   <span>
                     {data.order.startReceiveTime} ~ {data.order.endReceiveTime}
                   </span>
                   {!data.order.discussYn && (
-                    <span className="help m-l-10">협의가능</span>
+                    <span className="help m-l-10">{t("lbl_consult")}</span>
                   )}
                 </div>
               ),
             },
             {
-              label: "수령장소",
+              label: t("lbl_receive_address"),
               content: data.order.receiveAddress,
             },
             {
-              label: "추가 요청 메세지",
+              label: t("lbl_req_memo"),
               content: data.order.additionalMessage,
             },
             {
-              label: "예상 가격",
+              label: t("lbl_expected_price"),
               content: getItemPrice(data.order.shopperOrderItems || []),
             },
           ]}

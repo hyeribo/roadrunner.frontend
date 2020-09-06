@@ -33,7 +33,9 @@ const Notice = ({ t }) => {
           <CollapseItem
             key={notice.boardId}
             title={notice.title}
-            subtitle={`등록일 ${moment(notice.createdAt).format("YYYY.MM.DD")}`}
+            subtitle={`${t("lbl_write_date")} ${moment(notice.createdAt).format(
+              "YYYY.MM.DD"
+            )}`}
             content={notice.contents}
           />
         ))}

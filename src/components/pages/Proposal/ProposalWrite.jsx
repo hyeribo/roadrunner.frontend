@@ -17,11 +17,11 @@ const ProposalWrite = ({ history, t }) => {
     try {
       setLoading(true);
       await proposalModel.postProposal(values);
-      message.success("제안 등록에 성공했습니다.");
+      message.success(t("msg_write_proposal_s"));
       history.push("/home");
     } catch (error) {
       console.log(error);
-      message.error("제안 등록에 실패했습니다.");
+      message.error(t("msg_write_proposal_f"));
     } finally {
       setLoading(false);
     }
@@ -36,7 +36,7 @@ const ProposalWrite = ({ history, t }) => {
         text: t("lbl_register"),
         onClick: () =>
           confirm({
-            title: "심부름 제안을 등록하시겠습니까?",
+            title: t("cfm_write_proposal"),
             onOk: () => methods.handleSubmit(handleWrite)(),
           }),
         color: loading ? "disabled" : "primary",

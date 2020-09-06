@@ -33,7 +33,9 @@ const Faq = ({ t }) => {
           <CollapseItem
             key={faq.boardId}
             title={faq.title}
-            subtitle={`등록일 ${moment(faq.createdAt).format("YYYY.MM.DD")}`}
+            subtitle={`${t("lbl_write_date")} ${moment(faq.createdAt).format(
+              "YYYY.MM.DD"
+            )}`}
             content={faq.contents}
           />
         ))}

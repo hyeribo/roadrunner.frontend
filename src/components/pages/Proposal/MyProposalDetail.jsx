@@ -42,25 +42,31 @@ const MyProposalDetail = ({ t, match }) => {
         className="global-content-container p-t-20"
       >
         <p className="detail-title">
-          {data.order.runnerId === user.userId ? "나의 제안" : "쇼퍼의 제안"}
+          {data.order.runnerId === user.userId
+            ? t("lbl_my_propsal")
+            : t("lbl_runners_propsal")}
         </p>
-        <UserInfo type="proposal" userInfo={user} order={data.order} />
+        <UserInfo
+          type="proposal"
+          userInfo={data.order.runner}
+          order={data.order}
+        />
         <Contents
           items={[
             {
-              label: "현재 메세지",
+              label: t("lbl_now_message"),
               content: data.order.message,
             },
             {
-              label: "예상 일정",
+              label: t("lbl_expect_schedule"),
               content: data.order.estimatedTime,
             },
             {
-              label: "힌즐 소개",
+              label: t("lbl_introduce"),
               content: data.order.introduce,
             },
             {
-              label: "기본정보",
+              label: t("lbl_basic_info"),
               content: (
                 <ProposalInfo userInfo={data.runner} order={data.order} />
               ),

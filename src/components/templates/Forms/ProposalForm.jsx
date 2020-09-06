@@ -52,23 +52,8 @@ const radioOptions = [
   },
   {
     key: "10000",
-    label: "10km 이상",
+    label: "10km ~",
     value: "10KM",
-    span: 6,
-  },
-];
-
-const paymentsOptions = [
-  {
-    key: "현금결제",
-    label: "현금결제",
-    value: "현금결제",
-    span: 6,
-  },
-  {
-    key: "계좌이체",
-    label: "계좌이체",
-    value: "계좌이체",
     span: 6,
   },
 ];
@@ -84,6 +69,21 @@ export const ConnectForm = ({ children }) => {
 export const ProposalForm = (props) => {
   const user = useSelector((state) => state.user);
   const { t } = useTranslation();
+
+  const paymentsOptions = [
+    {
+      key: "현금결제",
+      label: t("lbl_cash"),
+      value: "현금결제",
+      span: 6,
+    },
+    {
+      key: "계좌이체",
+      label: t("lbl_bank"),
+      value: "계좌이체",
+      span: 6,
+    },
+  ];
 
   const validateContactTime = (time) => {
     if (!time.start || !time.end) return false;
@@ -141,7 +141,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="예) 기숙사 A, B, C동"
+              placeholder={t("lbl_ex_active_area")}
             />
           </FormItem>
           <FormItem
@@ -214,7 +214,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="예) 필요한 제품 사드립니다."
+              placeholder={t("lbl_ex_message")}
             />
           </FormItem>
 
@@ -224,7 +224,7 @@ export const ProposalForm = (props) => {
             name="estimatedTime"
             error={errors.estimatedTime}
             required
-            extra="예상 일정은 고객의 결정에 도움이 됩니다."
+            extra={t("lbl_help_estimated_time")}
           >
             <input
               id="estimatedTime"
@@ -232,7 +232,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="예) 1시에 A마트 방문 예정입니다."
+              placeholder={t("lbl_ex_estimated_time")}
             />
           </FormItem>
 
@@ -249,7 +249,7 @@ export const ProposalForm = (props) => {
               ref={register({
                 required: true,
               })}
-              placeholder="예) 집 앞까지 전달해드립니다."
+              placeholder={t("lbl_ex_introduce")}
             />
           </FormItem>
         </div>

@@ -85,7 +85,7 @@ export const RequestForm = (props) => {
             name="reqItems"
             required
             error={errors.reqItems}
-            helpbox="* 러너 팁은 총 금액의 10% 입니다."
+            helpbox={t("lbl_help_ruuner_tip")}
           >
             <Controller
               name="reqItems"
@@ -101,7 +101,7 @@ export const RequestForm = (props) => {
             label={t("lbl_req_img")}
             name="reqImages"
             error={errors.reqImages}
-            extra="이미지가 있으면 등록해주세요."
+            extra={t("lbl_help_image")}
           >
             <Controller
               name="files"
@@ -116,7 +116,7 @@ export const RequestForm = (props) => {
             label={t("lbl_receive_time")}
             name="reqReceiveTime"
             error={errors.reqReceiveTime}
-            extra="협의 가능"
+            extra={t("lbl_negotiable")}
             onToggleExtra={(checked) => {
               setValue("discussYn", checked);
             }}
@@ -136,7 +136,7 @@ export const RequestForm = (props) => {
             name="reqPriority"
             required
             error={errors.reqPriority}
-            helpbox="* 긴급 선택시 추가요금 5%"
+            helpbox={t("lbl_help_surcharge")}
             helpboxPlacement="right"
           >
             <Controller
@@ -161,7 +161,7 @@ export const RequestForm = (props) => {
             name="reqReceiveAddress"
             required
             error={errors.reqReceiveAddress}
-            extra="주소지와 동일"
+            extra={t("lbl_same_address")}
             onToggleExtra={(checked) => {
               if (checked) {
                 setValue("reqReceiveAddress", user.address);
